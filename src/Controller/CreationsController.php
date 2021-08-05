@@ -3,22 +3,22 @@
 namespace App\Controller;
 
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class HomeController extends AbstractController
+class CreationsController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/creations", name="creations")
      */
     public function index(ProductRepository $productRepo): Response
     {
-        $products = $productRepo->findAll();
+        $products = $productRepo->findByExampleField(4);
         // (“dump and die”) helper function
         // dd($products);
-        return $this->render('home/index.html.twig', [
+        dump($products);
+        return $this->render('creations/index.html.twig', [
             'products' => $products
         ]);
     }

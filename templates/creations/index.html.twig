@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="accueil">
+		<div class="row">
+			<div class="col text-center mt-3 title">
+				<div>CREATIONS</div>
+			</div>
+		</div>
+
+		<div class="row align-items-center justify-content-center">
+			<div class="col-12 col-md-4 text-center mt-3">
+				{% for product in products %}
+					<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

@@ -1,0 +1,64 @@
+<nav class="fixed-top">
+	<div class="container-fluid">
+		<div class="row d-flex align-items-center justify-content-between coverBlack">
+			<div class="col-2 mt-1">
+				<a href="javascript:void(0);" onclick="burgerToggle()">
+					<img id="burger" class="card-img  d-md-none" src="/img/burger.png" alt="logo">
+				</a>
+			</div>
+			<div class="col-7 col-md-4 col-lg-3 mt-1">
+				<a href="{{ path('home')}}">
+					<img class="card-img" src="/img/TEKOMA.png" alt="logo"></a>
+			</div>
+			<div class="col-2 mt-1">
+				<img class="card-img" src="" alt="logo">
+			</div>
+		</div>
+		{# small  #}
+		<div id="myTopnav" class="row coverBlack d-none d-md-none mx-1">
+			<div class="col-12 mt-2">
+				<a href="{{ path('home')}}" class="{{ app.request.get('_route') == 'home' ? 'active' }}">Accueil</a>
+			</div>
+			<div class="col-12 mt-2">
+				<a href="#">Spécifications</a>
+			</div>
+			<div class="col-12 mt-2">
+				<a href="{{ path('creations')}}" class="title {{ app.request.get('_route') == 'creations' ? 'active' }}">Créations</a>
+			</div>
+			<div class="col-12 mt-2">
+				<a href="#">Contact</a>
+			</div>
+			<div class="col-12 my-2">
+				<a href="#">insta</a>
+			</div>
+		</div>
+		{# medium  #}
+		<div class="row d-none d-md-flex justify-content-between navbar coverBlack">
+			<div class="col-2 my-3">
+				<div class="text-center">
+					<a class="title {{ app.request.get('_route') == 'home' ? 'active' }}" href="{{ path('home')}}">ACCUEIL</a>
+				</div>
+			</div>
+			<div class="col-2 col-md-3 col-lg-2 my-3">
+				<div class="text-center">
+					<a class="title" href="#">SPECIFICATIONS</a>
+				</div>
+			</div>
+			<div class="col-2 my-3">
+				<div class="text-center">
+					<a class="title {{ app.request.get('_route') == 'creations' ? 'active' }}" href="{{ path('creations')}}">CREATIONS</a>
+				</div>
+			</div>
+			<div class="col-2 my-3">
+				<div class="text-center">
+					<a class="title" href="#">CONTACT</a>
+				</div>
+			</div>
+			<div class="col-2 my-3">
+				<div class="text-center">
+					<a class="title" href="#">insta</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,85 @@
+/* [class^="col"] {
+  border: 1px solid rgb(255, 255, 255)!important;
+}
+
+[class^="row"] {
+  border: 1px solid yellow!important;
+} */
+
+body {
+  color: #ffffff;
+  font-size: 12px;
+  background-color: black;
+}
+
+.coverBlack {
+  background-color: black;
+  box-shadow: 0 1px 5px black;
+}
+
+input.form-control{
+    background-color:rgba(0,0,0,0) !important;
+    border:none !important;
+    border-top: 1px solid #505050!important;
+    border-radius: 0px!important;
+ }
+
+ textarea.form-control {
+    background-color:rgba(0,0,0,0) !important;
+    border: 1px solid #505050!important;
+ }
+
+ .imgProduct {   
+  border: 1px solid #505050;
+ }
+
+ .card-img{
+  background-size: contain!important;
+  background-repeat: no-repeat!important;  
+ }
+
+ .form-control {
+   color:#ffffff!important; 
+ }
+
+ .btn-custom {
+  color:#ffffff; 
+  background-color:rgba(0,0,0,0);
+  border:none;
+ }
+
+ .navTitle {
+   color:#ffffff;
+   font-weight: 700;
+   font-size: 18px;
+}
+ 
+
+ .title {
+  color:#ffffff;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+
+.accueil {
+  position: relative;
+  top: calc(10vh + 8vw);
+}
+
+.active {
+  border-bottom: 1px solid #505050;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none; /* no underline */
+}
+
+#myTopnav {
+border: 1px solid #505050;
+}
+/* 
+nav {
+  box-shadow: 0 5px 5px black;
+} */
