@@ -23,7 +23,7 @@
 				<a href="#">Spécifications</a>
 			</div>
 			<div class="col-12 mt-2">
-				<a href="{{ path('creations')}}" class="title {{ app.request.get('_route') == 'creations' ? 'active' }}">Créations</a>
+				<a href="{{ path('creations')}}" class="{{ app.request.get('_route') == 'creations' ? 'active' }}">Créations</a>
 			</div>
 			<div class="col-12 mt-2">
 				<a href="#">Contact</a>

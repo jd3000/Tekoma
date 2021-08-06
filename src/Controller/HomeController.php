@@ -15,9 +15,10 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $productRepo): Response
     {
-        $products = $productRepo->findAll();
+        $products = $productRepo->findByExampleField(4);
         // (“dump and die”) helper function
         // dd($products);
+        dump($products);
         return $this->render('home/index.html.twig', [
             'products' => $products
         ]);

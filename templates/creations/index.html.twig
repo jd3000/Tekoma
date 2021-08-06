@@ -7,25 +7,41 @@
 {% endblock %}
 
 {% block body %}
-
-
-	<div class="accueil">
+	<div class="container accueil">
 		<div class="row">
-			<div class="col text-center mt-3 title">
+			<div class="col text-center mt-3 title d-md-none">
 				<div>CREATIONS</div>
 			</div>
 		</div>
 
-		<div class="row align-items-center justify-content-center">
-			<div class="col-12 col-md-4 text-center mt-3">
-				{% for product in products %}
-					<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-{% endblock %}
+		{# <div class="row align-items-center justify-content-center">
+					{% for product in products %}
+						<div class="col-12 col-md-4 d-md-inline-flex justify-content-md-center text-center mt-3">
+		
+							<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+		
+						</div>
+					{% endfor %}
+				</div> #}
+		{# 
+				<div class="row">
+					<div class="col text-center mt-3 title d-md-none">
+						<div>CREATIONS</div>
+					</div>
+				</div> #}
 
-{% block javascripts %}
-	{{ parent() }}
-{% endblock %}
+
+		<div class="row align-items-center justify-content-center">
+			{% for product in products %}
+				<div class="col-12 col-md-4 text-center mt-3">
+
+					<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+
+				</div>
+			{% endfor %}
+		</div>
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ parent() }}
+	{% endblock %}

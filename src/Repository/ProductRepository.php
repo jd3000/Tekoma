@@ -30,7 +30,7 @@ class ProductRepository extends ServiceEntityRepository
             ->select('p')
             ->where('p.highlighted < :count')
             ->setParameter('count', $count)
-            ->orderBy('p.highlighted', 'DESC');
+            ->orderBy('p.highlighted', 'ASC');
 
         $query = $qb->getQuery();
 
