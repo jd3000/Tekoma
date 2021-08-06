@@ -20,13 +20,13 @@
 				<a href="{{ path('home')}}" class="{{ app.request.get('_route') == 'home' ? 'active' }}">Accueil</a>
 			</div>
 			<div class="col-12 mt-2">
-				<a href="#">Spécifications</a>
+				<a href="{{ path('specifications')}}" class="{{ app.request.get('_route') == 'specifications' ? 'active' }}">Spécifications</a>
 			</div>
 			<div class="col-12 mt-2">
 				<a href="{{ path('creations')}}" class="{{ app.request.get('_route') == 'creations' ? 'active' }}">Créations</a>
 			</div>
 			<div class="col-12 mt-2">
-				<a href="#">Contact</a>
+				<a href="{{path('contact')}}" class="{{ app.request.get('_route') == 'contact' ? 'active' }}">Contact</a>
 			</div>
 			<div class="col-12 my-2">
 				<a href="#">insta</a>
@@ -41,7 +41,7 @@
 			</div>
 			<div class="col-2 col-md-3 col-lg-2 my-3">
 				<div class="text-center">
-					<a class="title" href="#">SPECIFICATIONS</a>
+					<a class="title {{ app.request.get('_route') == 'specifications' ? 'active' }}" href="{{ path('specifications')}}">SPECIFICATIONS</a>
 				</div>
 			</div>
 			<div class="col-2 my-3">
@@ -51,7 +51,7 @@
 			</div>
 			<div class="col-2 my-3">
 				<div class="text-center">
-					<a class="title" href="#">CONTACT</a>
+					<a class="title {{ app.request.get('_route') == 'contact' ? 'active' }}" href="{{ path('contact')}}">CONTACT</a>
 				</div>
 			</div>
 			<div class="col-2 my-3">

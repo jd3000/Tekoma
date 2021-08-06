@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="container accueil">
+		<div class="row">
+			<div class="col text-center mt-3 title d-md-none">
+				<div>CONTACT</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>contact@tekomasound.com</div>
+			</div>
+		</div>
+
+
+		<form class="needs-validation" novalidate>
+			<div class="row align-items-center justify-content-center">
+				<div
+					class="col-12 col-md-6 mt-3">
+					{# <label for="validationCustom01">Nom</label> #}
+					<input type="text" class="form-control" id="validationCustom01" placeholder="Nom" required>
+					<div class="valid-feedback">
+						C'est parfait !
+					</div>
+					<div class="invalid-feedback">
+						Merci de renseigner votre Nom.
+					</div>
+				</div>
+
+				<div
+					class="col-12 col-md-6 mt-3">
+					{# <label for="validationCustom02">Prénom</label> #}
+					<input type="text" class="form-control" id="validationCustom02" placeholder="Prénom" required>
+					<div class="valid-feedback">
+						C'est parfait !
+					</div>
+					<div class="invalid-feedback">
+						Merci de renseigner votre Prénom.
+					</div>
+				</div>
+				<div
+					class="col-12 col-md-6 mt-3">
+					{# <label for="validationCustom03">Email</label> #}
+					<input type="email" class="form-control" id="validationCustom03" placeholder="Email" required>
+					<div class="valid-feedback">
+						C'est parfait !
+					</div>
+					<div class="invalid-feedback">
+						Merci de renseigner un Email.
+					</div>
+				</div>
+				<div
+					class="col-12 col-md-6 mt-3">
+					{# <label for="validationCustom04">Objet</label> #}
+					<input type="text" class="form-control" id="validationCustom04" placeholder="Objet" required>
+					<div class="valid-feedback">
+						C'est parfait !
+					</div>
+					<div class="invalid-feedback">
+						Merci de renseigner un Objet.
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+				<div class="col-12 col-md-8 col-lg-4 mt-3">
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required checked>
+							<label class="form-check-label" for="invalidCheck">
+								J'accepte d'être contacté par Tekoma grâce aux informations fournies.
+							</label>
+							<div class="invalid-feedback">
+								Vous devez accepter ces conditions pour envoyer votre message
+							</div>
+						</div>
+					</div>
+				</div>
+				<div
+					class="col-12 mt-3">
+					{# <label for="validationCustom05">Message</label> #}
+					<textarea class="form-control" id="validationCustom05" placeholder="Message" required rows="5"></textarea>
+					<div class="valid-feedback">
+						C'est parfait !
+					</div>
+					<div class="invalid-feedback">
+						Merci de renseigner un message.
+					</div>
+				</div>
+				<div class="col-12 mt-1">
+					<button class="btn btn-custom float-end" type="submit">Envoyer</button>
+				</div>
+			</div>
+		</form>
+
+
+		<div class="row d-flex justify-content-center logoSpec">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="./img/JUL.png" alt="sign logo">
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

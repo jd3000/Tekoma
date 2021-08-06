@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="container accueil">
+		<div class="row">
+			<div class="col text-center mt-3 title d-md-none">
+				<div>SPECIFICATIONS</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div><img src="/img/imagAccueil2.png" alt="image accueil 2"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>Structure en .......... créée par fabrication additive.<br>
+					Composants électroniques et audios choisis pour leur qualité et leur fiabilité.<br>
+					Assemblage manuel et finition personnalisée sur demande (couleur, aspect).<br>
+					Puissance 50W, 2 voies.<br>
+					Réponse en fréquence : 55Hz à 20KHz.<br>
+					Bluetooth 5.0, haute sensibilité de réception. Codecs APTX, APTX HD, APTX-LL, SBC & AAC.<br>
+					Controle d’apairage avec indicateur de connexion.<br>
+					Batteries rechargeables et remplaçables. Autonomie de 10h à puissance moyenne.<br>
+					Alimentation externe 19V/2A fournie permettant  une recharge totale en 2h pendant le fonctionnement.<br>
+					Indicateur de connexion secteur et de pleine charge.</div>
+			</div>
+		</div>
+
+		<div class="row d-flex justify-content-center logoSpec">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="./img/JUL.png" alt="sign logo">
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

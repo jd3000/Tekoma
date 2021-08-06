@@ -56,10 +56,14 @@ input.form-control{
   font-size: 16px;
 }
 
-
 .accueil {
   position: relative;
   top: calc(10vh + 8vw);
+}
+
+.logoSpec {
+  position: relative;
+  bottom: calc(-45vh);
 }
 
 .active {
