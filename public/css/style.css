@@ -12,30 +12,37 @@ body {
   background-color: black;
 }
 
-.coverBlack {
+.navBlack {
   background-color: black;
   box-shadow: 0 4px 5px black;
 }
 
-input.form-control{
+.coverBlack {
+  background-color: rgba(0, 0, 0, 0.99);
+  box-shadow: 0 4px 5px rgba(0,0,0,0.99);
+}
+
+
+
+.form-control {
     background-color:rgba(0,0,0,0) !important;
     border:none !important;
     border-top: 1px solid #505050!important;
     border-radius: 0px!important;
- }
+    color:#ffffff!important; 
+ } 
 
- textarea.form-control {
-    background-color:rgba(0,0,0,0) !important;
-    border: 1px solid #505050!important;
- }
+.form-error-icon  {
+color: RED;
+}
 
  .imgProduct {   
   border: 1px solid #505050;
  }
 
- .form-control {
+ /* .form-control {
    color:#ffffff!important; 
- }
+ } */
 
  .btn-custom {
   color:#ffffff; 
@@ -49,6 +56,9 @@ input.form-control{
    font-size: 18px;
 }
  
+.fa-instagram {
+  font-size: 24px;
+  }
 
  .title {
   color:#ffffff;
@@ -78,6 +88,14 @@ a {
 #myTopnav {
 border: 1px solid #505050;
 }
+
+/* form-control {
+  border: none;
+  border-top: 1px solid #505050;
+  background-color: black;
+  color: #ffffff;
+  font-size: 14px;
+  } */
 /* 
 nav {
   box-shadow: 0 5px 5px black;
