@@ -25,7 +25,7 @@ class Prospect
      * @Assert\NotBlank()
      * @Assert\Email()
      */
-    private $email;
+    private $prospectEmail;
 
     /**
      * @var string|null
@@ -41,11 +41,15 @@ class Prospect
      */
     private $message;
 
-
     /**
      * @var Product|null
      */
     private $product;
+
+    /**
+     * @var boolean|null
+     */
+    private $agreeTerms;
 
     /**
      * @return null|string
@@ -88,18 +92,18 @@ class Prospect
     /**
      * @return null|string
      */
-    public function getEmail(): ?string
+    public function getProspectEmail(): ?string
     {
-        return $this->email;
+        return $this->prospectEmail;
     }
 
     /**
      * @param null|string $email
      * @return Prospect
      */
-    public function setEmail(?string $email): Prospect
+    public function setProspectEmail(?string $prospectEmail): Prospect
     {
-        $this->email = $email;
+        $this->prospectEmail = $prospectEmail;
 
         return $this;
     }
@@ -157,6 +161,30 @@ class Prospect
     public function setProduct(?Product $product): Prospect
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of agreeTerms
+     *
+     * @return  boolean|null
+     */
+    public function getAgreeTerms()
+    {
+        return $this->agreeTerms;
+    }
+
+    /**
+     * Set the value of agreeTerms
+     *
+     * @param  boolean|null  $agreeTerms
+     *
+     * @return  self
+     */
+    public function setAgreeTerms($agreeTerms)
+    {
+        $this->agreeTerms = $agreeTerms;
 
         return $this;
     }

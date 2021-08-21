@@ -8,6 +8,7 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
+			{% include "_partials/_flashbag.html.twig" %}
 			<div class="col text-center mt-3 title d-md-none">
 				<div>CONTACT</div>
 			</div>
@@ -35,18 +36,25 @@
 							<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
 						</div>
 						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.email) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.email) }}</div>
+							<div>{{ form_widget(form.prospectEmail) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
 						</div>
 						<div class="col-12 col-md-6 mt-3">
 							<div>{{ form_widget(form.subject) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
 						</div>
 						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.email) }}</div>
+							<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
 						</div>
 						<div class="col-12 col-md-6">
 							<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
+						</div>
+						<div class="row d-flex justify-content-center">
+							<div class="col-12 col-md-8 col-lg-4 mt-3">
+								<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
+								<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
+
+							</div>
 						</div>
 						<div class="col-12 mt-3">
 							{{ form_widget(form.message) }}

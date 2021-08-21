@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ProspectType extends AbstractType
 {
@@ -27,7 +28,7 @@ class ProspectType extends AbstractType
                     'placeholder' => 'Nom'
                 )
             ))
-            ->add('email', EmailType::class, array(
+            ->add('prospectEmail', EmailType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Email'
@@ -44,6 +45,12 @@ class ProspectType extends AbstractType
                     'class' => 'form-control',
                     'required rows' => '5',
                     'placeholder' => 'Message'
+                )
+            ))
+            ->add('agreeTerms', CheckboxType::class, array(
+                'attr' => array(
+                    'class' => 'form-arround',
+                    'required' => true,
                 )
             ));
     }
