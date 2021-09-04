@@ -48,6 +48,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('agreeTerms', CheckboxType::class, array(
+                'label' => 'J\'accepte les conditions d\'utilisation',
                 'attr' => array(
                     'class' => 'form-arround',
                     'required' => true,

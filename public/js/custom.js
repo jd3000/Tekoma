@@ -19,6 +19,7 @@
 function burgerToggle() {
     let x = document.getElementById("myTopnav");
     let y = document.getElementById("burger");
+
     if (x.className === "row coverBlack d-flex-block d-md-none mx-1") {
         x.className = "row coverBlack d-none d-md-none mx-1";
         y.src = "/img/burger.png";
@@ -27,5 +28,18 @@ function burgerToggle() {
         y.src = "/img/cross.png";
     }
 }
+
+// function loginToggle() {
+//     let x = document.getElementById("myTopnav");
+//     let y = document.getElementById("login");
+
+//     if (x.className === "row coverBlack d-flex-block d-md-none mx-1") {
+//         x.className = "row coverBlack d-none d-md-none mx-1";
+//         y.src = "/img/burger.png";
+//     } else {
+//         // x.className = "row coverBlack d-flex-block d-md-none mx-1";
+//         // y.src = "/img/cross.png";
+//     }
+// }
 
 

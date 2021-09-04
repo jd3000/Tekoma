@@ -85,6 +85,11 @@ color: RED;
   bottom: calc(-45vh);
 }
 
+.logoLogin {
+  position: relative;
+  bottom: calc(-55vh);
+}
+
 .active {
   border-bottom: 1px solid #505050;
 }

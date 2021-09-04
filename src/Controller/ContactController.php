@@ -35,13 +35,9 @@ class ContactController extends AbstractController
                 // path of the Twig template to render
                 ->html('<b>Sujet :</b>' . ' ' . $form->get('subject')->getData() . '<br><b>Message :</b>' . ' ' . $form->get('message')->getData() . '<br><b>Identité :</b>' . ' ' . $form->get('firstname')->getData() . ' ' . $form->get('lastname')->getData() . '<br><b>Email :</b>' . ' ' . $form->get('prospectEmail')->getData() . '');
 
-
-
             $mailer->send($email);
             $this->addFlash('success', "Votre demande a bien été envoyée.");
             return $this->redirectToRoute('contact');
-
-
             // dump($prospect);
         }
 
