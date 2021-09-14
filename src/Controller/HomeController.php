@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Prospect;
 use App\Form\ProspectType;
-use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use App\Repository\ProductRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -28,12 +30,25 @@ class HomeController extends AbstractController
 
             $prospect = $form->getData();
 
-            $email =  (new Email())
+            // # 3
+            $email = (new TemplatedEmail())
                 ->from($form->get('prospectEmail')->getData())
-                ->to('contact@tekoma.com')
+                ->to(new Address('contact@tekoma.com'))
                 ->subject('CONTACT - ' . $form->get('subject')->getData())
+
                 // path of the Twig template to render
-                ->html('<b>Sujet :</b>' . ' ' . $form->get('subject')->getData() . '<br><b>Message :</b>' . ' ' . $form->get('message')->getData() . '<br><b>Identité :</b>' . ' ' . $form->get('firstname')->getData() . ' ' . $form->get('lastname')->getData() . '<br><b>Email :</b>' . ' ' . $form->get('prospectEmail')->getData() . '');
+                ->htmlTemplate('emails/template.html.twig')
+
+                // pass variables (name => value) to the template
+                ->context([
+                    'expiration_date' => new \DateTime('+7 days'),
+                    'firstname' => $form->get('firstname')->getData(),
+                    'lastname' => $form->get('lastname')->getData(),
+                    'prospectEmail' => $form->get('prospectEmail')->getData(),
+                    'subject' => $form->get('subject')->getData(),
+                    'message' => $form->get('message')->getData(),
+
+                ]);
 
             $mailer->send($email);
             $this->addFlash('success', "Votre demande a bien été envoyée.");
