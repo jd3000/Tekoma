@@ -53,6 +53,7 @@ class ContactController extends AbstractController
                     'prospectEmail' => $form->get('prospectEmail')->getData(),
                     'subject' => $form->get('subject')->getData(),
                     'message' => $form->get('message')->getData(),
+
                 ]);
 
             $mailer->send($email);
