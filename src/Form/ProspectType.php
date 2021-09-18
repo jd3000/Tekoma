@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class ProspectType extends AbstractType
 {
@@ -48,12 +49,16 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('agreeTerms', CheckboxType::class, array(
-                'label' => 'J\'accepte les conditions d\'utilisation',
+                'label' => 'J\'accepte l\'utilisation de ces informations pour être recontacté par Tekoma',
                 'attr' => array(
                     'class' => 'form-arround',
                     'required' => true,
                 )
             ));
+        // ))
+        // ->add('recaptcha', HiddenType::class, array(
+        //     'mapped' => false,
+        // ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

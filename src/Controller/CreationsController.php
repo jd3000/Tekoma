@@ -21,4 +21,19 @@ class CreationsController extends AbstractController
             'products' => $products
         ]);
     }
+
+    /**
+     * Permet d'afficher une seule creation
+     * 
+     * @Route("/creations/{slug}", name="creations_show")
+     */
+    public function show($slug, ProductRepository $productRepo): Response
+    {
+        $product = $productRepo->findOneBySlug($slug);
+        // (“dump and die”) helper function
+        // dd($products);
+        return $this->render('creations/show.html.twig', [
+            'product' => $product
+        ]);
+    }
 }

@@ -28,6 +28,16 @@ function burgerToggle() {
         y.src = "/img/cross.png";
     }
 }
+// recaptcha V3
+// $('#prospectForm').submit(function (e) {
+//     e.preventDefault();
+//     grecaptcha.ready(function () {
+//         grecaptcha.execute('6LcqcWocAAAAAKnafYT5t7dP9gtuc2dyxucHvmp9', { action: 'submit' }).then(function (token) {
+//             $('#prospectType_recaptcha').val(token);
+//             $('#prospectForm').off().submit();
+//         });
+//     });
+// });
 
 // function loginToggle() {
 //     let x = document.getElementById("myTopnav");

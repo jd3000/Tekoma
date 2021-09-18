@@ -55,8 +55,9 @@
 		<div class="row align-items-center justify-content-center p-3">
 			{% for product in products %}
 				<div class="col-12 col-md-4 text-center mt-3">
-
-					<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+					<a href="{{ path('creations_show' , {'slug':product.slug|e} ) }}">
+						<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+					</a>
 				</div>
 			{% endfor %}
 		</div>
