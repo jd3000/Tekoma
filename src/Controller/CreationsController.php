@@ -14,7 +14,7 @@ class CreationsController extends AbstractController
      */
     public function index(ProductRepository $productRepo): Response
     {
-        $products = $productRepo->findAll();
+        $products = $productRepo->findActiveProducts(true);
         // (“dump and die”) helper function
         // dd($products);
         return $this->render('creations/index.html.twig', [
@@ -31,7 +31,7 @@ class CreationsController extends AbstractController
     {
         $product = $productRepo->findOneBySlug($slug);
         // (“dump and die”) helper function
-        // dd($products);
+        dump($product);
         return $this->render('creations/show.html.twig', [
             'product' => $product
         ]);

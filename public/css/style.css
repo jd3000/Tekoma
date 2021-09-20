@@ -49,14 +49,22 @@ color: RED;
   border: 1px solid #505050;
  }
 
+
+
  /* .form-control {
    color:#ffffff!important; 
  } */
-
+ 
  .btn-custom {
   color:#ffffff; 
   background-color:rgba(0,0,0,0);
   border:none;
+ }
+
+ .btn-custom-border {
+  color:#ffffff; 
+  background-color:rgba(0,0,0,0);
+  border:1px solid #505050;
  }
 
  .navTitle {

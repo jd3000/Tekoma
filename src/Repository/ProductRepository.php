@@ -28,7 +28,7 @@ class ProductRepository extends ServiceEntityRepository
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('p')
             ->select('p')
-            ->where('p.highlighted < :count')
+            ->where('p.highlighted < :count', 'p.isActive = true')
             ->setParameter('count', $count)
             ->orderBy('p.highlighted', 'ASC');
 
@@ -38,27 +38,24 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
-    // public function findByExampleField($value)
+    public function findActiveProducts($isActive)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isActive = :val')
+            ->setParameter('val', $isActive)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+    // public function findOneBySomeField($value): ?Product
     // {
     //     return $this->createQueryBuilder('p')
     //         ->andWhere('p.exampleField = :val')
     //         ->setParameter('val', $value)
-    //         ->orderBy('p.id', 'ASC')
-    //         ->setMaxResults(10)
     //         ->getQuery()
-    //         ->getResult();
+    //         ->getOneOrNullResult();
     // }
-
-
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

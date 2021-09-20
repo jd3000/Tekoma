@@ -10,7 +10,36 @@
 		<div class="row">
 			{% include "_partials/_flashbag.html.twig" %}
 			<div class="col text-center mt-3 title d-md-none">
-				<div>CONTACT</div>
+				<div>COMMANDE</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3 title d-md-none">
+				<div>{{ product.name }}</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3 title d-none d-md-block">
+				<div>COMMANDE -
+					{{ product.name }}</div>
+			</div>
+		</div>
+
+		<div class="row align-items-center justify-content-center">
+
+			<div class="col-12 col-md-4 text-center mt-3">
+				<div class="imgProduct p-4"><img class="card-img" style="width: 10vh;" src="/img/{{ product.img }}" alt="image {{ product.name }}"></div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>{{ product.price }}
+					€
+				</div>
 			</div>
 		</div>
 
@@ -56,12 +85,14 @@
 
 							</div>
 						</div>
-						<div class="col-12 mt-3">
+						<div
+							class="col-12 mt-3">
+							{# {{product.name}} #}
 							{{ form_widget(form.message) }}
 							{{ form_errors(form.message) }}
 						</div>
 						<div class="col-12 mt-1 form-group">
-							<button class="btn btn-custom float-end" type="submit">Envoyer</button>
+							<button class="btn btn-custom float-end" type="submit">Commander</button>
 						</div>
 					</div>
 					{# {{ form_end(form, {'render_rest': false}) }} #}
