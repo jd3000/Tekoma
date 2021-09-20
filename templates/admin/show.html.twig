@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="container accueil">
+		<div class="row">
+			<div class="col text-center mt-3 title bg-warning">
+				<div>Admin du
+					{{ product.name }}</div>
+			</div>
+		</div>
+		<div class="row align-items-center justify-content-center">
+
+			<div class="col-12 col-md-4 text-center mt-3">
+				<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img }}" alt="image {{ product.name }}"></div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3 title">
+				<div>Description
+					{{ product.name }}</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>{{ product.description }}
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>{{ product.price }}
+					€
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<button class="btn btn-custom" onclick="window.location.href = '{{ path('creations')}}';">Revenir aux créations</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<button class="btn btn-custom-border" onclick="window.location.href = '{{ path('contact_order' , {'slug':product.slug} )}}';">Commander</button>
+			</div>
+		</div>
+
+		<div class="row d-flex justify-content-center logoSpec">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
