@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,11 +28,14 @@ class CreationsController extends AbstractController
      * 
      * @Route("/creations/{slug}", name="creations_show")
      */
-    public function show($slug, ProductRepository $productRepo): Response
+    public function show($slug, Product $product): Response
     {
-        $product = $productRepo->findOneBySlug($slug);
+
+        // si on utilise le ProductRepository à la place du paramconverter
+        // $product = $productRepo->findOneBySlug($slug);
+
         // (“dump and die”) helper function
-        dump($product);
+        // dump($product);
         return $this->render('creations/show.html.twig', [
             'product' => $product
         ]);

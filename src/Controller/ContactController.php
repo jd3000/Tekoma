@@ -120,7 +120,7 @@ class ContactController extends AbstractController
         $productName = $product->getName();
         // (“dump and die”) helper function
         // dump($product);
-        dump($productImg);
+        // dump($productImg);
 
         $prospect = new Prospect;
         $prospect->setProduct($product);
@@ -190,7 +190,7 @@ class ContactController extends AbstractController
 
             // $mailer->send($email);
 
-            $this->addFlash('success', "Votre commande conernant le produit $productName a bien été envoyée.");
+            $this->addFlash('success', "Votre commande concernant le produit $productName a bien été envoyée.");
             return $this->redirectToRoute('home');
             // dump($prospect);
         }

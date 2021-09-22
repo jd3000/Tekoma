@@ -6,6 +6,22 @@
   border: 1px solid yellow!important;
 } */
 
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-content: 0 0 0px 1000px #000 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 body {
   color: #ffffff;
   font-size: 12px;
@@ -30,54 +46,59 @@ body {
     border-top: 1px solid #505050!important;
     border-radius: 0px!important;
     color:#ffffff!important; 
- } 
+} 
 
- .form-arround {
+
+.form-arround {
   background-color:rgba(0,0,0,0) !important;
   border: 1px solid #505050!important;
- }
+}
 
- .form-check-label {
-   color: #6c757d;
- }
+.form-check-label , .custom-file {
+  color: #6c757d;
+}
+
+/* .custom-file {
+  color: #6c757d;
+} */
 
 .form-error-icon  {
 color: RED;
 }
 
- .imgProduct {   
+.imgProduct {   
   border: 1px solid #505050;
- }
+}
 
 
 
- /* .form-control {
-   color:#ffffff!important; 
+/* .form-control {
+  color:#ffffff!important; 
  } */
- 
- .btn-custom {
+
+.btn-custom {
   color:#ffffff; 
   background-color:rgba(0,0,0,0);
   border:none;
- }
+}
 
- .btn-custom-border {
+.btn-custom-border {
   color:#ffffff; 
   background-color:rgba(0,0,0,0);
   border:1px solid #505050;
- }
-
- .navTitle {
-   color:#ffffff;
-   font-weight: 700;
-   font-size: 18px;
 }
- 
+
+.navTitle {
+  color:#ffffff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
 .fa-instagram {
   font-size: 24px;
   }
 
- .title {
+.title {
   color:#ffffff;
   font-weight: 700;
   font-size: 16px;
@@ -111,6 +132,15 @@ a {
 border: 1px solid #505050;
 }
 
+.input-group-text {
+  background-color:rgba(255, 255, 255, 0);
+  color:#ffffff;
+}
+
+.file-upload-button {
+  color:rgb(255, 181, 62);
+}
+
 .card-header, .card {
   color:#505050;
   background-color:rgba(0, 0, 0, 0.657);
@@ -127,7 +157,7 @@ cursor: pointer;
 }
 
 .borderCard:hover , .cardAnim:hover{
-   transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 /* form-control {

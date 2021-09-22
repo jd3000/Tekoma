@@ -2,11 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Validator\Constraint as Assert;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * 
  */
 class Product
 {
@@ -18,12 +25,14 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255)     
+     * 
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     *
      */
     private $description;
 

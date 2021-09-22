@@ -9,8 +9,19 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
+			{% include "_partials/_flashbag.html.twig" %}
 			<div class="col text-center mt-3 title d-md-none">
 				<div>CREATIONS</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">
+				<div>
+					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_create')}}';">
+						<i class="fas fa-plus"></i>
+						<b>Ajouter une création</b>
+					</button>
+				</div>
 			</div>
 		</div>
 		<div class="row align-items-center justify-content-center px-3 mt-5">
