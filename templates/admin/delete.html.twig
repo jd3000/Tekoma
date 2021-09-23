@@ -9,15 +9,15 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
-			<div class="col text-center mt-3 title bg-warning">
-				<div>Admin du
+			<div class="col text-center mt-3 title bg-danger mx-3">
+				<div>Suppression
 					{{ product.name }}</div>
 			</div>
 		</div>
 		<div class="row align-items-center justify-content-center">
 
 			<div class="col-12 col-md-4 text-center mt-3">
-				<div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img }}" alt="image {{ product.name }}"></div>
+				<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
 			</div>
 
 		</div>
@@ -46,13 +46,13 @@
 
 		<div class="row">
 			<div class="col text-center mt-3">
-				<button class="btn btn-custom" onclick="window.location.href = '{{ path('creations')}}';">Revenir aux créations</button>
+				<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin')}}';">Revenir aux créations</button>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col text-center mt-3">
-				<button class="btn btn-custom-border" onclick="window.location.href = '{{ path('contact_order' , {'slug':product.slug} )}}';">Commander</button>
+				<button class="btn btn-custom-border bg-danger" onclick="window.location.href = '{{ path('admin_delete_confirm' , {'slug':product.slug} )}}';">Supprimer</button>
 			</div>
 		</div>
 

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\LessThan;
@@ -14,9 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
@@ -91,7 +92,16 @@ class AddCreationType extends AbstractType
             ->add(
                 'img',
                 FileType::class,
-                $this->getConfiguration("Image associée à la création", "Choisissez une image qui met valeur la création", "")
+                array(
+                    'label' => 'Choisissez une image qui met valeur la création',
+                    'attr' => array(
+                        'class' => 'form-control',
+                        'required' => false,
+                    ),
+                    'constraints' => array(
+                        new File()
+                    )
+                )
             )
             ->add(
                 'highlighted',

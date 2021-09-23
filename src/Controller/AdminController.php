@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 
 class AdminController extends AbstractController
@@ -43,14 +44,39 @@ class AdminController extends AbstractController
         $form = $this->createForm(AddCreationType::class, $product);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $productName = $product->getName();
             $form->getData();
+            $img = $form->get('img')->getData();
+
             // dump($form);
             $product->setSlug($form->get('name')->getData());
             $product->setIsactive(false);
 
-            dump($product);
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
+
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $img->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                // updates the 'imgname' property to store the PDF file name
+                // instead of its contents
+                $product->setImg($newFilename);
+            }
+
+
+            // dump($product);
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -64,10 +90,26 @@ class AdminController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Permet d'afficher une seule creation
+     * 
+     * @Route("/admin/delete/{slug}", name="admin_delete")
+     */
+    public function showDelete($slug, ProductRepository $productRepo): Response
+    {
+        $product = $productRepo->findOneBySlug($slug);
+        // (“dump and die”) helper function
+        dump($product);
+        return $this->render('admin/delete.html.twig', [
+            'product' => $product
+        ]);
+    }
+
     /**
      * Permet de supprimer seule creation
      * 
-     * @Route("/admin/delete/{slug}", name="admin_delete")
+     * @Route("/admin/delete/confirm/{slug}", name="admin_delete_confirm")
      */
     public function delete($slug, ProductRepository $productRepo): Response
     {

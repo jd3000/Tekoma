@@ -4,8 +4,8 @@
 			<strong>
 				{% for message in messages %}
 					{{ message|raw }}
-					{% if label is same as("succes") %}&#x1F44D;
-						{% elseif label is same as("danger") %}&#x1F6A7;
+					{% if label is same as("succes") %}
+						{% elseif label is same as("danger") %}
 					{% endif %}
 				{% endfor %}
 			</strong>

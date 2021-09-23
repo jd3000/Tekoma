@@ -38,7 +38,7 @@
 								{% endif %}
 								<h6 class="card-subtitle text-muted pt-3">{{ product.price|e }}€</h6>
 							</div>
-							<img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}">
+							<img class="card-img" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}">
 							<div class="card-body">
 								<p class="card-text">
 									{% if product.description|e|length > 50 %}
@@ -65,7 +65,7 @@
 								{% endif %}
 							</ul>
 							<div class="card-body">
-								<a href="#" class="card-link">Card link</a>
+								<a href="{{ path('admin_delete' , {'slug':product.slug} )}}" class="card-link text-danger">Supprimer</a>
 								<a href="#" class="card-link">Another link</a>
 							</div>
 							<div class="card-footer text-muted">

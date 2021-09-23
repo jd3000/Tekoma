@@ -7,3 +7,4 @@ twig:
     paths:
         # point this wherever your images live
         'public/img': images
+        'public/img/uploads': images
