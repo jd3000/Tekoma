@@ -17,8 +17,13 @@
 // })();
 
 
+// Permet de fermer les flashbags après 3 s
+setTimeout(function () {
+    $(".btn-close").trigger('click');
+}, 3000);
 
 
+// Permet de gérer le toggle du burger (small)
 function burgerToggle() {
     let x = document.getElementById("myTopnav");
     let y = document.getElementById("burger");

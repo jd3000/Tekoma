@@ -8,14 +8,14 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
+		<div class="row mt-4">
 			{% include "_partials/_flashbag.html.twig" %}
-			<div class="col text-center mt-3 title d-md-none">
+			<div class="col-12 text-center mt-3 title d-md-none">
 				<div>CREATIONS</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col text-center mt-3">
+			<div class="col-12 text-center mt-3">
 				<div>
 					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_create')}}';">
 						<i class="fas fa-plus"></i>
@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row align-items-center justify-content-center px-3 mt-5">
+		<div class="row align-items-center justify-content-center mt-5">
 			{% for product in products %}
 				<div class="col-12 col-md-3 text-center m-3 borderCard cardAnim">
 					<a href="{{ path('admin_show' , {'slug':product.slug|e} ) }}">
@@ -66,34 +66,42 @@
 							</ul>
 							<div class="card-body">
 								<a href="{{ path('admin_delete' , {'slug':product.slug} )}}" class="card-link text-danger">Supprimer</a>
-								<a href="#" class="card-link">Another link</a>
+
+								{% if product.isActive|e == true %}
+
+									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link">Désactiver</a>
+								</div>
+								<div class="card-footer text-muted">
+									Une création active est visible par les utilisateurs
+								</div>
+							{% else %}
+								<div class="card-body">
+									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link text-success">Activer</a>
+								</div>
+								<div class="card-footer text-muted">
+									Une création inactive n'est pas visible par les utilisateurs
+								</div>
 							</div>
-							<div class="card-footer text-muted">
-								2 days ago
-							</div>
+						{% endif %}
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">Card title</h4>
+							<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+							<a href="#" class="card-link">Card link</a>
+							<a href="#" class="card-link">Another link</a>
 						</div>
-						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title">Card title</h4>
-								<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-								<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-								<a href="#" class="card-link">Card link</a>
-								<a href="#" class="card-link">Another link</a>
-							</div>
-						</div>
-						{# <div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div> #}
-					</a>
-				</div>
-			{% endfor %}
-		</div>
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="./img/JUL.png" alt="sign logo">
+					</div>
+					{# <div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div> #}
+				</a>
 			</div>
+		{% endfor %}
+	</div>
+	<div class="row d-flex justify-content-center logoSpec">
+		<div class="col-3 col-md-2 col-lg-2 mt-3">
+			<img class="card-img" src="./img/JUL.png" alt="sign logo">
 		</div>
 	</div>
-{% endblock %}
-
-{% block javascripts %}
-	{{ parent() }}
-{% endblock %}
+</div>{% endblock %}{% block javascripts %}
+{{ parent() }}{% endblock %}
