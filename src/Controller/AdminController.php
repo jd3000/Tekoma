@@ -82,7 +82,7 @@ class AdminController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success', "Le produit $productName a bien été ajouté.");
+            $this->addFlash('success', "<b>$productName</b> a bien été ajouté.");
             return $this->redirectToRoute('admin');
         }
 
@@ -124,7 +124,7 @@ class AdminController extends AbstractController
         $entityManager->flush();
         // (“dump and die”) helper function
         // dump($product);
-        $this->addFlash('danger', "Le produit $productName a bien été supprimé.");
+        $this->addFlash('danger', "<b>$productName</b> a bien été supprimé.");
         return $this->redirectToRoute('admin');
 
         return $this->render('admin/delete.html.twig', [
@@ -154,14 +154,89 @@ class AdminController extends AbstractController
         $entityManager->flush();
         // (“dump and die”) helper function
         // dump($product);
-        $this->addFlash('success', "Le produit $productName a bien été $flashProduct.");
+        $this->addFlash('success', "<b>$productName</b> a bien été <b>$flashProduct</b>.");
 
         return $this->redirectToRoute('admin');
 
-        return $this->render('', [
-            'product' => $product
-        ]);
+        // return $this->render('', [
+        //     'product' => $product
+        // ]);
     }
+
+    /**
+     * Permet de dé-highlighter une seule creation
+     * 
+     * @Route("/admin/unhighlight/confirm/{slug}", name="admin_unhighlight_confirm")
+     */
+    public function unhighlight($slug, ProductRepository $productRepo): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $product = $productRepo->findOneBySlug($slug);
+        $productName = $product->getName();
+        $productHighlighted = $product->getHighlighted();
+
+        if ($productHighlighted !== null) {
+            $product->setHighlighted(null);
+            $flashProduct = 'a bien été <b>retiré</b> de la page d\'accueil'; # code...
+        }
+        $entityManager->persist($product);
+        $entityManager->flush();
+        // (“dump and die”) helper function
+        // dump($product);
+        $this->addFlash('success', "<b>$productName</b> $flashProduct.");
+
+        return $this->redirectToRoute('admin');
+
+        // return $this->render('', [
+        //     'product' => $product
+        // ]);
+    }
+
+    /**
+     * Permet d'highlighter une seule creation
+     * 
+     * @Route("/admin/highlight/confirm/{slug}", name="admin_highlight_confirm")
+     */
+    public function highlight($slug, ProductRepository $productRepo): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $product = $productRepo->findOneBySlug($slug);
+        $productName = $product->getName();
+        // $products = $productRepo->findHighlightedField(4);
+
+        $productHighlightedValue1 = $productRepo->findOneHighlightedBySomeField(1);
+        $productHighlightedValue2 = $productRepo->findOneHighlightedBySomeField(2);
+        $productHighlightedValue3 = $productRepo->findOneHighlightedBySomeField(3);
+
+
+        if (!$productHighlightedValue1) {
+            $product->setHighlighted(1);
+            $flashClass = 'success';
+            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+        } elseif (!$productHighlightedValue2) {
+            $product->setHighlighted(2);
+            $flashClass = 'success';
+            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+        } elseif (!$productHighlightedValue3) {
+            $product->setHighlighted(3);
+            $flashClass = 'success';
+            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+        } else {
+            $flashClass = 'warning';
+            $flashProduct = 'ne peut pas être ajouté à la page d\'accueil (maximum = 3), vous devez <b>retirer une création</b> de la page d\'accueil au préalable</b>';
+        }
+
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        $this->addFlash($flashClass, "<b>$productName</b> $flashProduct.");
+
+        return $this->redirectToRoute('admin');
+        // return $this->render('', [
+        //     'product' => $product
+        // ]);
+    }
+
 
     /**
      * Permet d'afficher une seule creation
@@ -172,7 +247,7 @@ class AdminController extends AbstractController
     {
         $product = $productRepo->findOneBySlug($slug);
         // (“dump and die”) helper function
-        dump($product);
+        // dump($product);
         return $this->render('admin/show.html.twig', [
             'product' => $product
         ]);

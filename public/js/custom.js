@@ -20,7 +20,7 @@
 // Permet de fermer les flashbags après 3 s
 setTimeout(function () {
     $(".btn-close").trigger('click');
-}, 3000);
+}, 10000);
 
 
 // Permet de gérer le toggle du burger (small)

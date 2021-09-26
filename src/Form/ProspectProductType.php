@@ -55,7 +55,7 @@ class ProspectProductType extends AbstractType
             ))
             ->add('message', TextareaType::class, array(
                 'attr' => array(
-                    'class' => 'form-control',
+                    'class' => 'form-arround',
                     'required rows' => '5',
                     'placeholder' => 'Votre message pour commander le ' . $productName,
                 )

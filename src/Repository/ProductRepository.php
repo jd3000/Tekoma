@@ -23,12 +23,26 @@ class ProductRepository extends ServiceEntityRepository
      * @return Product[] Returns an array of Product objects
      */
 
-    public function findByExampleField($count): array
+    public function findActiveHighlightedField($count): array
     {  // automatically knows to select Products
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('p')
             ->select('p')
-            ->where('p.highlighted < :count', 'p.isActive = true')
+            ->where('p.highlighted < :count', 'p.isActive = true', 'p.highlighted > 0')
+            ->setParameter('count', $count)
+            ->orderBy('p.highlighted', 'ASC');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
+    public function findHighlightedField($count): array
+    {  // automatically knows to select Products
+        // the "p" is an alias you'll use in the rest of the query
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.highlighted < :count', 'p.highlighted > 0')
             ->setParameter('count', $count)
             ->orderBy('p.highlighted', 'ASC');
 
@@ -50,12 +64,12 @@ class ProductRepository extends ServiceEntityRepository
 
 
 
-    // public function findOneBySomeField($value): ?Product
-    // {
-    //     return $this->createQueryBuilder('p')
-    //         ->andWhere('p.exampleField = :val')
-    //         ->setParameter('val', $value)
-    //         ->getQuery()
-    //         ->getOneOrNullResult();
-    // }
+    public function findOneHighlightedBySomeField($value): ?Product
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.highlighted = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

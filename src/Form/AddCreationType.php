@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -50,7 +51,7 @@ class AddCreationType extends AbstractType
                 TextType::class,
                 array(
                     'attr' => array(
-                        'class' => 'form-control',
+                        'class' => '',
                         'placeholder' => 'Nom de la création'
                     ),
                     'constraints' => array(
@@ -59,23 +60,27 @@ class AddCreationType extends AbstractType
                     )
                 )
             )
-            ->add('description', TextareaType::class, array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'required rows' => '5',
-                    'placeholder' => 'Description de la création'
-                ),
-                'constraints' => array(
-                    new NotBlank(),
-                    new Length(['min' => 10])
+            ->add(
+                'description',
+                TextareaType::class,
+                array(
+                    'attr' => array(
+                        'class' => 'form-arround',
+                        'required rows' => '5',
+                        'placeholder' => 'Description de la création'
+                    ),
+                    'constraints' => array(
+                        new NotBlank(),
+                        new Length(['min' => 10])
+                    )
                 )
-            ))
+            )
             ->add(
                 'price',
                 MoneyType::class,
                 array(
                     'attr' => array(
-                        'class' => 'form-control',
+                        'class' => '',
                         'placeholder' => 'Prix de la création'
                     ),
                     'constraints' => array(
@@ -86,8 +91,16 @@ class AddCreationType extends AbstractType
             )
             ->add(
                 'quantity',
-                IntegerType::class,
-                $this->getConfiguration("Qauntité en stock", "Quantité", "")
+                NumberType::class,
+                array(
+                    'attr' => array(
+                        'class' => '',
+                        'placeholder' => 'Quantité'
+                    ),
+                    'constraints' => array(
+                        new GreaterThanOrEqual(['value' => 0])
+                    )
+                )
             )
             ->add(
                 'img',
@@ -95,7 +108,7 @@ class AddCreationType extends AbstractType
                 array(
                     'label' => 'Choisissez une image qui met valeur la création',
                     'attr' => array(
-                        'class' => 'form-control',
+                        'class' => '',
                         'required' => false,
                     ),
                     'constraints' => array(
@@ -105,8 +118,14 @@ class AddCreationType extends AbstractType
             )
             ->add(
                 'highlighted',
-                IntegerType::class,
-                $this->getConfiguration("Produit mis en avant sur la page d'accueil", "Produit mis en avant sur la page d'acceuil", "")
+                HiddenType::class,
+                array(
+                    'label' => 'highlighted',
+                    'attr' => array(
+                        'class' => '',
+                        'required' => false,
+                    )
+                )
             )
             ->add(
                 'slug',
@@ -119,7 +138,7 @@ class AddCreationType extends AbstractType
                 array(
                     'label' => 'Produit visible par les visiteurs',
                     'attr' => array(
-                        'class' => 'form-arround',
+                        'class' => '',
                         'required' => false,
                     )
                 )

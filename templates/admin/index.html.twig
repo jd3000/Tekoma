@@ -24,9 +24,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="row align-items-center justify-content-center mt-5">
+		<div class="row align-items-center justify-content-center mt-5 px-3">
 			{% for product in products %}
-				<div class="col-12 col-md-3 text-center m-3 borderCard cardAnim">
+				<div class="col-12 col-md-3 text-center m-3 {% if product.isActive|e %} border border-success {% else %} border border-danger{% endif %} cardAnim">
 					<a href="{{ path('admin_show' , {'slug':product.slug|e} ) }}">
 						<div class="card mb-3">
 							<h3 class="card-header">{{ product.name|e }}</h3>
@@ -46,51 +46,46 @@
 									{% else %}
 										{{ product.description|e }}
 									{% endif %}
-
-
 								</p>
 							</div>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item {{ product.quantity|e > 0  ? 'bg-secondary' : 'bg-transparent border border-danger' }} ">
-									<b>Quantité disponible :
+									<b>Quantité disponible
 										{{ product.quantity|e }}</b>
 								</li>
 								{% if product.highlighted|e %}
 									<li class="list-group-item bg-success">
 										<b>Produit mis en avant sur la page d'accueil (
-											{{ product.highlighted|e }}
-											)</b>
+											<span class="text-light">{{ product.highlighted|e }}</span>
+											)
+										</b>
 									</li>
 									{% else %}
 								{% endif %}
 							</ul>
 							<div class="card-body">
 								<a href="{{ path('admin_delete' , {'slug':product.slug} )}}" class="card-link text-danger">Supprimer</a>
-
-								{% if product.isActive|e == true %}
-
+								{% if product.isActive|e %}
 									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link">Désactiver</a>
 								</div>
 								<div class="card-footer text-muted">
 									Une création active est visible par les utilisateurs
 								</div>
 							{% else %}
-								<div class="card-body">
-									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link text-success">Activer</a>
-								</div>
-								<div class="card-footer text-muted">
-									Une création inactive n'est pas visible par les utilisateurs
-								</div>
+								<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link text-light border-bottom border-light">Activer</a>
+							</div>
+							<div class="card-footer text-muted">
+								Une création inactive n'est pas visible par les utilisateurs
 							</div>
 						{% endif %}
 					</div>
 					<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">Card title</h4>
-							<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							<a href="#" class="card-link">Card link</a>
-							<a href="#" class="card-link">Another link</a>
+							{% if product.highlighted|e %}
+								<a href="{{ path('admin_unhighlight_confirm' , {'slug':product.slug} )}}" class="card-link">Enlever de la page d'accueil</a>
+							{% else %}
+								<a href="{{ path('admin_highlight_confirm' , {'slug':product.slug} )}}" class="card-link">Mettre en avant sur la page d'accueil</a>
+							{% endif %}
 						</div>
 					</div>
 					{# <div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div> #}
@@ -100,8 +95,7 @@
 	</div>
 	<div class="row d-flex justify-content-center logoSpec">
 		<div class="col-3 col-md-2 col-lg-2 mt-3">
-			<img class="card-img" src="./img/JUL.png" alt="sign logo">
-		</div>
+			<img class="card-img" src="./img/JUL.png" alt="sign logo"></div>
 	</div>
 </div>{% endblock %}{% block javascripts %}
 {{ parent() }}{% endblock %}

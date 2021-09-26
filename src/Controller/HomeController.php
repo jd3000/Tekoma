@@ -54,7 +54,7 @@ class HomeController extends AbstractController
             $this->addFlash('success', "Votre demande a bien été envoyée.");
             return $this->redirectToRoute('home');
         }
-        $products = $productRepo->findByExampleField(4);
+        $products = $productRepo->findActiveHighlightedField(4);
         // (“dump and die”) helper function
         // dd($products);
         // dump($products);
