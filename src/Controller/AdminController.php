@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\AddCreationType;
+use App\Form\UpdateCreationType;
 use App\Repository\ProductRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -235,6 +236,67 @@ class AdminController extends AbstractController
         // return $this->render('', [
         //     'product' => $product
         // ]);
+    }
+
+    /**
+     * Permet d'afficher une seule creation
+     * 
+     * @Route("/update/{slug}", name="admin_update")
+     */
+    public function update($slug, Request $request, Product $product): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(UpdateCreationType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $productName = $product->getName();
+            $form->getData();
+            $img = $form->get('img')->getData();
+
+            // dump($form);
+            $product->setSlug($form->get('name')->getData());
+            $product->setIsactive(false);
+
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
+
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $img->move(
+                        $this->getParameter('uploads_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                // updates the 'imgname' property to store the PDF file name
+                // instead of its contents
+                $product->setImg($newFilename);
+            }
+
+
+            // dump($product);
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            $this->addFlash('success', "<b>$productName</b> a bien été ajouté.");
+            return $this->redirectToRoute('admin');
+        }
+
+
+        // (“dump and die”) helper function
+        // dump($product);
+        return $this->render('admin/update.html.twig', [
+            'form' => $form->createView(),
+            'product' => $product
+        ]);
     }
 
 

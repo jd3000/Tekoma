@@ -9,8 +9,8 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
-			<div class="col text-center mt-3 title bg-warning">
-				<div>Modifier
+			<div class="col text-center mt-3 title">
+				<div>
 					{{ product.name }}</div>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 
 		<div class="row">
 			<div class="col text-center mt-3">
-				<button class="btn btn-custom-border" onclick="window.location.href = '{{ path('contact_order' , {'slug':product.slug} )}}';">Modifier</button>
+				<button class="btn btn-custom-border" onclick="window.location.href = '{{ path('admin_update' , {'slug':product.slug} )}}';">Modifier</button>
 			</div>
 		</div>
 
