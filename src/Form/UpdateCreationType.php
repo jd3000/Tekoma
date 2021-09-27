@@ -110,16 +110,9 @@ class UpdateCreationType extends AbstractType
                 'img',
                 FileType::class,
                 array(
-                    'data_class' => null,
-                    'label' => 'Choisissez une image qui met valeur la création',
-                    'attr' => array(
-                        'class' => '',
-                        'required' => false,
-
-                    ),
-                    'constraints' => array(
-                        new File()
-                    )
+                    'mapped' => false,
+                    'required' => false,
+                    'label' => 'Choisissez une image qui met valeur la création'
                 )
             )
             ->add(
@@ -138,17 +131,18 @@ class UpdateCreationType extends AbstractType
                 HiddenType::class,
                 $this->getConfiguration("Slug associé au produit", "Slug", "")
             )
-            ->add(
-                'isActive',
-                HiddenType::class,
-                array(
-                    'label' => 'Produit visible par les visiteurs',
-                    'attr' => array(
-                        'class' => '',
-                        'required' => false,
-                    )
-                )
-            );
+            // ->add(
+            //     'isActive',
+            //     HiddenType::class,
+            //     array(
+            //         'label' => 'Produit visible par les visiteurs',
+            //         'attr' => array(
+            //             'class' => '',
+            //             'required' => false,
+            //         )
+            //     )
+            // )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

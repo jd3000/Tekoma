@@ -250,15 +250,21 @@ class AdminController extends AbstractController
         $form = $this->createForm(UpdateCreationType::class, $product);
 
         $form->handleRequest($request);
+        $unmodifiedImg = $product->getImg();
+
+        // dump($product);
+        // dump($unmodifiedImg);
+        // dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $productName = $product->getName();
             $form->getData();
+
+
             $img = $form->get('img')->getData();
 
             // dump($form);
-            $product->setSlug($form->get('name')->getData());
-            $product->setIsactive(false);
+            // $product->setSlug($form->get('name')->getData());
 
             if ($img) {
                 $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
@@ -279,10 +285,12 @@ class AdminController extends AbstractController
                 // updates the 'imgname' property to store the PDF file name
                 // instead of its contents
                 $product->setImg($newFilename);
+            } else {
+                $product->setImg($unmodifiedImg);
             }
 
 
-            // dump($product);
+
             $entityManager->persist($product);
             $entityManager->flush();
 

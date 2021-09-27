@@ -71,12 +71,12 @@
 							<div class="d-none d-md-block">{{ form_errors(form.slug) }}</div>
 						</div>
 
-						<div class="row d-flex justify-content-center">
-							<div class="col-12 col-md-8 col-lg-4 mt-3">
-								<div class="text-md-center">{{ form_widget(form.isActive) }}</div>
-								<div class="text-center">{{ form_errors(form.isActive) }}</div>
-							</div>
-						</div>
+						{# <div class="row d-flex justify-content-center">
+																																					<div class="col-12 col-md-8 col-lg-4 mt-3">
+																																						<div class="text-md-center">{{ form_widget(form.isActive) }}</div>
+																																						<div class="text-center">{{ form_errors(form.isActive) }}</div>
+																																					</div>
+																																				</div> #}
 
 						<div class="col-12 mt-1 form-group">
 							<button class="btn btn-custom float-end" type="submit">Modifier</button>
@@ -84,6 +84,12 @@
 					</div>
 					{{ form_rest(form) }}
 					{{ form_end(form) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col text-center mt-3">
+					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_show' , {'slug':product.slug} ) }}';">Annuler la modification</button>
 				</div>
 			</div>
 			<div class="row d-flex justify-content-center logoSpec">
