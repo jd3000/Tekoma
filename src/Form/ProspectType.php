@@ -18,7 +18,6 @@ class ProspectType extends AbstractType
     {
 
 
-
         $builder
 
             ->add('firstname', TextType::class, array(
@@ -61,12 +60,6 @@ class ProspectType extends AbstractType
                     'required' => true,
                 )
             ));
-        # code...
-
-        // ))
-        // ->add('recaptcha', HiddenType::class, array(
-        //     'mapped' => false,
-        // ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

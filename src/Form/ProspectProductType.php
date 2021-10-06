@@ -67,12 +67,6 @@ class ProspectProductType extends AbstractType
                     'required' => true,
                 )
             ));
-        # code...
-
-        // ))
-        // ->add('recaptcha', HiddenType::class, array(
-        //     'mapped' => false,
-        // ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

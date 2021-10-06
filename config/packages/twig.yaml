@@ -8,3 +8,5 @@ twig:
         # point this wherever your images live
         'public/img': images
         'public/img/uploads': images
+    globals:
+        hcaptcha_site_key: '%env(HCAPTCHA_SITEKEY)%'

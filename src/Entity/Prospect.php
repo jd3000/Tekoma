@@ -188,4 +188,28 @@ class Prospect
 
         return $this;
     }
+
+    /**
+     * Get the value of showCaptcha
+     *
+     * @return  boolean|null
+     */
+    public function getShwoCaptcha()
+    {
+        return $this->showCaptcha;
+    }
+
+    /**
+     * Set the value of showCaptcha
+     *
+     * @param  boolean|null  $showCaptcha
+     *
+     * @return  self
+     */
+    public function setShwoCaptcha($showCaptcha)
+    {
+        $this->showCaptcha = $showCaptcha;
+
+        return $this;
+    }
 }
