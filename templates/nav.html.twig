@@ -15,12 +15,14 @@
 
 			{% if app.user %}
 				<div class="col-2 mt-1 text-center">
-					<a href="{{ path('logout')}}" class="{{ app.request.get('_route') == 'login' ? 'active' }}">Déconnexion
+					<a href="{{ path('logout')}}" class="{{ app.request.get('_route') == 'login' ? 'active' }}">
+						<i class="fas fa-user-times fs-5" data-toggle="tooltip" data-placement="bottom" title="Déconnexion"></i>
 					</a>
 				</div>
 			{% else %}
 				<div class="col-2 mt-1 text-center">
-					<a href="{{ path('login')}}" class="{{ app.request.get('_route') == 'login' ? 'active' }}">Connexion
+					<a href="{{ path('login')}}" class="{{ app.request.get('_route') == 'login' ? 'active' }}">
+						<i class="far fa-user fs-5" data-toggle="tooltip" data-placement="bottom" title="Connexion"></i>
 					</a>
 				</div>
 			{% endif %}
@@ -93,6 +95,12 @@
 				</div>
 			{% endif %}
 		</div>
-
 	</div>
-</div></nav>
+	<div class="container mt-2">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				{% include "_partials/_flashbag.html.twig" %}
+			</div>
+		</div>
+	</div>
+</nav>

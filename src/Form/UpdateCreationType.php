@@ -46,7 +46,7 @@ class UpdateCreationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $product = $options['data'];
-        dump($product);
+        // dump($product);
         // $productName = $product->getProduct()->getName();
 
         $builder

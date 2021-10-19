@@ -9,13 +9,12 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row mt-4">
-			{% include "_partials/_flashbag.html.twig" %}
 			<div class="col-12 text-center mt-3 title d-md-none">
-				<div>CREATIONS</div>
+				<div class="text-warning">ADMIN</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 text-center mt-3">
+			<div class="col-12 text-center mt-3 mt-md-5">
 				<div>
 					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_create')}}';">
 						<i class="fas fa-plus"></i>
