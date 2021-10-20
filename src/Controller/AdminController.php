@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\AddCreationType;
+use App\Service\FileUploader;
 use App\Form\UpdateCreationType;
 use App\Repository\ProductRepository;
 use Doctrine\Persistence\ObjectManager;
@@ -39,7 +40,7 @@ class AdminController extends AbstractController
      * 
      * @return Response
      */
-    public function create(Request $request, EntityManagerInterface $entityManager)
+    public function create(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $product = new Product();
@@ -58,24 +59,10 @@ class AdminController extends AbstractController
             $product->setIsactive(false);
 
             if ($img) {
-                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
 
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $img->move(
-                        $this->getParameter('uploads_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                // updates the 'imgname' property to store the PDF file name
-                // instead of its contents
-                $product->setImg($newFilename);
+                $imgFileName = $fileUploader->upload($img);
+                $product->setImg($imgFileName);
+                
             }
 
 
@@ -243,7 +230,7 @@ class AdminController extends AbstractController
      * 
      * @Route("/update/{slug}", name="admin_update")
      */
-    public function update($slug, Request $request, Product $product): Response
+    public function update($slug, Request $request, Product $product, FileUploader $fileUploader): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -267,25 +254,9 @@ class AdminController extends AbstractController
             // $product->setSlug($form->get('name')->getData());
 
             if ($img) {
-                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $img->guessExtension();
-
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $img->move(
-                        $this->getParameter('uploads_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                // updates the 'imgname' property to store the PDF file name
-                // instead of its contents
-                $product->setImg($newFilename);
-            } else {
+                $imgFileName = $fileUploader->upload($img);
+                $product->setImg($imgFileName);
+                } else {
                 $product->setImg($unmodifiedImg);
             }
 
