@@ -109,3 +109,18 @@ if (m) {
     }
 }
 
+// scroll home form_error flashbag
+url = window.location.pathname;
+el = document.getElementById("alert-success");
+if (el) {
+    msg = el.innerText;
+} else { msg = ""; }
+let height = $(window).height();
+// console.log(url);
+error = document.getElementsByClassName('form-error-icon');
+// console.log(error);
+if (error.length != 0 && url == '/') {
+    $(window).scrollTop(height);
+} else if (msg && msg == "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer" && url == '/') {
+    $(window).scrollTop(height);
+}
