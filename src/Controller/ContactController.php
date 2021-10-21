@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\Mime\Part\Multipart\RelatedPart;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Mime\Part\Multipart\AlternativePart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,15 +34,25 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, MailerInterface $mailer, HCaptcha $hcaptcha): Response
     {
 
         $prospect = new Prospect;
         $form = $this->createForm(ProspectType::class, $prospect);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        $ishcaptchaValid = $hcaptcha->isHCaptchaValid();
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == false) {
+            $this->addFlash('success', "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer");
+        }
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == true) {
+
+
+            // dump($hcaptcha);
+            // dd($hcaptcha);
             $prospect = $form->getData();
             // # 3
             $email = (new TemplatedEmail())
@@ -72,7 +83,8 @@ class ContactController extends AbstractController
 
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'response' => $hcaptcha->isHCaptchaValid()
         ]);
     }
 

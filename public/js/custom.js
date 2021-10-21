@@ -18,7 +18,7 @@ function burgerToggle() {
     }
 }
 
-// admin / update.html.twig creation
+// admin / update.html.twig new.html.twig creation
 $(document).ready(function () {
     let uploadPreview = document.getElementById("uploadPreview");
     formUpdateProduct = $("#update_creation_img");
@@ -89,20 +89,23 @@ if (m) {
     // extraction via la regex du nom du produit avec les balises <b></b> qui l'entourent
     let match = modifiedProductHtml.match(/\<b(.*)b>/);
     // console.log(match);
-    modifiedProduct = match[0];
-    // console.log(modifiedProduct);
-    // supression des balises <b> et </b>
-    modifiedProduct = modifiedProduct.replace('<b>', '');
-    modifiedProduct = modifiedProduct.replace('</b>', '');
-    // console.log(modifiedProduct);
+    if (match) {
+        modifiedProduct = match[0];
 
-    // définition de la hauteur de la cardProduct contenant le produit qui vient d'être modifié
-    d = $("*:contains('" + modifiedProduct + "'):last").offset().top;
-    // console.log(d);
-    // soustraction de la hauteur de la nav à celle de la card pour définir le scrolling vertical
-    d = d - navHeight;
-    // console.log(d);
-    // scrolling
-    $(window).scrollTop(d);
+        // console.log(modifiedProduct);
+        // supression des balises <b> et </b>
+        modifiedProduct = modifiedProduct.replace('<b>', '');
+        modifiedProduct = modifiedProduct.replace('</b>', '');
+        // console.log(modifiedProduct);
+
+        // définition de la hauteur de la cardProduct contenant le produit qui vient d'être modifié
+        d = $("*:contains('" + modifiedProduct + "'):last").offset().top;
+        // console.log(d);
+        // soustraction de la hauteur de la nav à celle de la card pour définir le scrolling vertical
+        d = d - navHeight;
+        // console.log(d);
+        // scrolling
+        $(window).scrollTop(d);
+    }
 }
 

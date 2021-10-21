@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Prospect;
+use App\Service\HCaptcha;
 use App\Form\ProspectType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Mime\Email;
@@ -20,13 +21,20 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(ProductRepository $productRepo, Request $request, MailerInterface $mailer): Response
+    public function index(ProductRepository $productRepo, Request $request, MailerInterface $mailer, HCaptcha $hcaptcha): Response
     {
         $prospect = new Prospect;
         // $prospect->setProduct($product);
         $form = $this->createForm(ProspectType::class, $prospect);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        $ishcaptchaValid = $hcaptcha->isHCaptchaValid();
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == false) {
+            $this->addFlash('success', "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer");
+        }
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == true) {
 
             $prospect = $form->getData();
 
@@ -60,7 +68,8 @@ class HomeController extends AbstractController
         // dump($products);
         return $this->render('home/index.html.twig', [
             'products' => $products,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'response' => $hcaptcha->isHCaptchaValid()
         ]);
     }
 }

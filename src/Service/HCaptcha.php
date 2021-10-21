@@ -23,16 +23,13 @@ class HCaptcha
         $this->hCaptchaSecretKey = $hCaptchaSecretKey;
     }
 
-    public function isHCaptchaValid(): bool
+    public function isHCaptchaValid()
     {
         $request = $this->requestStack->getCurrentRequest();
-
 
         if (!$request) {
             return false;
         }
-
-
 
         $options = [
             'headers' => [
@@ -47,6 +44,9 @@ class HCaptcha
 
         $response = $this->httpClient->request('POST', self::HCAPTCHA_ENDPOINT, $options);
         $data = $response->toArray();
-        return $data['succes'];
+        return $data;
+        // dd($data);
+        // return $data['succes'];
+
     }
 }
