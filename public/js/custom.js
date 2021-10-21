@@ -1,4 +1,4 @@
-// Permet de fermer les flashbags après 3 s
+// Permet de fermer les flashbags après 10 s
 setTimeout(function () {
     $(".btn-close").trigger('click');
 }, 10000);
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 for (let i = 0; i < countFiles; i++) {
                     let reader = new FileReader();
                     reader.onload = function (e) {
-                        image_holder.className === "imgProduct p-4";
+                        image_holder.className = "imgProduct p-4";
                         $("<img />", {
                             "src": e.target.result,
                             "class": "card-img"
@@ -48,12 +48,12 @@ $(document).ready(function () {
                     image_holder.show();
                     reader.readAsDataURL($(this)[0].files[i]);
                 }
-                uploadPreview.className = "col-12 col-md-4 text-center imgProduct p-4";
+                uploadPreview.className = "col-12 col-md-4 text-center imgProduct p-4 mt-4";
             } else {
-                alert("This browser does not support FileReader.");
+                alert("Ce navigateur ne supporte pas la lecture de fichiers.");
             }
         } else {
-            alert("Pls select only images");
+            alert("Merci de sélectionner une image.");
         }
     });
 });
@@ -80,7 +80,7 @@ $(document).ready(function () {
                 for (let i = 0; i < countFiles; i++) {
                     let reader = new FileReader();
                     reader.onload = function (e) {
-                        image_holder.className === "imgProduct p-4";
+                        image_holder.className = "imgProduct p-4";
                         $("<img />", {
                             "src": e.target.result,
                             "class": "card-img"
@@ -91,12 +91,49 @@ $(document).ready(function () {
                 }
                 uploadPreview.className = "col-12 col-md-4 text-center imgProduct p-4";
             } else {
-                alert("This browser does not support FileReader.");
+                alert("Ce navigateur ne supporte pas la lecture de fichiers.");
             }
         } else {
-            alert("Pls select only images");
+            alert("Merci de sélectionner une image.");
         }
     });
 });
 
+
+
+
+// Permet de scroller jusqu'au produit modifié
+
+// cible le flash bag contenant le nom du produit modifié
+m = document.getElementById("alert-success");
+// console.log(m);
+
+if (m) {
+    // définition de la hauteur de la nav
+    nav = document.getElementsByClassName("fixed-top");
+    navHeight = nav[0].clientHeight;
+    // console.log(nav);
+    // console.log(navHeight);
+    // cible le html du flashbag
+    modifiedProductHtml = m.innerHTML;
+    // console.log(modifiedProductHtml);
+    // extraction via la regex du nom du produit avec les balises <b></b> qui l'entourent
+    let match = modifiedProductHtml.match(/\<b(.*)b>/);
+    // console.log(match);
+    modifiedProduct = match[0];
+    // console.log(modifiedProduct);
+    // supression des balises <b> et </b>
+    modifiedProduct = modifiedProduct.replace('<b>', '');
+    modifiedProduct = modifiedProduct.replace('</b>', '');
+    // console.log(modifiedProduct);
+
+    // définition de la hauteur de la cardProduct contenant le produit qui vient d'être modifié
+    d = $("*:contains('" + modifiedProduct + "'):last").offset().top;
+    // console.log(d);
+    // soustraction de la hauteur de la nav à celle de la card pour définir le scrolling vertical
+    d = d - navHeight;
+    // console.log(d);
+    // scrolling
+    $(window).scrollTop(d);
+}
 

@@ -62,7 +62,6 @@ class AdminController extends AbstractController
 
                 $imgFileName = $fileUploader->upload($img);
                 $product->setImg($imgFileName);
-                
             }
 
 
@@ -133,16 +132,16 @@ class AdminController extends AbstractController
         $productName = $product->getName();
         if ($product->getIsActive()) {
             $product->setIsactive(false);
-            $flashProduct = '<b>désactivé</b>'; # code...
+            $flashProduct = 'désactivé'; # code...
         } else {
             $product->setIsactive(true);
-            $flashProduct = '<b>activé</b>';
+            $flashProduct = 'activé';
         }
         $entityManager->persist($product);
         $entityManager->flush();
         // (“dump and die”) helper function
         // dump($product);
-        $this->addFlash('success', "<b>$productName</b> a bien été <b>$flashProduct</b>.");
+        $this->addFlash('success', "<b>$productName</b> a bien été $flashProduct.");
 
         return $this->redirectToRoute('admin');
 
@@ -165,7 +164,7 @@ class AdminController extends AbstractController
 
         if ($productHighlighted !== null) {
             $product->setHighlighted(null);
-            $flashProduct = 'a bien été <b>retiré</b> de la page d\'accueil'; # code...
+            $flashProduct = 'a bien été retiré de la page d\'accueil'; # code...
         }
         $entityManager->persist($product);
         $entityManager->flush();
@@ -200,18 +199,18 @@ class AdminController extends AbstractController
         if (!$productHighlightedValue1) {
             $product->setHighlighted(1);
             $flashClass = 'success';
-            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+            $flashProduct = 'a bien été ajouté à la page d\'accueil';
         } elseif (!$productHighlightedValue2) {
             $product->setHighlighted(2);
             $flashClass = 'success';
-            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+            $flashProduct = 'a bien été ajouté à la page d\'accueil';
         } elseif (!$productHighlightedValue3) {
             $product->setHighlighted(3);
             $flashClass = 'success';
-            $flashProduct = 'a bien été <b>ajouté</b> à la page d\'accueil';
+            $flashProduct = 'a bien été ajouté à la page d\'accueil';
         } else {
             $flashClass = 'warning';
-            $flashProduct = 'ne peut pas être ajouté à la page d\'accueil (maximum = 3), vous devez <b>retirer une création</b> de la page d\'accueil au préalable</b>';
+            $flashProduct = 'ne peut pas être ajouté à la page d\'accueil (maximum = 3), vous devez retirer une création de la page d\'accueil au préalable';
         }
 
         $entityManager->persist($product);
@@ -256,7 +255,7 @@ class AdminController extends AbstractController
             if ($img) {
                 $imgFileName = $fileUploader->upload($img);
                 $product->setImg($imgFileName);
-                } else {
+            } else {
                 $product->setImg($unmodifiedImg);
             }
 
