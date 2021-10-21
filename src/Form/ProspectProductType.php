@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -64,6 +65,13 @@ class ProspectProductType extends AbstractType
                 'label' => 'J\'accepte l\'utilisation de ces informations pour être recontacté par Tekoma',
                 'attr' => array(
                     'class' => 'form-arround',
+                    'required' => true,
+                )
+            ))
+            ->add('check', SubmitType::class, array(
+                'label' => 'Vérification du formulaire',
+                'attr' => array(
+                    'class' => 'form-control-check',
                     'required' => true,
                 )
             ));

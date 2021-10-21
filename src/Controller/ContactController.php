@@ -93,7 +93,7 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact/{slug}", name="contact_order")
      */
-    public function order(Request $request, MailerInterface $mailer, $slug, ProductRepository $productRepo): Response
+    public function order(Request $request, MailerInterface $mailer, $slug, ProductRepository $productRepo, HCaptcha $hcaptcha): Response
     {
 
         $product = $productRepo->findOneBySlug($slug);
@@ -108,7 +108,14 @@ class ContactController extends AbstractController
         $form = $this->createForm(ProspectProductType::class, $prospect);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+
+        $ishcaptchaValid = $hcaptcha->isHCaptchaValid();
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == false) {
+            $this->addFlash('success', "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer");
+        }
+
+        if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == true) {
 
             $prospect = $form->getData();
 
@@ -179,7 +186,8 @@ class ContactController extends AbstractController
         return $this->render('contact/order.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form->createView(),
-            'product' => $product
+            'product' => $product,
+            'response' => $hcaptcha->isHCaptchaValid()
         ]);
     }
 }

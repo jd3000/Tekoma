@@ -92,8 +92,15 @@
 							{{ form_errors(form.message) }}
 						</div>
 						<div class="col-12 mt-1 form-group">
-							{% include '_partials/_hcaptcha_order_submit_button.html.twig' %}
-							{# <button class="btn btn-custom float-end" type="submit">Commander</button> #}
+							<div class="row d-flex justify-content-center">
+								<div class="col-12 col-md-8 col-lg-4 text-center">
+									{{ form_widget(form.check) }}
+								</div>
+							</div>
+							{% if response['success'] == false %}
+								{% include '_partials/_hcaptcha_order_submit_button.html.twig' %}
+								{# <button class="btn btn-custom float-end" type="submit">Commander</button> #}
+							{% endif %}
 						</div>
 					</div>
 					{# {{ form_end(form, {'render_rest': false}) }} #}
