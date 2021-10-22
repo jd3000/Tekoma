@@ -69,58 +69,89 @@ $(document).ready(function () {
             }
         });
     }
-});
 
-// Permet de scroller jusqu'au produit modifié
 
-// cible le flash bag contenant le nom du produit modifié
-m = document.getElementById("alert-success");
-// console.log(m);
+    // Permet de scroller jusqu'au produit modifié
 
-if (m) {
-    // définition de la hauteur de la nav
-    nav = document.getElementsByClassName("fixed-top");
-    navHeight = nav[0].clientHeight;
-    // console.log(nav);
-    // console.log(navHeight);
-    // cible le html du flashbag
-    modifiedProductHtml = m.innerHTML;
-    // console.log(modifiedProductHtml);
-    // extraction via la regex du nom du produit avec les balises <b></b> qui l'entourent
-    let match = modifiedProductHtml.match(/\<b(.*)b>/);
-    // console.log(match);
-    if (match) {
-        modifiedProduct = match[0];
+    // cible le flash bag contenant le nom du produit modifié
+    m = document.getElementById("alert-success");
+    // console.log(m);
+    if (m) {
+        const modifiedProduct = m.querySelector('b');
+        const modifiedProductId = modifiedProduct.getAttribute('data-product-id');
+        console.log(modifiedProduct);
+        console.log(modifiedProductId);
+        const productCard = document.getElementById("product-" + modifiedProductId);
 
-        // console.log(modifiedProduct);
-        // supression des balises <b> et </b>
-        modifiedProduct = modifiedProduct.replace('<b>', '');
-        modifiedProduct = modifiedProduct.replace('</b>', '');
-        // console.log(modifiedProduct);
+        const nav = document.querySelector(".fixed-top");
+        navHeight = nav.clientHeight;
+        console.log(navHeight);
 
-        // définition de la hauteur de la cardProduct contenant le produit qui vient d'être modifié
-        d = $("*:contains('" + modifiedProduct + "'):last").offset().top;
-        // console.log(d);
-        // soustraction de la hauteur de la nav à celle de la card pour définir le scrolling vertical
-        d = d - navHeight;
-        // console.log(d);
-        // scrolling
-        $(window).scrollTop(d);
+        const rect = productCard.getBoundingClientRect();
+        window.scrollTo(0, rect.y - navHeight);
+        console.log(rect);
+
+
+
+
+
+        // // définition de la hauteur de la nav
+        // // nav = document.getElementsByClassName("fixed-top");
+        // // navHeight = nav[0].clientHeight;
+        // // console.log(nav);
+        // // console.log(navHeight);
+        // // cible le html du flashbag
+        // modifiedProductHtml = m.innerHTML;
+        // // console.log(modifiedProductHtml);
+        // // extraction via la regex du nom du produit avec les balises <b></b> qui l'entourent
+        // let match = modifiedProductHtml.match(/\<b(.*)b>/);
+        // // console.log(match);
+        // if (match) {
+        //     modifiedProduct = match[0];
+
+        //     // console.log(modifiedProduct);
+        //     // supression des balises <b> et </b>
+        //     modifiedProduct = modifiedProduct.replace('<b>', '');
+        //     modifiedProduct = modifiedProduct.replace('</b>', '');
+        //     console.log(modifiedProduct);
+
+        //     // définition de la hauteur de la cardProduct contenant le produit qui vient d'être modifié
+        //     d = $("*:contains('" + modifiedProduct + "'):last").offset().top;
+        //     // console.log(d);
+        //     // soustraction de la hauteur de la nav à celle de la card pour définir le scrolling vertical
+        //     d = d - navHeight;
+        //     // console.log(d);
+        //     // scrolling
+        //     $(window).scrollTop(d);
+        // }
     }
-}
 
-// scroll home form_error flashbag
-url = window.location.pathname;
-el = document.getElementById("alert-success");
-if (el) {
-    msg = el.innerText;
-} else { msg = ""; }
-let height = $(window).height();
-// console.log(url);
-error = document.getElementsByClassName('form-error-icon');
-// console.log(error);
-if (error.length != 0 && url == '/') {
-    $(window).scrollTop(height);
-} else if (msg && msg == "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer" && url == '/') {
-    $(window).scrollTop(height);
-}
+    // A REVOIR !!!!!!!!!!!!!!!!!
+    // scroll home form_error flashbag
+    let url = window.location.pathname;
+    // console.log(url);
+    let el = document.getElementById("alert-success");
+    let body = document.body,
+        html = document.documentElement;
+    let height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    // console.log(height);
+    let error = document.getElementsByClassName('form-error-icon');
+    // console.log(error);
+
+    if (el && url == '/') {
+        msg = el.innerText;
+    } else { msg = ""; }
+
+    if (msg && msg == "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer") {
+        $(window).scrollTop(height);
+        let btn = document.getElementsByClassName("h-captcha");
+        console.log(btn[0]);
+        console.log(btn[0].className);
+        btn[0].className = btn[0].className + "";
+        btn[0].innerHTML = "<div class=\"spinner-grow  text-success\" style=\"width: 1rem; height: 1rem;\" role=\"status\"></div>&nbsp;" + btn[0].innerHTML;
+        console.log(btn[0].className);
+    } else if (error.length != 0 && url == '/') {
+        $(window).scrollTop(height);
+    }
+
+});
