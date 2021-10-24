@@ -69,7 +69,7 @@ class AdminController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            $this->addFlash('success', "<b id=\"$productName\">$productName</b> a bien été ajouté.");
+            $this->addFlash('success', "<b data-product-id=\"$productName\">$productName</b> a bien été ajouté.");
             return $this->redirectToRoute('admin');
         }
 
@@ -141,7 +141,7 @@ class AdminController extends AbstractController
         $entityManager->flush();
         // (“dump and die”) helper function
         // dump($product);
-        $this->addFlash('success', "<b id=\"$productName\">$productName</b> a bien été $flashProduct.");
+        $this->addFlash('success', "<b data-product-id=\"$productName\">$productName</b> a bien été $flashProduct.");
 
         return $this->redirectToRoute('admin');
 
@@ -170,7 +170,7 @@ class AdminController extends AbstractController
         $entityManager->flush();
         // (“dump and die”) helper function
         // dump($product);
-        $this->addFlash('success', "<b id=\"$productName\">$productName</b> $flashProduct.");
+        $this->addFlash('success', "<b data-product-id=\"$productName\">$productName</b> $flashProduct.");
 
         return $this->redirectToRoute('admin');
 
@@ -216,7 +216,7 @@ class AdminController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        $this->addFlash($flashClass, "<b id=\"$productName\">$productName</b> $flashProduct.");
+        $this->addFlash($flashClass, "<b data-product-id=\"$productName\">$productName</b> $flashProduct.");
 
         return $this->redirectToRoute('admin');
         // return $this->render('', [

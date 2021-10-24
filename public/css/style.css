@@ -96,6 +96,10 @@ color: RED;
   border:1px solid #505050;
 }
 
+.btn-custom-border:hover {
+  border:1px solid #212529;
+}
+
 .navTitle {
   color:#ffffff;
   font-weight: 700;

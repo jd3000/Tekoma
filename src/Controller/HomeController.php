@@ -29,9 +29,16 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         $ishcaptchaValid = $hcaptcha->isHCaptchaValid();
+        $verif = false;
 
         if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == false) {
-            $this->addFlash('success', "✔ Les champs sont correctes 🖱 Cliquez sur Envoyer");
+            $this->addFlash('success', "<span data-verified-form=\"form_prospect\">✔ Les champs sont corrects 🖱 Cliquez sur Envoyer</span>");
+            $verif = $form->isValid();
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('danger', "<span data-verified-form=\"form_prospect\">❌Les champs sont incorrects - Votre demande ne pourra pas être envoyée</span>");
+            $verif = $form->isValid();
         }
 
         if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == true) {
@@ -69,7 +76,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'products' => $products,
             'form' => $form->createView(),
-            'response' => $hcaptcha->isHCaptchaValid()
+            'response' => $hcaptcha->isHCaptchaValid(),
+            'verif' => $verif
         ]);
     }
 }

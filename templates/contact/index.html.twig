@@ -18,64 +18,63 @@
 		{# TEST FORM #}
 		<div class="row justify-content-center">
 			<div class="col-md-8 mt-md-5">
-				<div id="prospectForm">
-					{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
-					{{ form_errors(form) }}
-					<div class="row align-items-center justify-content-center mx-2">
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.firstname) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.lastname) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.prospectEmail) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.subject) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
-						</div>
-						<div class="row d-flex justify-content-center">
-							<div class="col-12 col-md-8 col-lg-4 mt-3">
-								<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
-								<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
+				{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
+				{{ form_errors(form) }}
+				<div class="row align-items-center justify-content-center mx-2">
+					<div class="col-12 col-md-6 mt-3">
+						<div>{{ form_widget(form.firstname) }}</div>
+						<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
+					</div>
+					<div class="col-12 col-md-6 mt-3">
+						<div>{{ form_widget(form.lastname) }}</div>
+						<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
+					</div>
+					<div class="col-12 col-md-6 mt-3">
+						<div>{{ form_widget(form.prospectEmail) }}</div>
+						<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
+					</div>
+					<div class="col-12 col-md-6 mt-3">
+						<div>{{ form_widget(form.subject) }}</div>
+						<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
+					</div>
+					<div class="col-12 col-md-6">
+						<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<div class="col-12 col-md-8 col-lg-4 mt-3">
+							<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
+							<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
 
-							</div>
-						</div>
-						<div class="col-12 mt-3">
-							{{ form_widget(form.message) }}
-							{{ form_errors(form.message) }}
-						</div>
-						<div class="col-12 mt-1 form-group">
-							<div class="row d-flex justify-content-center">
-								<div class="col-12 col-md-8 col-lg-4 text-center">
-									{{ form_widget(form.check) }}
-								</div>
-							</div>
-							{% if response['success'] == false %}
-								{# {{ dump(response) }} #}
-								{% include '_partials/_hcaptcha_submit_button.html.twig' %}
-							{% endif %}
 						</div>
 					</div>
-					{# {{ form_end(form, {'render_rest': false}) }} #}
-					{{ form_end(form) }}
+					<div class="col-12 mt-3">
+						{{ form_widget(form.message) }}
+						{{ form_errors(form.message) }}
+					</div>
+					<div class="col-12 mt-1 form-group">
+						<div class="row d-flex justify-content-center">
+							<div class="col-12 col-md-8 col-lg-4 text-center">
+								{{ form_widget(form.check) }}
+							</div>
+						</div>
+						{% if response['success'] == false and verif == true %}
+							{# {{ dump(response) }} #}
+							{% include '_partials/_hcaptcha_submit_button.html.twig' %}
+						{% endif %}
+					</div>
 				</div>
+				{# {{ form_end(form, {'render_rest': false}) }} #}
+				{{ form_end(form) }}
+
 			</div>
 			<div class="row d-flex justify-content-center logoSpec">
 				<div class="col-3 col-md-2 col-lg-2 mt-3">
