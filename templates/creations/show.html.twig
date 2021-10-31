@@ -45,13 +45,23 @@
 
 		<div class="row justify-content-center">
 			<div class="col-12 text-center mt-3">
-				<button class="btn btn-custom" onclick="window.location.href = '{{ path('creations')}}';">Revenir aux créations</button>
+				<a href="{{ path('creations')}}">
+					<button class="btn btn-custom">Revenir aux créations</button>
+				</a>
 			</div>
 		</div>
 
 		<div class="row justify-content-center">
 			<div class="col-12 text-center mt-3">
-				<button class="btn btn-custom-border" onclick="window.location.href = '{{ path('contact_order' , {'slug':product.slug} )}}';">Commander</button>
+				{% if product.quantity == 0 %}
+					<a href="{{ path('contact_order' , {'slug':product.slug} )}}">
+						<button class="btn btn-custom-border">Précommander</button>
+					</a>
+				{% else %}
+					<a href="{{ path('creations_login' , {'slug':product.slug} )}}">
+						<button class="btn btn-custom-border">Acheter</button>
+					</a>
+				{% endif %}
 			</div>
 		</div>
 

@@ -89,7 +89,7 @@ class AdminController extends AbstractController
     {
         $product = $productRepo->findOneBySlug($slug);
         // (“dump and die”) helper function
-        dump($product);
+        // dump($product);
         return $this->render('admin/delete.html.twig', [
             'product' => $product
         ]);

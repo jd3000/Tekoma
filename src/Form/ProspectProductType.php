@@ -51,14 +51,14 @@ class ProspectProductType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'placeholder' => 'Objet',
-                    'value' => 'COMMANDE - ' . $productName
+                    'value' => 'PRÉCOMMANDE - ' . $productName
                 )
             ))
             ->add('message', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'form-arround',
                     'required rows' => '5',
-                    'placeholder' => 'Votre message pour commander le ' . $productName,
+                    'placeholder' => 'Votre message pour précommander la création ' . $productName,
                 )
             ))
             ->add('agreeTerms', CheckboxType::class, array(

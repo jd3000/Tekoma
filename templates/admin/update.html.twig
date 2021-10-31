@@ -93,7 +93,9 @@
 
 			<div class="row">
 				<div class="col text-center mt-3">
-					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_show' , {'slug':product.slug} ) }}';">Annuler la modification</button>
+					<a href="{{ path('admin_show' , {'slug':product.slug} ) }}">
+						<button class="btn btn-custom">Annuler la modification</button>
+					</a>
 				</div>
 			</div>
 			<div class="row d-flex justify-content-center logoSpec">

@@ -137,4 +137,15 @@ $(document).ready(function () {
     }
 
 
+    $("body").on('click', '.toggle-password', function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $("#inputPassword");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+
+    });
+
 });

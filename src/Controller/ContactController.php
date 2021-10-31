@@ -123,7 +123,7 @@ class ContactController extends AbstractController
         $verif = false;
 
         if ($form->isSubmitted() && $form->isValid() && $ishcaptchaValid['success'] == false) {
-            $this->addFlash('success', "<span data-verified-form=\"form_prospect\">✔ Les champs sont corrects 🖱 Cliquez sur Commander</span>");
+            $this->addFlash('success', "<span data-verified-form=\"form_prospect\">✔ Les champs sont corrects 🖱 Cliquez sur Précommander</span>");
             $verif = $form->isValid();
         }
 
@@ -140,7 +140,7 @@ class ContactController extends AbstractController
             $email = (new TemplatedEmail())
                 ->from($form->get('prospectEmail')->getData())
                 ->to(new Address('contact@tekoma.com'))
-                ->subject('COMMANDE - ' . $product->getName())
+                ->subject('PRÉCOMMANDE - ' . $product->getName())
 
                 // path of the Twig template to render
                 ->htmlTemplate('emails/order.html.twig')

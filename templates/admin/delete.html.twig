@@ -46,13 +46,17 @@
 
 		<div class="row">
 			<div class="col text-center mt-3">
-				<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin')}}';">Revenir aux créations</button>
+				<a href="{{ path('admin')}}">
+					<button class="btn btn-custom">Revenir aux créations</button>
+				</a>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col text-center mt-3">
-				<button class="btn btn-custom-border bg-danger" onclick="window.location.href = '{{ path('admin_delete_confirm' , {'slug':product.slug} )}}';">Supprimer</button>
+				<a href="{{ path('admin_delete_confirm' , {'slug':product.slug} )}}">
+					<button class="btn btn-custom-border bg-danger">Supprimer</button>
+				</a>
 			</div>
 		</div>
 

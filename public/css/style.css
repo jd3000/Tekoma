@@ -1,5 +1,5 @@
 /* [class^="col"] {
-  border: 1px solid rgb(255, 255, 255)!important;
+  border: 1px solid rgb(212, 95, 95)!important;
 }
 
 [class^="row"] {
@@ -26,6 +26,9 @@ body {
   color: #ffffff;
   font-size: 12px;
   background-color: black;
+}
+input:focus {
+  outline: none;
 }
 
 .navBlack {
@@ -55,6 +58,24 @@ body {
   font-size: 12px; 
 }
 
+.form-login {
+  background-color:rgba(0,0,0,0) !important;
+  border:none !important;
+  border-top: none !important;
+  border-radius: 0px!important;
+  color:#ffffff!important;
+  font-size: 1rem;
+} 
+
+.icon-eye-size {
+  font-size: 1rem;  
+}
+
+.borderTop {
+  border-top: 1px solid #505050!important;
+}
+
+
 
 .form-arround {
   background-color:rgba(0,0,0,0) !important;
@@ -74,10 +95,10 @@ body {
 color: RED;
 }
 
+
 .imgProduct {   
   border: 1px solid #505050;
 }
-
 
 
 /* .form-control {
@@ -169,6 +190,8 @@ cursor: pointer;
 .borderCard:hover , .cardAnim:hover{
   transform: scale(1.05);
 }
+
+
 
 /* form-control {
   border: none;

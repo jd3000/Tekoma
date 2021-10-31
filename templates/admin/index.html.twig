@@ -16,10 +16,12 @@
 		<div class="row">
 			<div class="col-12 text-center mt-3 mt-md-5">
 				<div>
-					<button class="btn btn-custom" onclick="window.location.href = '{{ path('admin_create')}}';">
-						<i class="fas fa-plus"></i>
-						<b>Ajouter une création</b>
-					</button>
+					<a href="{{ path('admin_create')}}">
+						<button class="btn btn-custom">
+							<i class="fas fa-plus"></i>
+							<b>Ajouter une création</b>
+						</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -48,12 +50,12 @@
 								</p>
 							</div>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item {{ product.quantity|e > 0  ? 'bg-secondary' : 'bg-transparent border border-danger' }} ">
+								<li class="list-group-item {{ product.quantity|e > 0  ? 'text-white bg-transparent border border-white' : 'bg-transparent border border-danger' }} ">
 									<b>Quantité disponible
 										{{ product.quantity|e }}</b>
 								</li>
 								{% if product.highlighted|e %}
-									<li class="list-group-item bg-success">
+									<li class="list-group-item bg-success mt-1">
 										<b>Produit mis en avant sur la page d'accueil (
 											<span class="text-light">{{ product.highlighted|e }}</span>
 											)
