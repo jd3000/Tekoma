@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\Prospect;
 use App\Service\HCaptcha;
 use App\Form\ProspectType;
@@ -70,6 +71,7 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
         $products = $productRepo->findActiveHighlightedField(4);
+
         // (“dump and die”) helper function
         // dd($products);
         // dump($products);

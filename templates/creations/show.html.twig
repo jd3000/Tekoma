@@ -57,8 +57,13 @@
 					<a href="{{ path('contact_order' , {'slug':product.slug} )}}">
 						<button class="btn btn-custom-border">Précommander</button>
 					</a>
+				{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+					<a href="">
+						<button class="btn btn-custom-border">Acheter</button>
+					</a>
 				{% else %}
-					<a href="{{ path('creations_login' , {'slug':product.slug} )}}">
+					<a href="{{ path('loginproduct')}}">
 						<button class="btn btn-custom-border">Acheter</button>
 					</a>
 				{% endif %}

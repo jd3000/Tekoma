@@ -24,7 +24,7 @@ class LoginFormProductAuthenticator extends AbstractFormLoginAuthenticator imple
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'creations_login';
+    public const LOGIN_ROUTE = 'loginproduct';
 
     private $entityManager;
     private $urlGenerator;
@@ -99,7 +99,11 @@ class LoginFormProductAuthenticator extends AbstractFormLoginAuthenticator imple
 
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        if ((in_array('ROLE_USER', $rolesTab, true))) {
+        if ((in_array('ROLE_ADMIN', $rolesTab, true))) {
+            return new RedirectResponse($this->urlGenerator
+                ->generate('admin'));
+            throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);
+        } else {
             return new RedirectResponse($this->urlGenerator
                 ->generate('specifications'));
             throw new \Exception('TODO: provide a valid redirect inside ' . __FILE__);

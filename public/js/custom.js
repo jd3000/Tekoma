@@ -148,4 +148,15 @@ $(document).ready(function () {
 
     });
 
+    $("body").on('click', '.toggle-password-register', function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $("#registration_form_plainPassword");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+
+    });
+
 });
