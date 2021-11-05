@@ -46,4 +46,22 @@ class CreationsController extends AbstractController
             'product' => $product
         ]);
     }
+
+    /**
+     * Permet d'afficher une seule creation
+     * 
+     * @Route("user/creations/{slug}", name="creations_selection")
+     */
+    public function userSelection($slug, Product $product): Response
+    {
+
+        // si on utilise le ProductRepository à la place du paramconverter
+        // $product = $productRepo->findOneBySlug($slug);
+
+        // (“dump and die”) helper function
+        // dump($product);
+        return $this->render('creations/selection.html.twig', [
+            'product' => $product
+        ]);
+    }
 }

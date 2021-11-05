@@ -1,10 +1,10 @@
-/* [class^="col"] {
+[class^="col"] {
   border: 1px solid rgb(212, 95, 95)!important;
 }
 
 [class^="row"] {
   border: 1px solid yellow!important;
-} */
+}
 
 /* Change autocomplete styles in WebKit */
 input:-webkit-autofill,
@@ -69,6 +69,22 @@ input:focus {
 
 .icon-eye-size {
   font-size: 1rem;  
+}
+
+.field-icon {
+  float: right;
+  margin-left: -30px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+.field-icon-reg {
+  float: right;
+  margin-right: 30px;
+  margin-top: -26px;
+  position: relative;
+  z-index: 2;
 }
 
 .borderTop {

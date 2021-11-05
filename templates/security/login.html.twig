@@ -8,72 +8,73 @@
 
 {% block body %}
 	<div class="container accueil">
+
+		<div class="row">
+			<div class="col text-center mt-5 title">CONNEXION</div>
+		</div>
 		<div class="row justify-content-center align-items-center mt-4">
-			<div class="col-8 col-md-6 text-center mt-4">
-				<form method="post" action="login">
+			<div class="col-8 col-md-8 text-center mt-4">
+				<form method="post">
 					{% if error %}
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
 					<div class="row justify-content-center mt-4">
-						<label class="mb-1" for="inputEmail">Email</label>
-					</div>
-					<div class="col-12 text-start">
-						<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control col-12" autocomplete="email" required autofocus>
-
+						<div class="col-10 col-md-8 col-lg-6 text-start">
+							<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control col-12" autocomplete="email" required autofocus>
+						</div>
 					</div>
 					<div class="row justify-content-center align-items-center mt-4">
-						<label class="mb-1" for="inputPassword">Mot de passe</label>
-
-						<div class="col-10 text-start">
+						<div class="col-10 col-md-8 col-lg-6 text-start">
 							<input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control col-12" autocomplete="current-password" required>
+							<span toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password icon-eye-size"></span>
 						</div>
-						<div class="col-2">
-							<span toggle="#password-field" class="fas fa-eye-slash toggle-password icon-eye-size"></span>
-						</div>
+
 					</div>
-					<input
-					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-
-					{#Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								        See https://symfony.com/doc/current/security/remember_me.html
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								        <div class="checkbox mb-3">
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								            <label>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								                <input type="checkbox" name="_remember_me"> Remember me
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								            </label>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								        </div>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								    #}
-
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 					<div class="row justify-content-center mt-4">
-						<div class="col-10 m-3 text-center">
+						<div class="col-10 col-md-8 m-3 text-center">
 							<button class="btn btn-lg btn-custom-border" type="submit">
 								Me connecter
 							</button>
 						</div>
 					</div>
-					{# 
-															{% set currentPath = path(app.request.attributes.get('_route'),
-										                       app.request.attributes.get('_route_params')) %}
-										
-															<pre>
-																   {{ dump(app.request.attributes.get('_route_params')) }}
-										
-																
-															   </pre>
-															<div class="row justify-content-center mt-4">
-																<div class="col-10 m-3 text-center">
-																	Lien ici
-																</div>
-															</div> #}
-
-
 				</form>
 			</div>
-			<div class="row d-flex justify-content-center logoLogin">
-				<div class="col-3 col-md-2 col-lg-2 mt-3">
-					<img class="card-img" src="./img/JUL.png" alt="sign logo">
+		</div>
+
+		{% set prevUrl = app.request.headers.get('referer') %}
+		{# {% dump(prevUrl) %} #}
+		{% set urlParams = prevUrl|split('/') %}
+		{% set lastParam = urlParams[urlParams|length - 1] %}
+		{# {% dump(lastParam) %} #}
+
+		{% for product in products %}
+			{% if product.slug == lastParam %}
+
+				<div class="row">
+					<div class="col text-center mt-4">
+						<a href="{{ path('register')}}">Nouveau membre ? Inscrivez-vous !</a>
+					</div>
+				</div>
+
+			{% endif %}
+		{% endfor %}
+
+		{% if lastParam == 'register' %}
+
+			<div class="row">
+				<div class="col text-center mt-4">
+					<a href="{{ path('register')}}">Nouveau membre ? Inscrivez-vous !</a>
 				</div>
 			</div>
+
+		{% endif %}
+
+		<div class="row d-flex justify-content-center logoLogin">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="./img/JUL.png" alt="sign logo">
+			</div>
 		</div>
-	{% endblock %}
+	</div>
+
+{% endblock %}

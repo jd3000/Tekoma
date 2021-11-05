@@ -159,4 +159,29 @@ $(document).ready(function () {
 
     });
 
+
+    // const formRegister = document.getElementById("#registration_form");
+    const registerForm = document.querySelector("#registration_form");
+    // console.log(registerForm);
+    error = document.getElementsByClassName("invalid-feedback");
+    // inputEmail = document.getElementById("registration_form_email");
+    if (error && registerForm) {
+        const elMailId = document.getElementById("#errorMail");
+        errorMailMessage = elMailId.querySelector(".form-error-message");
+        if (errorMailMessage) {
+            errorMailMessage.innerText = "Ce compte existe déjà";
+        }
+        const elPasswordId = document.getElementById("#errorPassword");
+        errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
+        if (errorPasswordMessage) {
+            const iconEl = document.querySelector("svg[toggle='#password-field']");
+            if (iconEl.classList.contains('field-icon')) {
+                iconEl.classList.remove('field-icon');
+                iconEl.classList.add('field-icon-reg');
+            }
+        }
+    }
+
+
+
 });
