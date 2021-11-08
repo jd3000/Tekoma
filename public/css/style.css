@@ -1,10 +1,10 @@
-[class^="col"] {
+/* [class^="col"] {
   border: 1px solid rgb(212, 95, 95)!important;
 }
 
 [class^="row"] {
   border: 1px solid yellow!important;
-}
+} */
 
 /* Change autocomplete styles in WebKit */
 input:-webkit-autofill,
@@ -40,8 +40,6 @@ input:focus {
   background-color: rgba(0, 0, 0, 0.99);
   box-shadow: 0 4px 5px rgba(0,0,0,0.99);
 }
-
-
 
 .form-control {
     background-color:rgba(0,0,0,0) !important;
@@ -92,7 +90,6 @@ input:focus {
 }
 
 
-
 .form-arround {
   background-color:rgba(0,0,0,0) !important;
   border: 1px solid #505050!important;
@@ -103,10 +100,6 @@ input:focus {
   color: #6c757d;
 }
 
-/* .custom-file {
-  color: #6c757d;
-} */
-
 .form-error-icon  {
 color: RED;
 }
@@ -114,6 +107,11 @@ color: RED;
 
 .imgProduct {   
   border: 1px solid #505050;
+}
+
+.img-admin-card {
+  max-width: 15vh;
+  max-height: 15vh;
 }
 
 
@@ -150,7 +148,7 @@ color: RED;
 .title {
   color:#ffffff;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .accueil {
@@ -177,6 +175,12 @@ a {
   text-decoration: none; /* no underline */
 }
 
+a:hover {
+  color: #6c757d!important;
+  ;
+}
+
+
 #myTopnav {
 border: 1px solid #505050;
 }
@@ -195,8 +199,6 @@ border: 1px solid #505050;
   background-color:rgba(0, 0, 0, 0.657);
 }
 
-
-
 .borderCard, .cardAnim {  
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 
@@ -206,6 +208,12 @@ cursor: pointer;
 .borderCard:hover , .cardAnim:hover{
   transform: scale(1.05);
 }
+
+/* .alert-success-flash {
+  background-color: hsla(152, 70%, 51%, 0.970)!important;
+  border: 1px solid black!important;
+  color:black!important
+} */
 
 
 

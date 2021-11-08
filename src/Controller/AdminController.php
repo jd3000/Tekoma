@@ -26,10 +26,12 @@ class AdminController extends AbstractController
     public function index(ProductRepository $productRepo): Response
     {
         $products = $productRepo->findAll();
+        $activeProducts = $productRepo->findActiveProducts(true);
         // (“dump and die”) helper function
         // dd($products);
         return $this->render('admin/index.html.twig', [
-            'products' => $products
+            'products' => $products,
+            'activeProducts' => $activeProducts
         ]);
     }
 

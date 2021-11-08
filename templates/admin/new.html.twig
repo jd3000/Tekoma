@@ -83,11 +83,19 @@
 						</div>
 
 						<div class="col-12 mt-1 form-group">
-							<button class="btn btn-custom float-end" type="submit">Créer</button>
+							<button class="btn btn-custom-border float-end" type="submit">Créer</button>
 						</div>
 					</div>
 					{{ form_rest(form) }}
 					{{ form_end(form) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col text-center mt-3">
+					<a href="{{ path('admin')}}">
+						<button class="btn btn-custom">Revenir aux créations</button>
+					</a>
 				</div>
 			</div>
 			<div class="row d-flex justify-content-center logoSpec">
