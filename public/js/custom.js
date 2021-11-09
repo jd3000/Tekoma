@@ -72,7 +72,7 @@ $(document).ready(function () {
 
     // Permet de scroller jusqu'au produit modifié
     // cible le flash bag contenant le nom du produit modifié
-    m = document.getElementById("alert-success");
+    m = document.getElementById("flash-alert-success");
     // console.log(m);
     if (m) {
         // définition de la hauteur de la nav
@@ -110,7 +110,7 @@ $(document).ready(function () {
     }
 
     // Permet de scroller jusqu'au produit modifié
-    n = document.getElementById("alert-danger");
+    n = document.getElementById("flash-alert-danger");
     // console.log(m);
     if (n) {
         // définition de la hauteur de la nav
@@ -164,20 +164,25 @@ $(document).ready(function () {
     const registerForm = document.querySelector("#registration_form");
     // console.log(registerForm);
     error = document.getElementsByClassName("invalid-feedback");
+    console.log(error);
     // inputEmail = document.getElementById("registration_form_email");
-    if (error && registerForm) {
+    if (error) {
         const elMailId = document.getElementById("#errorMail");
         errorMailMessage = elMailId.querySelector(".form-error-message");
         if (errorMailMessage) {
             errorMailMessage.innerText = "Ce compte existe déjà";
         }
         const elPasswordId = document.getElementById("#errorPassword");
+        console.log(elPasswordId);
+
         errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
         if (errorPasswordMessage) {
-            const iconEl = document.querySelector("svg[toggle='#password-field']");
+            const iconEl = document.getElementById("eyeSvg");
+            console.log(iconEl);
+
             if (iconEl.classList.contains('field-icon')) {
-                iconEl.classList.remove('field-icon');
-                iconEl.classList.add('field-icon-reg');
+                // iconEl.classList.remove('field-icon');
+                iconEl.classList.toggle('field-icon-reg');
             }
         }
     }

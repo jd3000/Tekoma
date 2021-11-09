@@ -195,7 +195,7 @@ class ContactController extends AbstractController
 
             // $mailer->send($email);
 
-            $this->addFlash('success', "Votre commande concernant le produit $productName a bien été envoyée.");
+            $this->addFlash('success', "Votre commande concernant $productName a bien été envoyée.");
             return $this->redirectToRoute('home');
             // dump($prospect);
         }

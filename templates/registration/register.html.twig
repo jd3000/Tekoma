@@ -27,7 +27,7 @@
 				<div class="row justify-content-center mt-4">
 					<div class="col-10 col-md-8 col-lg-6 text-start">
 						<div>{{ form_widget(registrationForm.plainPassword, {label: 'Password'}) }}</div>
-						<span toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password-register icon-eye-size"></span>
+						<span id="eyeSvg" toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password-register icon-eye-size"></span>
 						<div id="#errorPassword">{{ form_errors(registrationForm.plainPassword, {label: 'Password'}) }}
 						</div>
 					</div>

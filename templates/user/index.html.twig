@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{% if app.user %}
+		<div class="container accueil">
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3 title">
+					{{ app.user.email }}
+				</div>
+				<div class="row align-items-center justify-content-center">
+					{{ app.user.id }}
+
+				</div>
+
+				<div class="row justify-content-center">
+					{{ dump(app.user.getRoles) }}
+
+				</div>
+
+				<div class="row justify-content-center">
+					{{ app.user.getPassword }}
+
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-12 text-center mt-3"></div>
+				</div>
+
+				<div class="row justify-content-center"></div>
+
+				<div class="row justify-content-center">
+					<div class="col-12 text-center mt-3"></div>
+				</div>
+			{% endif %}
+
+			<div class="row d-flex justify-content-center logoSpec">
+				<div class="col-3 col-md-2 col-lg-2 mt-3">
+					<img class="card-img" src="/img/JUL.png" alt="sign logo">
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ parent() }}
+	{% endblock %}

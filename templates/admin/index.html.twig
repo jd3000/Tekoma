@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 text-center mt-3 mt-md-5">
+			<div class="col-12 text-center mt-3 mt-md-4 met-lg-5">
 				<div>
 					<a href="{{ path('admin_create')}}">
 						<button class="btn btn-custom-border">
@@ -67,8 +67,10 @@
 									<b>{{ product.quantity|e }}</b>
 								</li>
 								{% if product.highlighted|e %}
-									<li class="list-group-item bg-success mt-1 rounded text-light">Produit mis en avant sur la page d'accueil
-										<b>{{ product.highlighted|e }}</b>
+									<li class="list-group-item bg-success mt-1 rounded text-light">Produit mis en avant sur la page d'accueil :
+										<span class="lead">
+											<b>{{ product.highlighted|e }}</b>
+										</span>
 									</li>
 									{% else %}
 								{% endif %}

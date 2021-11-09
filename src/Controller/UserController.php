@@ -14,27 +14,30 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class CreationsController extends AbstractController
+class UserController extends AbstractController
 {
-    /**
-     * @Route("/creations", name="creations")
-     */
-    public function index(ProductRepository $productRepo): Response
-    {
-        $products = $productRepo->findActiveProducts(true);
-        // (“dump and die”) helper function
-        // dd($products);
-        return $this->render('creations/index.html.twig', [
-            'products' => $products
-        ]);
-    }
-
     /**
      * Permet d'afficher une seule creation
      * 
-     * @Route("/creations/{slug}", name="creations_show")
+     * @Route("/user", name="user")
      */
-    public function show($slug, Product $product): Response
+    public function user()
+    {
+        // si on utilise le ProductRepository à la place du paramconverter
+        // $product = $productRepo->findOneBySlug($slug);
+
+        // (“dump and die”) helper function
+        // dump($product);
+        return $this->render('user/index.html.twig');
+    }
+
+
+    /**
+     * Permet d'afficher une seule creation sélectionnée par un utilisateur
+     * 
+     * @Route("/user/creations/{slug}", name="user_creations_show")
+     */
+    public function userSelection($slug, Product $product): Response
     {
 
         // si on utilise le ProductRepository à la place du paramconverter
@@ -42,7 +45,7 @@ class CreationsController extends AbstractController
 
         // (“dump and die”) helper function
         // dump($product);
-        return $this->render('creations/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'product' => $product
         ]);
     }
