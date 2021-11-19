@@ -3,6 +3,73 @@ setTimeout(function () {
     $(".btn-close").trigger('click');
 }, 10000);
 
+// $("#cp").autocomplete({
+//     source: function (request, response) {
+//         $.ajax({
+//             url: "https://api-adresse.data.gouv.fr/search/?q=" + $("input[name='cp']").val() + '&type=municipality&autocomplete=1',
+//             data: { q: request.term },
+//             dataType: "json",
+//             success: function (data) {
+//                 response($.map(data.features, function (item) {
+//                     console.log(item);
+//                     console.log(data.features);
+
+//                     return {
+//                         label: item.properties.postcode + " – " + item.properties.city,
+//                         city: item.properties.city,
+//                         value: item.properties.postcode
+//                     };
+//                 }));
+//             }
+//         });
+//     },
+//     // On remplit aussi la ville
+//     select: function (event, ui) {
+//         $('#ville').val(ui.item.city);
+//     }
+// });
+// $("#ville").autocomplete({
+//     source: function (request, response) {
+//         $.ajax({
+//             url: "https://api-adresse.data.gouv.fr/search/?city=" + $("input[name='ville']").val(),
+//             data: { q: request.term },
+//             dataType: "json",
+//             success: function (data) {
+//                 let cities = [];
+//                 response($.map(data.features, function (item) {
+//                     // Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+//                     if ($.inArray(item.properties.postcode, cities) == -1) {
+//                         cities.push(item.properties.postcode);
+//                         return {
+//                             label: item.properties.postcode + " - " + item.properties.city,
+//                             postcode: item.properties.postcode,
+//                             value: item.properties.city
+//                         };
+//                     }
+//                 }));
+//             }
+//         });
+//     },
+//     // On remplit aussi le CP
+//     select: function (event, ui) {
+//         $('#cp').val(ui.item.postcode);
+//     }
+// });
+// $("#adresse").autocomplete({
+//     source: function (request, response) {
+//         $.ajax({
+//             url: "https://api-adresse.data.gouv.fr/search/?postcode=" + $("input[name='cp']").val(),
+//             data: { q: request.term },
+//             dataType: "json",
+//             success: function (data) {
+//                 response($.map(data.features, function (item) {
+//                     return { label: item.properties.name, value: item.properties.name };
+//                 }));
+//             }
+//         });
+//     }
+// });
+
 
 // Permet de gérer le toggle du burger (small)
 function burgerToggle() {
@@ -160,32 +227,36 @@ $(document).ready(function () {
     });
 
 
+
+
+    // A REVOIR POUR GERER LE FAVICON DU REGISTER_FORM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     // const formRegister = document.getElementById("#registration_form");
-    const registerForm = document.querySelector("#registration_form");
-    // console.log(registerForm);
-    error = document.getElementsByClassName("invalid-feedback");
-    console.log(error);
-    // inputEmail = document.getElementById("registration_form_email");
-    if (error) {
-        const elMailId = document.getElementById("#errorMail");
-        errorMailMessage = elMailId.querySelector(".form-error-message");
-        if (errorMailMessage) {
-            errorMailMessage.innerText = "Ce compte existe déjà";
-        }
-        const elPasswordId = document.getElementById("#errorPassword");
-        console.log(elPasswordId);
+    // const registerForm = document.querySelector("#registration_form");
+    // // console.log(registerForm);
+    // error = document.getElementsByClassName("invalid-feedback");
+    // // console.log(error);
+    // // inputEmail = document.getElementById("registration_form_email");
+    // if (error) {
+    //     const elMailId = document.getElementById("#errorMail");
+    //     errorMailMessage = elMailId.querySelector(".form-error-message");
+    //     if (errorMailMessage) {
+    //         errorMailMessage.innerText = "Ce compte existe déjà";
+    //     }
+    //     const elPasswordId = document.getElementById("#errorPassword");
+    //     // console.log(elPasswordId);
 
-        errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
-        if (errorPasswordMessage) {
-            const iconEl = document.getElementById("eyeSvg");
-            console.log(iconEl);
+    //     errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
+    //     if (errorPasswordMessage) {
+    //         const iconEl = document.getElementById("eyeSvg");
+    //         // console.log(iconEl);
 
-            if (iconEl.classList.contains('field-icon')) {
-                // iconEl.classList.remove('field-icon');
-                iconEl.classList.toggle('field-icon-reg');
-            }
-        }
-    }
+    //         if (iconEl.classList.contains('field-icon')) {
+    //             // iconEl.classList.remove('field-icon');
+    //             iconEl.classList.toggle('field-icon-reg');
+    //         }
+    //     }
+    // }
 
 
 });

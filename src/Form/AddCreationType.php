@@ -91,7 +91,7 @@ class AddCreationType extends AbstractType
             )
             ->add(
                 'quantity',
-                NumberType::class,
+                IntegerType::class,
                 array(
                     'attr' => array(
                         'class' => '',

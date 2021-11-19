@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
 
         $products = $productRepo->findActiveProducts(true);
         if ($this->getUser()) {
-            return $this->redirectToRoute('target_path');
+            return $this->redirectToRoute('home');
         }
 
         // get the login error if there is one

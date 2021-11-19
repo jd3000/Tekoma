@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class UpdateCreationType extends AbstractType
@@ -95,11 +96,11 @@ class UpdateCreationType extends AbstractType
             )
             ->add(
                 'quantity',
-                NumberType::class,
+                IntegerType::class,
                 array(
                     'attr' => array(
                         'class' => '',
-                        'placeholder' => 'Quantité'
+                        'placeholder' => 'Quantité disponnible'
                     ),
                     'constraints' => array(
                         new GreaterThanOrEqual(['value' => 0])

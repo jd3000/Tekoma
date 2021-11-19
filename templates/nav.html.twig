@@ -15,7 +15,7 @@
 
 			{% if app.user %}
 				<div class="col-2 mt-1 text-center">
-					<a href="{{ path('logout')}}" class="{{ app.request.get('_route') == 'login' ? 'active' }}">
+					<a href="{{ path('logout')}}">
 						<i class="fas fa-user-times fs-5" data-toggle="tooltip" data-placement="bottom" title="Déconnexion"></i>
 					</a>
 				</div>
@@ -49,6 +49,10 @@
 			{% if is_granted('ROLE_ADMIN') %}
 				<div class="col-12 my-2">
 					<a href="{{path('admin')}}" class="{{ app.request.get('_route') == 'admin' ? 'active' }} text-warning">ADMIN</a>
+				</div>
+			{% elseif is_granted('ROLE_USER') %}
+				<div class="col-12 my-2">
+					<a href="{{path('user')}}" class="{{ app.request.get('_route') == 'user' ? 'active' }} text-warning">COMPTE</a>
 				</div>
 			{% else %}
 				<div class="col-12 my-2">
@@ -86,6 +90,10 @@
 					<div class="text-center">
 						<a class="text-warning title {{ app.request.get('_route') == 'admin' ? 'active' }}" href="{{ path('admin')}}">ADMIN</a>
 					</div>
+				</div>
+			{% elseif is_granted('ROLE_USER') %}
+				<div class="text-center">
+					<a href="{{path('user')}}" class="{{ app.request.get('_route') == 'user' ? 'active' }} text-warning title">COMPTE</a>
 				</div>
 			{% else %}
 				<div class="text-center">

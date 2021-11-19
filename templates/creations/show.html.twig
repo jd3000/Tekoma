@@ -53,19 +53,16 @@
 
 		<div class="row justify-content-center">
 			<div class="col-12 text-center mt-3">
-				{% if product.quantity == 0 %}
+				{% if product.quantity < 1 %}
 					<a href="{{ path('contact_order' , {'slug':product.slug} )}}">
 						<button class="btn btn-custom-border">Précommander</button>
 					</a>
-				{% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				{% elseif product.quantity > 0 %}
+					<a href="{{ path('user_creations_payment', {'slug':product.slug} )}}">
+						<button class="btn btn-custom-border">Acheter</button>
+					</a>
+					{# {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %} #}
 
-					<a href="">
-						<button class="btn btn-custom-border">Acheter</button>
-					</a>
-				{% else %}
-					<a href="{{ path('user_creations_show', {'slug':product.slug} )}}">
-						<button class="btn btn-custom-border">Acheter</button>
-					</a>
 				{% endif %}
 			</div>
 		</div>

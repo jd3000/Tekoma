@@ -35,10 +35,12 @@
 					{{ form_errors(form) }}
 					<div class="row align-items-center justify-content-center mx-2">
 						<div class="col-12 col-md-6 mt-3">
+							<div class="d-block">Nom</div>
 							<div>{{ form_widget(form.name) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.name) }}</div>
 						</div>
 						<div class="col-12 col-md-6 mt-3">
+							<div class="d-block">Prix</div>
 							<div>{{ form_widget(form.price) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.price) }}</div>
 						</div>
@@ -49,10 +51,12 @@
 							<div class="d-none d-md-block">{{ form_errors(form.price) }}</div>
 						</div>
 						<div class="col-12 mt-3">
+							<div class="d-block">Description</div>
 							{{ form_widget(form.description) }}
 							{{ form_errors(form.description) }}
 						</div>
 						<div class="col-12 col-md-6 mt-3">
+							<div class="d-block">Quantité</div>
 							<div>{{ form_widget(form.quantity) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.quantity) }}</div>
 						</div>
