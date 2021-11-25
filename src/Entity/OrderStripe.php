@@ -2,17 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
+use App\Repository\OrderStripeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=OrderRepository::class)
- * @ORM\Table(name="`order`")
+ * @ORM\Entity(repositoryClass=OrderStripeRepository::class)
  */
-class Order
+class OrderStripe
 {
-    const DEVISE = 'eur';
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,39 +18,39 @@ class Order
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $user_id;
+    private $username;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $product_id;
+    private $product;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reference;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $stripe_token;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $brand_stripe;
+    private $adress_line1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $last4_stripe;
+    private $adress_line2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $id_charge_stripe;
+    private $postal_code;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -61,7 +58,7 @@ class Order
     private $status_stripe;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $created_at;
 
@@ -75,31 +72,36 @@ class Order
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_sent;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?User
+    public function getUsername(): ?string
     {
-        return $this->user_id;
+        return $this->username;
     }
 
-    public function setUserId(?User $user_id): self
+    public function setUsername(?string $username): self
     {
-        $this->user_id = $user_id;
+        $this->username = $username;
 
         return $this;
     }
 
-    public function getProductId(): ?Product
+    public function getProduct(): ?string
     {
-        return $this->product_id;
+        return $this->product;
     }
 
-    public function setProductId(?Product $product_id): self
+    public function setProduct(?string $product): self
     {
-        $this->product_id = $product_id;
+        $this->product = $product;
 
         return $this;
     }
@@ -109,57 +111,57 @@ class Order
         return $this->reference;
     }
 
-    public function setReference(string $reference): self
+    public function setReference(?string $reference): self
     {
         $this->reference = $reference;
 
         return $this;
     }
 
-    public function getStripeToken(): ?string
+    public function getCity(): ?string
     {
-        return $this->stripe_token;
+        return $this->city;
     }
 
-    public function setStripeToken(?string $stripe_token): self
+    public function setCity(?string $city): self
     {
-        $this->stripe_token = $stripe_token;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getBrandStripe(): ?string
+    public function getAdressLine1(): ?string
     {
-        return $this->brand_stripe;
+        return $this->adress_line1;
     }
 
-    public function setBrandStripe(?string $brand_stripe): self
+    public function setAdressLine1(?string $adress_line1): self
     {
-        $this->brand_stripe = $brand_stripe;
+        $this->adress_line1 = $adress_line1;
 
         return $this;
     }
 
-    public function getLast4Stripe(): ?string
+    public function getAdressLine2(): ?string
     {
-        return $this->last4_stripe;
+        return $this->adress_line2;
     }
 
-    public function setLast4Stripe(?string $last4_stripe): self
+    public function setAdressLine2(?string $adress_line2): self
     {
-        $this->last4_stripe = $last4_stripe;
+        $this->adress_line2 = $adress_line2;
 
         return $this;
     }
 
-    public function getIdChargeStripe(): ?string
+    public function getPostalCode(): ?string
     {
-        return $this->id_charge_stripe;
+        return $this->postal_code;
     }
 
-    public function setIdChargeStripe(?string $id_charge_stripe): self
+    public function setPostalCode(?string $postal_code): self
     {
-        $this->id_charge_stripe = $id_charge_stripe;
+        $this->postal_code = $postal_code;
 
         return $this;
     }
@@ -181,7 +183,7 @@ class Order
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -208,6 +210,18 @@ class Order
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getIsSent(): ?bool
+    {
+        return $this->is_sent;
+    }
+
+    public function setIsSent(bool $is_sent): self
+    {
+        $this->is_sent = $is_sent;
 
         return $this;
     }
