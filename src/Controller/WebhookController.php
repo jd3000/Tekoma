@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\OrderStripe;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -25,7 +26,9 @@ class WebhookController extends AbstractController
             );
         } catch (\UnexpectedValueException $e) {
             // Invalid payload
-            http_response_code(400);
+            // http_response_code(400);
+            return new Response(http_response_code(400));
+
             exit();
         }
 
@@ -53,8 +56,8 @@ class WebhookController extends AbstractController
                 $entityManager->persist($order);
                 $entityManager->flush();
                 // Then define and call a method to handle the successful payment intent.
-                // handlePaymentIntentSucceeded($paymentIntent);
-                http_response_code(200);
+
+                return new Response(http_response_code(200));
 
                 break;
             case 'payment_method.attached':
@@ -67,6 +70,6 @@ class WebhookController extends AbstractController
                 echo 'Received unknown event type ' . $event->type;
         }
 
-        http_response_code(200);
+        return new Response(http_response_code(200));
     }
 }

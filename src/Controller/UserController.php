@@ -92,7 +92,7 @@ class UserController extends AbstractController
                     'quantity'   => 1,
                 ]
             ],
-            'metadata' => ['userMail' => $user, 'productName' => $productName],
+            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid()],
             'mode'                 => 'payment',
             'success_url'          => $this->generateUrl('success_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url'           => $this->generateUrl('cancel_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
