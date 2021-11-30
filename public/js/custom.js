@@ -71,19 +71,19 @@ setTimeout(function () {
 // });
 
 
-// Permet de gérer le toggle du burger (small)
-function burgerToggle() {
-    let x = document.getElementById("myTopnav");
-    let y = document.getElementById("burger");
+// // Permet de gérer le toggle du burger (small)
+// function burgerToggle() {
+//     let x = document.getElementById("myTopnav");
+//     let y = document.getElementById("burger");
 
-    if (x.className === "row coverBlack d-flex-block d-md-none mx-1") {
-        x.className = "row coverBlack d-none d-md-none mx-1";
-        y.src = "/img/burger.png";
-    } else {
-        x.className = "row coverBlack d-flex-block d-md-none mx-1";
-        y.src = "/img/cross.png";
-    }
-}
+//     if (x.className === "row coverBlack d-flex-block d-md-none mx-1") {
+//         x.className = "row coverBlack d-none d-md-none mx-1";
+//         y.src = "/img/burger.png";
+//     } else {
+//         x.className = "row coverBlack d-flex-block d-md-none mx-1";
+//         y.src = "/img/cross.png";
+//     }
+// }
 
 // admin / update.html.twig new.html.twig creation
 $(document).ready(function () {
@@ -226,6 +226,9 @@ $(document).ready(function () {
 
     });
 
+    $(".table-row").click(function () {
+        window.document.location = $(this).data("href");
+    });
 
 
 

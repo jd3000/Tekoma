@@ -19,32 +19,28 @@ class OrderStripeRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderStripe::class);
     }
 
-    // /**
-    //  * @return OrderStripe[] Returns an array of OrderStripe objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return OrderStripe[] Returns an array of OrderStripe objects
+     */
+    public function findByUserName($userName): array
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('o')
+            ->select('o')
+            ->where('o.username = :username')
+            ->setParameter('username', $userName)
+            ->orderBy('o.username', 'ASC');
+        $query = $qb->getQuery();
+        return $query->execute();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?OrderStripe
+
+
+    public function findOneByReference($value): ?OrderStripe
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
+            ->andWhere('o.reference = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 }

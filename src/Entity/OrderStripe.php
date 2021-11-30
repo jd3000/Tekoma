@@ -77,6 +77,11 @@ class OrderStripe
      */
     private $is_sent;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $img;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +227,18 @@ class OrderStripe
     public function setIsSent(bool $is_sent): self
     {
         $this->is_sent = $is_sent;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

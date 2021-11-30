@@ -233,6 +233,14 @@ cursor: pointer;
   color:black;
 }
 
+.table-row{
+  cursor:pointer;
+  }
+ 
+  .tableHover:hover {
+    background-color:  #6c757d!important;
+  }
+
 
 
 /* form-control {

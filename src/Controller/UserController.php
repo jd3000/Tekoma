@@ -6,12 +6,16 @@ use Stripe\Stripe;
 use App\Entity\User;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Entity\OrderStripe;
 use Doctrine\ORM\Mapping\Id;
 use Stripe\Checkout\Session;
+use App\Form\UpdateOrderType;
 use App\Form\RegistrationType;
 use App\Service\StripeService;
 use App\Form\RegistrationFormType;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use App\Repository\OrderStripeRepository;
 use App\Controller\RegistrationController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -25,18 +29,74 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends AbstractController
 {
     /**
-     * Permet d'afficher une seule creation
+     * Permet d'afficher le compte
      * 
      * @Route("/user", name="user")
      */
-    public function user()
+    public function user(OrderStripeRepository $orderStripeRepo)
     {
-        // si on utilise le ProductRepository à la place du paramconverter
-        // $product = $productRepo->findOneBySlug($slug);
+        $user = $this->getUser();
+        $userName = $user->getUsername();
+        $stripeOrders = $orderStripeRepo->findByUserName($userName);
+        dump($stripeOrders);
+        $userId = $user->getId();
+        dump($userId);
 
-        // (“dump and die”) helper function
-        // dump($product);
-        return $this->render('user/index.html.twig');
+        return $this->render('user/index.html.twig', [
+            'stripeOrders' => $stripeOrders
+        ]);
+    }
+
+    /**
+     * Permet d'afficher de modifier l'adresse de livraison
+     * 
+     * @Route("/user/upd-order/{reference}", name="user_order")
+     */
+    public function order($reference, Request $request, OrderStripeRepository $orderStripeRepo, OrderStripe $orderStripe)
+    {
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(UpdateOrderType::class, $orderStripe);
+
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+        $userName = $user->getUsername();
+        dump($userName);
+
+
+        $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $productName =  $stripeOrder->getProduct();
+
+        dump($stripeOrder);
+        $userOrder = $stripeOrder->getUsername();
+        dump($userOrder);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->getData();
+
+            $entityManager->persist($stripeOrder);
+            $entityManager->flush();
+
+
+            $this->addFlash('success', "Addresse de livraison modifiée pour " . $productName . ".");
+            return $this->redirectToRoute('user');
+        }
+
+        // $userId = $user->getId();
+        if ($userName == $userOrder) {
+
+            return $this->render('user/order-upd.html.twig', [
+                'form' => $form->createView(),
+                'stripeOrder' => $stripeOrder
+            ]);
+            # code...
+        } else {
+            return $this->redirectToRoute('user');
+        }
     }
 
 
@@ -92,7 +152,7 @@ class UserController extends AbstractController
                     'quantity'   => 1,
                 ]
             ],
-            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid()],
+            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid(), 'productImg' => $productImg],
             'mode'                 => 'payment',
             'success_url'          => $this->generateUrl('success_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url'           => $this->generateUrl('cancel_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
@@ -122,44 +182,5 @@ class UserController extends AbstractController
     public function cancelUrl($slug): Response
     {
         return $this->redirectToRoute('user_creations_payment', array('slug' => $slug));
-    }
-
-    /**
-     * Permet d'afficher une seule creation sélectionnée par un utilisateur
-     * 
-     * @Route("/user/order/{slug}", name="user_order_create")
-     */
-    public function orderCreate($slug, Product $product, Request $request, Security $security): Response
-    {
-
-        $entityManager = $this->getDoctrine()->getManager();
-        // $order = new Order();
-        // $orderUserName = $order->setUsername('nom');
-        // $orderProductName = $order->setProduct('produit');
-        // $orderReference = $order->setReference('ref');
-        // $orderUpdateCity = $order->setCity('city');
-        // $orderUpdateAddressLine1 = $order->setAdressLine1('line1');
-        // $orderUpdateAddressLine2 = $order->setAdressLine2('line2');
-        // $orderUpdatePostalCode = $order->setPostalCode('post code');
-        // $orderStatus = $order->setStatusStripe('status');
-        // $now = new \DateTimeImmutable($request->get('time'));
-        // $orderCrationDate = $order->setCreatedAt($now);
-        // $orderUpadateDate = $order->setUpdatedAt($now);
-        // $orderPrice = $order->setPrice($product->getPrice() / 100);
-        // $orderIsSent = $order->setIsSent(false);
-        // $user = $security->getUser();
-        // $id = $order->setUser($user);
-        // dd($id);
-        // $entityManager->persist($order);
-        // $entityManager->flush();
-
-        // si on utilise le ProductRepository à la place du paramconverter
-        // $product = $productRepo->findOneBySlug($slug);
-
-        // (“dump and die”) helper function
-        // dump($product);
-        return $this->render('user/order.html.twig', [
-            'product' => $product
-        ]);
     }
 }

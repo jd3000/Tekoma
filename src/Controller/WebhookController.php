@@ -40,6 +40,7 @@ class WebhookController extends AbstractController
                 $order = new OrderStripe();
                 $orderUserName = $order->setUsername($paymentIntent->metadata->userMail);
                 $orderProductName = $order->setProduct($paymentIntent->metadata->productName);
+                $orderProductImg = $order->setImg($paymentIntent->metadata->productImg);
                 $orderReference = $order->setReference($paymentIntent->id);
                 $orderUpdateCity = $order->setCity($paymentIntent->shipping->address->city);
                 $orderUpdateAddressLine1 = $order->setAdressLine1($paymentIntent->shipping->address->line1);

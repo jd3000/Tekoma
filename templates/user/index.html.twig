@@ -7,46 +7,56 @@
 {% endblock %}
 
 {% block body %}
-	{% if app.user %}
-		<div class="container accueil">
-			<div class="row justify-content-center">
-				<div class="col-12 text-center mt-3 title">
-					{{ app.user.email }}
-				</div>
-				<div class="row align-items-center justify-content-center">
-					{{ app.user.id }}
-
-				</div>
-
-				<div
-					class="row justify-content-center">{# {{ dump(app.user.getRoles) }} #}
-
-				</div>
-
-				<div class="row justify-content-center">
-					{{ app.user.getPassword }}
-
-				</div>
-
-				<div class="row justify-content-center">
-					<div class="col-12 text-center mt-3"></div>
-				</div>
-
-				<div class="row justify-content-center"></div>
-
-				<div class="row justify-content-center">
-					<div class="col-12 text-center mt-3"></div>
-				</div>
-			{% endif %}
-
-			<div class="row d-flex justify-content-center logoSpec">
-				<div class="col-3 col-md-2 col-lg-2 mt-3">
-					<img class="card-img" src="/img/JUL.png" alt="sign logo">
-				</div>
+{% if app.user %}
+	<div class="container accueil">
+		<div class="row justify-content-center">
+			<div class="col-12 text-center mt-3 title">
+				{{ app.user.email }}
 			</div>
-		</div>
-	{% endblock %}
-
-	{% block javascripts %}
-		{{ parent() }}
-	{% endblock %}
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3">
+					<table class="table text-white">
+						{% if stripeOrders %}
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Création</th>
+									<th scope="col">Date</th>
+									<th scope="col">Prix</th>
+									<th scope="col">Envoyé</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for stripeOrder in stripeOrders %}
+									{% if stripeOrder.getIsSent == false %}
+										<tr class='table-row tableHover' data-href='{{ path('user_order' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse de livraison commande #{{ loop.index }}">
+											<th scope="row">{{ loop.index }}</th>
+											<td>{{stripeOrder.product}}</td>
+											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
+											<td>{{stripeOrder.price}}&nbsp;€</td>
+											<td>
+												<i class="text-warning fas fa-times"></i>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<th scope="row">{{ loop.index }}</th>
+											<td>{{stripeOrder.product}}</td>
+											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
+											<td>{{stripeOrder.price}}&nbsp;€</td>
+											<td>
+												<i class="text-success fas fa-check"></i>
+											</td>
+										</tr>
+									</a>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					</tbody>
+				</tbody>
+			</tr>
+		</tbody>
+	</table>
+{% else %}
+	<div class="border border-white p-4">Vous n'avez pas encore commandé de création.</div>
+{% endif %}</div></div><div class="row justify-content-center"></div><div class="row justify-content-center"><div class="col-12 text-center mt-3"></div></div>{% endif %}<div class="row d-flex justify-content-center logoSpec"><div class="col-3 col-md-2 col-lg-2 mt-3"><img class="card-img" src="/img/JUL.png" alt="sign logo"></div></div></div>{% endblock %}{% block javascripts %}{{ parent() }}{% endblock %}
