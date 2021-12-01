@@ -38,9 +38,9 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $userName = $user->getUsername();
         $stripeOrders = $orderStripeRepo->findByUserName($userName);
-        dump($stripeOrders);
+        // dump($stripeOrders);
         $userId = $user->getId();
-        dump($userId);
+        // dump($userId);
 
         return $this->render('user/index.html.twig', [
             'stripeOrders' => $stripeOrders
@@ -168,7 +168,16 @@ class UserController extends AbstractController
      */
     public function successUrl($slug, Product $product): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $productName = $product->getName();
+        $productQuantity = $product->getQuantity();
+
+
+        if ($productQuantity > 0) {
+            $product->setQuantity($productQuantity - 1);
+        }
+        $entityManager->persist($product);
+        $entityManager->flush();
 
         $this->addFlash('success',  $productName . " commandé ! Merci 🙂. Suivez l'évolution de votre commande ici");
         return $this->redirectToRoute('user');

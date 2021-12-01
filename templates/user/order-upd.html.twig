@@ -27,17 +27,22 @@
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-8 mt-md-5">
-				<div id="add_creationForm">
+				<div id="upd_orderForm">
 					{{ form_start(form) }}
 					{{ form_errors(form) }}
 					<div class="row align-items-center justify-content-center mx-2">
+						<div class="col-12 mt-3">
+							<div>Nom*</div>
+							{{ form_widget(form.name) }}
+							{{ form_errors(form.name) }}
+						</div>
 						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Ville</div>
+							<div class="d-block">Ville*</div>
 							<div>{{ form_widget(form.city) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.city) }}</div>
 						</div>
 						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Adresse</div>
+							<div class="d-block">Adresse*</div>
 							<div>{{ form_widget(form.adress_line1) }}</div>
 							<div class="d-block d-md-none">{{ form_errors(form.adress_line1) }}</div>
 						</div>

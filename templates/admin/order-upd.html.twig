@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Tekoma
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<div class="container accueil">
+		<div class="row">
+			<div class="col text-center mt-3 title">
+				<div>Gestion des commandes</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">{{stripeOrder.reference}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-center mt-3">
+				<a href="{{ path('admin_orders')}}">
+					<button class="btn btn-custom">Revenir aux commandes</button>
+				</a>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center logoSpec">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+			</div>
+		</div>
+	{% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+	{% endblock %}

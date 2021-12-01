@@ -27,7 +27,19 @@ class UpdateOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
+            ->add(
+                'name',
+                TextType::class,
+                array(
+                    'attr' => array(
+                        'class' => '',
+                        'placeholder' => 'Nom',
+                    ),
+                    'constraints' => array(
+                        new NotBlank()
+                    )
+                )
+            )
             ->add(
                 'city',
                 TextType::class,

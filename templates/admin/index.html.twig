@@ -13,8 +13,8 @@
 				<div class="text-warning">ADMIN</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12 text-center mt-3 mt-md-4 met-lg-5">
+		<div class="row justify-content-center">
+			<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
 				<div>
 					<a href="{{ path('admin_create')}}">
 						<button class="btn btn-custom-border">
@@ -24,9 +24,19 @@
 					</a>
 				</div>
 			</div>
+			<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
+				<div>
+					<a href="{{ path('admin_orders')}}">
+						<button class="btn btn-custom-border">
+							<i class="fas fa-shopping-cart"></i>
+							<b>Gérer les commandes</b>
+						</button>
+					</a>
+				</div>
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 text-center mt-2">
+			<div class="col-12 text-center mt-4">
 				<div>
 					{{ products|length > 1 ? 'Produits :' : 'Produit :' }}
 					{{ products|length }}

@@ -9,6 +9,7 @@ use App\Form\UpdateCreationType;
 use App\Repository\ProductRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrderStripeRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,6 +80,68 @@ class AdminController extends AbstractController
         return $this->render('admin/new.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Permet d'afficher le compte
+     * 
+     * @Route("/admin/orders", name="admin_orders")
+     */
+    public function user(OrderStripeRepository $orderStripeRepo)
+    {
+        $stripeOrders = $orderStripeRepo->findAll();
+        // dump($stripeOrders);
+
+        return $this->render('admin/orders.html.twig', [
+            'stripeOrders' => $stripeOrders
+        ]);
+    }
+    /**
+     * Permet d'afficher de modifier l'adresse de livraison
+     * 
+     * @Route("/admin/upd-order/{reference}", name="admin_order_upd")
+     */
+    public function order($reference, Request $request, OrderStripeRepository $orderStripeRepo)
+    {
+
+
+        // $entityManager = $this->getDoctrine()->getManager();
+
+        // $form = $this->createForm(UpdateOrderType::class, $orderStripe);
+
+        // $form->handleRequest($request);
+
+        // $user = $this->getUser();
+        // $userName = $user->getUsername();
+        // dump($userName);
+
+
+        $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $productName =  $stripeOrder->getProduct();
+
+        dump($stripeOrder);
+        $userOrder = $stripeOrder->getUsername();
+        dump($userOrder);
+
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $form->getData();
+
+        //     $entityManager->persist($stripeOrder);
+        //     $entityManager->flush();
+
+
+        //     $this->addFlash('success', "Addresse de livraison modifiée pour " . $productName . ".");
+        //     return $this->redirectToRoute('user');
+        // }
+
+
+
+        return $this->render('admin/order-upd.html.twig', [
+            'stripeOrder' => $stripeOrder
+        ]);
+        # code...
+
     }
 
 
