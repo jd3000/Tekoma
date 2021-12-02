@@ -12,6 +12,13 @@
 				<div>Gestion des commandes</div>
 			</div>
 		</div>
+		<div class="row justify-content-center">
+			<div class="col-6  mt-5">
+				<input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
+				<span id="icon-no-result" class="d-none fas fa-times field-icon-no-result text-danger"></span>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col text-center mt-3">
 				{% if stripeOrders %}
@@ -25,53 +32,45 @@
 								<th scope="col">Envoyée</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="myTable">
 							{% for stripeOrder in stripeOrders %}
-								{% if stripeOrder.getIsSent == false %}
-									<tr class='table-row tableHover' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier le statut de la commande : {{stripeOrder.product}}">
-										<th scope="row">{{ stripeOrder.username }}</th>
-										<td>{{stripeOrder.product}}</td>
-										<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
-										<td>{{stripeOrder.price}}&nbsp;€</td>
-										<td>
+
+								<tr class='table-row tableHover' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.product}}">
+									<th scope="row">{{ stripeOrder.username }}</th>
+									<td>{{stripeOrder.product}}</td>
+
+									<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
+									<td>{{stripeOrder.price}}&nbsp;€</td>
+									<td>
+										{% if stripeOrder.getIsSent == false %}
 											<i class="text-warning fas fa-times"></i>
-										</td>
-									</tr>
-								{% else %}
-									<tr>
-										<th scope="row">{{ stripeOrder.username }}</th>
-										<td>{{stripeOrder.product}}</td>
-										<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
-										<td>{{stripeOrder.price}}&nbsp;€</td>
-										<td>
+										{% else %}
 											<i class="text-success fas fa-check"></i>
-										</td>
-									</tr>
-								</a>
-							</tr>
-						{% endif %}
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	{% else %}
-		<div class="border border-white p-4">Vous n'avez pas encore commandé de création.</div>
-	{% endif %}
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div id="noResult"></div>
+				{% else %}
+					<div class="border border-white p-4">Aucune comande pour l'instant</div>
+				{% endif %}
 
 
-	<div class="row">
-		<div class="col text-center mt-3">
-			<a href="{{ path('admin')}}">
-				<button class="btn btn-custom">Revenir aux créations</button>
-			</a>
-		</div>
-	</div>
-	<div class="row d-flex justify-content-center logoSpec">
-		<div class="col-3 col-md-2 col-lg-2 mt-3">
-			<img class="card-img" src="/img/JUL.png" alt="sign logo">
-		</div>
-	</div>
-{% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-{% endblock %}
+				<div class="row">
+					<div class="col text-center mt-3">
+						<a href="{{ path('admin')}}">
+							<button class="btn btn-custom">Revenir aux créations</button>
+						</a>
+					</div>
+				</div>
+				<div class="row d-flex justify-content-center logoSpec">
+					<div class="col-3 col-md-2 col-lg-2 mt-3">
+						<img class="card-img" src="/img/JUL.png" alt="sign logo">
+					</div>
+				</div>
+			{% endblock %}
+			{% block javascripts %}
+				{{ parent() }}
+			{% endblock %}

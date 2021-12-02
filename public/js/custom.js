@@ -226,9 +226,52 @@ $(document).ready(function () {
 
     });
 
+    // permet d'utiliser l'atribut data-href
     $(".table-row").click(function () {
         window.document.location = $(this).data("href");
     });
+
+    // permet de rechercher des valeurs dans la gestion des commandes partie admin, d'afficher l'icone d'effacer l'input et d'afficher le message si aucun résultât 
+    $("#myInput").on("keyup blur", function () {
+        let value = $(this).val().toLowerCase();
+        let compare = 0;
+        $("#myTable tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        let tableRows = $("#myTable tr");
+        let compareNumer = tableRows.length;
+        for (let index = 0; index < tableRows.length; index++) {
+            // console.log(tableRows[index].style.display);
+            if (tableRows[index].style.display == "none") {
+                compare += 1;
+            }
+        }
+
+        const noResult = document.getElementById("noResult");
+
+        if (compare == compareNumer) {
+            // console.log(noResult);
+            noResult.innerHTML = "<div class=\"no-result p-4\">Aucune commande ne correspond à la recherche</div>";
+            let iconNoResult = document.getElementById("icon-no-result");
+            // console.log(iconNoResult.className.baseVal);
+            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-no-result text-danger";
+            $("body").on('click', '#icon-no-result', function () {
+                let input = $("#myInput");
+                if (input.val() != "") {
+                    input.val('');
+                    input.blur();
+                }
+            });
+
+        } else {
+            noResult.innerHTML = "";
+            let iconNoResult = document.getElementById("icon-no-result");
+            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
+
+        }
+
+    });
+
 
 
 
