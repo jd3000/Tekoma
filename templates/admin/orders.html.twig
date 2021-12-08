@@ -8,44 +8,45 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
-			<div class="col text-center mt-3 title">
+			<div class="col-12 text-center mt-3 title">
 				<div>Gestion des commandes</div>
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-6  mt-5">
+			<div class="col-11 col-sm-9 col-md-7 col-lg-5 mt-5">
 				<input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
 				<span id="icon-no-result" class="d-none fas fa-times field-icon-no-result text-danger"></span>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
+			<div class="col-12 text-center mt-3">
 				{% if stripeOrders %}
-					<table class="table text-white">
-						<thead>
+					<table class="table text-white" id="sortTable" class="display" style="width:100%">
+						<thead id="theadOrders">
 							<tr>
-								<th scope="col">Utilisateur</th>
-								<th scope="col">Création</th>
-								<th scope="col">Date</th>
-								<th scope="col">Prix</th>
-								<th scope="col">Envoyée</th>
+								<th scope="col" id="userName" data-toggle="tooltip" data-placement="top" title="Trier par Utilisateur">Utilisateur</th>
+								<th scope="col" id="product" data-toggle="tooltip" data-placement="top" title="Trier par Création">Création</th>
+								<th scope="col" id="date" data-toggle="tooltip" data-placement="top" title="Trier par Date">Date</th>
+								<th scope="col" id="price" data-toggle="tooltip" data-placement="top" title="Trier par Prix">Prix</th>
+								<th scope="col" id="isSent" data-toggle="tooltip" data-placement="top" title="Trier par Statut">Envoyée</th>
+								<th scope="col" id="isSent" class="displayHidden">Envoyée</th>
 							</tr>
 						</thead>
 						<tbody id="myTable">
 							{% for stripeOrder in stripeOrders %}
-
-								<tr class='table-row tableHover' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.product}}">
+								<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.product}}">
 									<th scope="row">{{ stripeOrder.username }}</th>
 									<td>{{stripeOrder.product}}</td>
-
-									<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
+									<td>{{stripeOrder.getCreatedAt|date('d/m/Y')}}</td>
 									<td>{{stripeOrder.price}}&nbsp;€</td>
-									<td>
-										{% if stripeOrder.getIsSent == false %}
-											<i class="text-warning fas fa-times"></i>
+									<td class="displayHidden">{{stripeOrder.getIsSent}}</td>
+									<td id="isSentValue">
+										{% if stripeOrder.getIsSent == 1 %}
+											<span>
+												<i class="fas fa-check text-success"></i>
+											</span>
 										{% else %}
-											<i class="text-success fas fa-check"></i>
+											<span>
+												<i class="fas fa-times text-warning"></i>
+											</span>
 										{% endif %}
 									</td>
 								</tr>
@@ -56,21 +57,22 @@
 				{% else %}
 					<div class="border border-white p-4">Aucune comande pour l'instant</div>
 				{% endif %}
-
-
-				<div class="row">
-					<div class="col text-center mt-3">
-						<a href="{{ path('admin')}}">
-							<button class="btn btn-custom">Revenir aux créations</button>
-						</a>
-					</div>
-				</div>
-				<div class="row d-flex justify-content-center logoSpec">
-					<div class="col-3 col-md-2 col-lg-2 mt-3">
-						<img class="card-img" src="/img/JUL.png" alt="sign logo">
-					</div>
-				</div>
-			{% endblock %}
-			{% block javascripts %}
-				{{ parent() }}
-			{% endblock %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center mt-3">
+				<a href="{{ path('admin')}}">
+					<button class="btn btn-custom">Revenir aux créations</button>
+				</a>
+			</div>
+		</div>
+		<div class="row d-flex justify-content-center logoSpec">
+			<div class="col-3 col-md-2 col-lg-2 mt-3">
+				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

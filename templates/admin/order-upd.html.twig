@@ -9,13 +9,45 @@
 	<div class="container accueil">
 		<div class="row">
 			<div class="col text-center mt-3 title">
-				<div>Gestion des commandes</div>
+				<div>Gestion de la commande</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col text-center mt-3">{{stripeOrder.reference}}</div>
+			<div class="col-12 text-center mt-3">{{stripeOrder.reference}}</div>
 		</div>
+		<div class="row justify-content-center">
+			<div class="col-10 col-md-6 col-lg-4 mt-3">
+				<div class="card-img imgProduct mx-auto p-4">
+					<img src="/img/uploads/{{ stripeOrder.img }}" class="card-img-top" alt="image {{ stripeOrder.product }}">
+					<div class="card-body">
+						<h4 class="card-title">{{ stripeOrder.product }}</h4>
+						<p>
+							<div class="card-text">
+								Commandé le :
+								<div>{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</div>
+							</div>
 
+							<div class="card-text">
+								Par :
+								<div>{{ stripeOrder.username }}</div>
+							</div>
+							<div class="contact">
+
+								<div class="btn-group">
+									<a class="btn btn-success btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail à
+										{{ stripeOrder.username }}</a>
+									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="copy to clipboard">
+										<i class="far fa-copy"></i>
+
+									</button>
+								</div>
+							</div>
+						</p>
+					</div>
+					<pre>{{ dump(stripeOrder) }}</pre>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col text-center mt-3">
 				<a href="{{ path('admin_orders')}}">
@@ -28,7 +60,10 @@
 				<img class="card-img" src="/img/JUL.png" alt="sign logo">
 			</div>
 		</div>
-	{% endblock %}
-	{% block javascripts %}
-		{{ parent() }}
-	{% endblock %}
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

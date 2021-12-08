@@ -33,6 +33,11 @@ class OrderStripeRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function findAllOrderedNotSent()
+    {
+        return $this->findBy(array(), array('is_sent' => 'ASC'));
+    }
+
 
 
     public function findOneByReference($value): ?OrderStripe

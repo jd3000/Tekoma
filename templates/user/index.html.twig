@@ -36,7 +36,7 @@
 							<tbody>
 								{% for stripeOrder in stripeOrders %}
 									{% if stripeOrder.getIsSent == false %}
-										<tr class='table-row tableHover' data-href='{{ path('user_order' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse de livraison commande N°{{ loop.index }}">
+										<tr class='table-row' data-href='{{ path('user_order' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse de livraison commande N°{{ loop.index }}">
 											<th scope="row">{{ loop.index }}</th>
 											<td>{{stripeOrder.product}}</td>
 											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
@@ -47,7 +47,7 @@
 										</tr>
 									{% else %}
 										<tr>
-											<th scope="row">{{ loop.index }}</th>
+											<td scope="row">{{ loop.index }}</td>
 											<td>{{stripeOrder.product}}</td>
 											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
 											<td>{{stripeOrder.price}}&nbsp;€</td>
@@ -55,19 +55,19 @@
 												<i class="text-success fas fa-check"></i>
 											</td>
 										</tr>
-									</a>
-								</tr>
-							{% endif %}
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		{% else %}
-			<div class="border border-white p-4">Vous n'avez pas encore commandé de création.</div>
-		{% endif %}
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+									</tr>
+								{% endif %}
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			{% else %}
+				<div class="border border-white p-4">Vous n'avez pas encore commandé de création.</div>
+			{% endif %}
+			<div class="row d-flex justify-content-center logoSpec">
+				<div class="col-3 col-md-2 col-lg-2 mt-3">
+					<img class="card-img" src="/img/JUL.png" alt="sign logo">
+				</div>
 			</div>
 		</div>
 	{% endif %}

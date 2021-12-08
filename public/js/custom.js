@@ -85,6 +85,19 @@ function burgerToggle() {
     }
 }
 
+
+
+
+// if (thIconAsc) {
+//     thIconAsc.innerHTML += "&nbsp;<i class=\"fas fa-caret-down\"></i>";
+//     console.log(thIconAsc);
+// }
+
+// if (thIconDesc) {
+//     thIconDesc.innerHTML += "&nbsp;<i class=\"fas fa-caret-up\"></i>";
+//     console.log(thIconDesc);
+// }
+
 // admin / update.html.twig new.html.twig creation
 $(document).ready(function () {
     let uploadPreview = document.getElementById("uploadPreview");
@@ -231,6 +244,26 @@ $(document).ready(function () {
         window.document.location = $(this).data("href");
     });
 
+
+
+    $('#sortTable').DataTable({
+        "order": [[4, "asc"]]
+    });
+    if ($('#sortTable_length')[0]) {
+        $('#sortTable_length')[0].hidden = true;
+    }
+    if ($('#sortTable_filter')[0]) {
+        $('#sortTable_filter')[0].hidden = true;
+    }
+    if ($('#sortTable_info')[0]) {
+        $('#sortTable_info')[0].hidden = true;
+    }
+    if ($('#sortTable_paginate')[0]) {
+        $('#sortTable_paginate')[0].hidden = true;
+    }
+
+
+
     // permet de rechercher des valeurs dans la gestion des commandes partie admin, d'afficher l'icone d'effacer l'input et d'afficher le message si aucun résultât 
     $("#myInput").on("keyup blur", function () {
         let value = $(this).val().toLowerCase();
@@ -272,6 +305,44 @@ $(document).ready(function () {
 
     });
 
+    function copyToClipboard(text, el) {
+
+        let elOriginalText = el.attr('data-original-title');
+
+
+        let copyTextArea = document.createElement("textarea");
+        copyTextArea.value = text;
+        document.body.appendChild(copyTextArea);
+        copyTextArea.select();
+        try {
+            let successful = document.execCommand('copy');
+            let msg = successful ? 'Copied!' : 'Whoops, not copied!';
+            el.attr('data-original-title', msg).tooltip('show');
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        document.body.removeChild(copyTextArea);
+        el.attr('data-original-title', elOriginalText);
+
+    }
+
+    $(document).ready(function () {
+        // Initialize
+        // ---------------------------------------------------------------------
+
+        // Tooltips
+        // Requires Bootstrap 3 for functionality
+        $('.js-tooltip').tooltip();
+
+        // Copy to clipboard
+        // Grab any text in the attribute 'data-copy' and pass it to the 
+        // copy function
+        $('.js-copy').click(function () {
+            var text = $(this).attr('data-copy');
+            var el = $(this);
+            copyToClipboard(text, el);
+        });
+    });
 
 
 

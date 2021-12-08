@@ -241,20 +241,50 @@ cursor: pointer;
   color:black;
 }
 
-.table-row{
+.table-row {
+  background-color:black!important;
+}
+.table-row:hover {
+  background-color:  #6c757d6c!important;
+}
+
+#theadOrders>tr>th {
+  font-size: 16px;
+}
+
+#theadOrders>tr>th:hover {
+  background-color:#6c757d6c!important;
+}
+
+/* Permet de masquer l'en-tête de colonne et la colonne qui permettent de gérer le filtre sur le statut Envoyé 
+Commenter sur la vue admin/orders pour plus de compréhension 
+*/
+.displayHidden {
+  visibility: hidden;
+  display: none;
+}
+
+
+.table-row {
   cursor:pointer;
   }
  
-  .tableHover:hover {
-    background-color:  #6c757d6c!important;
-  }
-  .no-result {
-    
+  
+  .no-result {    
   background-color: hsla(354, 70%, 54%, 0.9);
   border: 1px solid black;
   color:black;
   }
 
+  /* .sorting_asc {
+   background-color: cadetblue!important;
+  }
+  .sorting_desc {
+   background-color:brown!important;
+  }
+  .sorting {
+    background-color:burlywood!important;
+  } */
 
 
 /* form-control {

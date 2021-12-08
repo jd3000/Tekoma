@@ -89,7 +89,7 @@ class AdminController extends AbstractController
      */
     public function user(OrderStripeRepository $orderStripeRepo)
     {
-        $stripeOrders = $orderStripeRepo->findAll();
+        $stripeOrders = $orderStripeRepo->findAllOrderedNotSent();
         // dump($stripeOrders);
 
         return $this->render('admin/orders.html.twig', [
