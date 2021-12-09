@@ -8,62 +8,120 @@
 {% block body %}
 	<div class="container accueil">
 		<div class="row">
-			<div class="col text-center mt-3 title">
+			<div class="col-12 text-center mt-3 title">
 				<div>Gestion de la commande</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12 text-center mt-3">{{stripeOrder.reference}}</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-10 col-md-6 col-lg-4 mt-3">
-				<div class="card-img imgProduct mx-auto p-4">
-					<img src="/img/uploads/{{ stripeOrder.img }}" class="card-img-top" alt="image {{ stripeOrder.product }}">
-					<div class="card-body">
-						<h4 class="card-title">{{ stripeOrder.product }}</h4>
-						<p>
-							<div class="card-text">
-								Commandé le :
-								<div>{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</div>
-							</div>
-
-							<div class="card-text">
-								Par :
-								<div>{{ stripeOrder.username }}</div>
-							</div>
-							<div class="contact">
-
-								<div class="btn-group">
-									<a class="btn btn-success btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail à
-										{{ stripeOrder.username }}</a>
-									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="copy to clipboard">
-										<i class="far fa-copy"></i>
-
-									</button>
-								</div>
-							</div>
-						</p>
-					</div>
-					<pre>{{ dump(stripeOrder) }}</pre>
+		<div class="row justify-content-center mt-2 orderUpdRef pt-2 mx-1">
+			<div class="col-12 col-lg-5 col-xl-4 text-md-center">
+				<div>
+					<b>Référence</b>
+				</div>
+				<div class="d-block d-lg-inline ref">{{stripeOrder.reference}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.reference }}" title="Copier Référence">
+						<i class="far fa-copy"></i>
+					</button>
+				</div>
+			</div>
+			<div class="col-12 col-lg-5 col-xl-4 text-md-center">
+				<div>
+					<b>Utilisateur</b>
+				</div>
+				<div class="d-block d-lg-inline">{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
+						<i class="far fa-copy"></i>
+					</button>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col text-center mt-3">
-				<a href="{{ path('admin_orders')}}">
-					<button class="btn btn-custom">Revenir aux commandes</button>
-				</a>
-			</div>
-		</div>
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
-	</div>
+		<div class="bg-trasparent my-3" style="position: relative;">
+			<div class="row justify-content-center">
+				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4">
+					<div class="card h-100 shadow-sm imgProduct">
+						<img src="/img/uploads/{{ stripeOrder.img }}" class="card-img-top" alt="image {{ stripeOrder.img }}">
+						<div class="label-top shadow-sm text-white px-3">{{ stripeOrder.product }}</div>
+						<div class="card-body">
+							<div class="clearfix mb-3">
+								<span class="float-start badge rounded-pill bg-{{ (stripeOrder.getStatusStripe == 'complete') ? 'success' : 'danger' }}">{{ stripeOrder.price }}&nbsp;€</span>
+								<span class="float-end text-white">Envoyé
+									{% if stripeOrder.getIsSent == false %}
+										<span>
+											<i class="fas fa-times text-warning"></i>
+										</span>
+									{% else %}
+										<span>
+											<i class="fas fa-check text-success"></i><br>
+											le
+											{{stripeOrder.getUpdatedAt|date('d/m/Y')}}
+										</span>
+									{% endif %}
+								</span>
+							</div>
+							<div class="clearfix mb-3">
+								<span class="float-start text-white">Commandé le
+									{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</span>
+								<span class="float-end">
+									{% if stripeOrder.getIsSent == false %}
+										<a href="{{ path('admin_order_send' , {'reference':stripeOrder.reference} )}}" class="small text-warning">Modifier le statut</a>
+									{% endif %}
+								</span>
+							</div>
+							<h5 class="card-title">Adresse de livraison</h5>
+							<div class="clearfix text-white">
+								<span class="float-start">{{stripeOrder.name}}</span>
+
+								<span class="float-end">
+									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.name}}" title="Copier Nom">
+										<i class="far fa-copy"></i>
+									</button>
+								</span>
+							</div>
+							<div class="clearfix text-white">
+								<span class="float-start">
+									{{stripeOrder.getAdressLine1}}
+									<br>
+									{% if stripeOrder.getAdressLine2 != null %}
+										{{stripeOrder.getAdressLine2}}
+										<br>
+									{% endif %}
+									{{stripeOrder.getPostalCode}}
+									<br>
+									{{stripeOrder.getCity}}</span>
+
+								{% if stripeOrder.getAdressLine2 != null %}
+									{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getAdressLine2 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
+								{% else %}
+									{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
+								{% endif %}
 
 
-{% endblock %}
-{% block javascripts %}
-	{{ parent() }}
-{% endblock %}
+								<span class="float-end">
+									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ adressString }}" title="Copier Adresse">
+										<i class="far fa-copy"></i>
+									</button>
+								</span>
+							</div>
+							<div class="text-center mt-4">
+								<div class="btn-group">
+									<a class="btn btn-custom-border btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<a href="{{ path('admin_orders')}}">
+						<button class="btn btn-custom">Revenir aux commandes</button>
+					</a>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-center logoSpec">
+				<div class="col-3 col-md-2 col-lg-2 mt-3">
+					<img class="card-img" src="/img/JUL.png" alt="sign logo">
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+	{% endblock %}

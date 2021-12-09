@@ -24,6 +24,7 @@
 							<tr>
 								<th scope="col" id="userName" data-toggle="tooltip" data-placement="top" title="Trier par Utilisateur">Utilisateur</th>
 								<th scope="col" id="product" data-toggle="tooltip" data-placement="top" title="Trier par Création">Création</th>
+								<th scope="col" id="reference" data-toggle="tooltip" data-placement="top" title="Trier par Création">Référence</th>
 								<th scope="col" id="date" data-toggle="tooltip" data-placement="top" title="Trier par Date">Date</th>
 								<th scope="col" id="price" data-toggle="tooltip" data-placement="top" title="Trier par Prix">Prix</th>
 								<th scope="col" id="isSent" data-toggle="tooltip" data-placement="top" title="Trier par Statut">Envoyée</th>
@@ -35,6 +36,7 @@
 								<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.product}}">
 									<th scope="row">{{ stripeOrder.username }}</th>
 									<td>{{stripeOrder.product}}</td>
+									<td class="ref text-muted">{{stripeOrder.reference}}</td>
 									<td>{{stripeOrder.getCreatedAt|date('d/m/Y')}}</td>
 									<td>{{stripeOrder.price}}&nbsp;€</td>
 									<td class="displayHidden">{{stripeOrder.getIsSent}}</td>

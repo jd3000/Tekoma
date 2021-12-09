@@ -264,17 +264,27 @@ Commenter sur la vue admin/orders pour plus de compréhension
   display: none;
 }
 
+.ref{
+  font-size: xx-small;
+}
+
 
 .table-row {
   cursor:pointer;
-  }
- 
+  } 
   
-  .no-result {    
-  background-color: hsla(354, 70%, 54%, 0.9);
-  border: 1px solid black;
-  color:black;
-  }
+.no-result {    
+background-color: hsla(354, 70%, 54%, 0.9);
+border: 1px solid black;
+color:black;
+}
+
+.orderUpdRef {   
+  border: 1px solid #505050;
+  background-color: #6c757d6c;
+}
+
+ 
 
   /* .sorting_asc {
    background-color: cadetblue!important;

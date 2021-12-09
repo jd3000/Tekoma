@@ -96,52 +96,64 @@ class AdminController extends AbstractController
             'stripeOrders' => $stripeOrders
         ]);
     }
+
     /**
-     * Permet d'afficher de modifier l'adresse de livraison
+     * Permet d'afficher un commande
      * 
      * @Route("/admin/upd-order/{reference}", name="admin_order_upd")
      */
     public function order($reference, Request $request, OrderStripeRepository $orderStripeRepo)
     {
 
-
-        // $entityManager = $this->getDoctrine()->getManager();
-
-        // $form = $this->createForm(UpdateOrderType::class, $orderStripe);
-
-        // $form->handleRequest($request);
-
-        // $user = $this->getUser();
-        // $userName = $user->getUsername();
-        // dump($userName);
-
-
         $stripeOrder = $orderStripeRepo->findOneByReference($reference);
         $productName =  $stripeOrder->getProduct();
 
-        dump($stripeOrder);
+        // dump($stripeOrder);
         $userOrder = $stripeOrder->getUsername();
-        dump($userOrder);
-
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $form->getData();
-
-        //     $entityManager->persist($stripeOrder);
-        //     $entityManager->flush();
-
-
-        //     $this->addFlash('success', "Addresse de livraison modifiée pour " . $productName . ".");
-        //     return $this->redirectToRoute('user');
-        // }
-
-
+        // dump($userOrder);
 
         return $this->render('admin/order-upd.html.twig', [
             'stripeOrder' => $stripeOrder
         ]);
-        # code...
+    }
 
+    /**
+     * Permet de modifier le staut l'envoi d'une commande
+     * 
+     * @Route("/admin/send-order/{reference}", name="admin_order_send")
+     */
+    public function updateStatus($reference, Request $request, OrderStripeRepository $orderStripeRepo)
+    {
+
+        $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $productName =  $stripeOrder->getProduct();
+
+        // dump($stripeOrder);
+        $userOrder = $stripeOrder->getUsername();
+        // dump($userOrder);
+
+        return $this->render('admin/order-send.html.twig', [
+            'stripeOrder' => $stripeOrder
+        ]);
+    }
+
+    /**
+     * Permet de confirmer l'envoi d'une commande
+     * 
+     * @Route("/admin/confirm-order/{reference}", name="admin_order_confirm")
+     */
+    public function confirm($reference, Request $request, OrderStripeRepository $orderStripeRepo)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $orderStatus =  $stripeOrder->setIsSent(true);
+
+        $entityManager->flush();
+        $userOrder = $stripeOrder->getUsername();
+
+        $this->addFlash('success', "L'envoi de la commande de <b>$userOrder</b> a bien été confirmé.");
+
+        return $this->redirectToRoute('admin_order_upd', ['reference' => $stripeOrder->getReference()]);
     }
 
 
