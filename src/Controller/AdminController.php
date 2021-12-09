@@ -6,12 +6,15 @@ use App\Entity\Product;
 use App\Form\AddCreationType;
 use App\Service\FileUploader;
 use App\Form\UpdateCreationType;
+use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OrderStripeRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -142,16 +145,39 @@ class AdminController extends AbstractController
      * 
      * @Route("/admin/confirm-order/{reference}", name="admin_order_confirm")
      */
-    public function confirm($reference, Request $request, OrderStripeRepository $orderStripeRepo)
+    public function confirm($reference, Request $request, OrderStripeRepository $orderStripeRepo, MailerInterface $mailer)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $now = new \DateTimeImmutable($request->get('time'));
+        $orderUpadateDate = $stripeOrder->setUpdatedAt($now);
         $orderStatus =  $stripeOrder->setIsSent(true);
 
         $entityManager->flush();
         $userOrder = $stripeOrder->getUsername();
 
-        $this->addFlash('success', "L'envoi de la commande de <b>$userOrder</b> a bien été confirmé.");
+
+        $email = (new TemplatedEmail())
+            ->from(new Address('contact@tekoma.com'))
+            ->to($stripeOrder->getUsername())
+            ->subject('Votre commande -' . $stripeOrder->getProduct() . '- est envoyé - ')
+
+            // path of the Twig template to render
+            ->htmlTemplate('emails/order-confirm.html.twig')
+
+            // pass variables (name => value) to the template
+            ->context([
+                'expiration_date' => new \DateTime('+7 days'),
+                'firstname' => $stripeOrder->getName(),
+                'stripeOrder' => $stripeOrder,
+                'productName' => $stripeOrder->getProduct(),
+                'productImg' => $stripeOrder->getImg()
+
+            ]);
+
+        $mailer->send($email);
+
+        $this->addFlash('success', "L'envoi de la commande de $userOrder a bien été confirmé.");
 
         return $this->redirectToRoute('admin_order_upd', ['reference' => $stripeOrder->getReference()]);
     }
