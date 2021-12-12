@@ -109,6 +109,8 @@ class AdminController extends AbstractController
     {
 
         $stripeOrder = $orderStripeRepo->findOneByReference($reference);
+        $allStripeOrders = $orderStripeRepo->findAll();
+
         $productName =  $stripeOrder->getProduct();
 
         // dump($stripeOrder);
@@ -116,7 +118,9 @@ class AdminController extends AbstractController
         // dump($userOrder);
 
         return $this->render('admin/order-upd.html.twig', [
-            'stripeOrder' => $stripeOrder
+            'stripeOrder' => $stripeOrder,
+            'allStripeOrders' => $allStripeOrders
+
         ]);
     }
 
@@ -160,7 +164,7 @@ class AdminController extends AbstractController
         $email = (new TemplatedEmail())
             ->from(new Address('contact@tekoma.com'))
             ->to($stripeOrder->getUsername())
-            ->subject('Votre commande -' . $stripeOrder->getProduct() . '- est envoyé - ')
+            ->subject('TEKOMA - Votre commande ' . $stripeOrder->getProduct() . ' est en route !')
 
             // path of the Twig template to render
             ->htmlTemplate('emails/order-confirm.html.twig')

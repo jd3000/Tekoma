@@ -272,35 +272,75 @@ $(document).ready(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
         let tableRows = $("#myTable tr");
-        let compareNumer = tableRows.length;
+        let compareNumber = tableRows.length;
         for (let index = 0; index < tableRows.length; index++) {
             // console.log(tableRows[index].style.display);
             if (tableRows[index].style.display == "none") {
                 compare += 1;
             }
         }
+        // console.log(compare);
+        // console.log(compareNumber);
+        let noResult = document.getElementById("noResult");
+        let iconResult = document.getElementById("icon-result");
+        let iconNoResult = document.getElementById("icon-no-result");
+        let messageResult = document.getElementById("message-result");
+        let messRes = compareNumber - compare;
+        if (messRes > 1) {
+            stringMessRes = 'résultats';
+        } else {
+            stringMessRes = 'résultat';
+        }
 
-        const noResult = document.getElementById("noResult");
+        if (compare == 0) {
+            console.log(compareNumber + " commandes");
+            messageResult.innerText = compareNumber + " commandes au total"
+            messageResult.className = "text-end";
+            noResult.innerHTML = "";
+            iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-result text-success";
+            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
+            $("body").on('click', '#icon-result', function () {
+                let input = $("#myInput");
+                if (input.val() != "") {
+                    input.val('');
+                    input.blur();
+                    iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
+                }
+            });
 
-        if (compare == compareNumer) {
-            // console.log(noResult);
+        } else if (compare > 0 && compare < compareNumber) {
+            console.log(compareNumber - compare + " " + stringMessRes);
+            messageResult.innerText = compareNumber - compare + " " + stringMessRes;
+            messageResult.className = "text-end text-success";
+            iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-result text-success";
+            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
+            noResult.innerHTML = "";
+            $("body").on('click', '#icon-result', function () {
+                let input = $("#myInput");
+                if (input.val() != "") {
+                    input.val('');
+                    input.blur();
+                    iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
+                }
+            });
+
+        } else if (compare == compareNumber) {
+            console.log("Auccun résultat");
+            messageResult.innerText = "Auccun résultat";
+            messageResult.className = "text-end text-danger";
             noResult.innerHTML = "<div class=\"no-result p-4\">Aucune commande ne correspond à la recherche</div>";
-            let iconNoResult = document.getElementById("icon-no-result");
             // console.log(iconNoResult.className.baseVal);
             iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-no-result text-danger";
+            iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
             $("body").on('click', '#icon-no-result', function () {
                 let input = $("#myInput");
                 if (input.val() != "") {
                     input.val('');
                     input.blur();
+                    noResult.innerHTML = "";
+                    iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
                 }
             });
-
-        } else {
-            noResult.innerHTML = "";
-            let iconNoResult = document.getElementById("icon-no-result");
-            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
-
         }
 
     });
@@ -348,32 +388,40 @@ $(document).ready(function () {
 
     // A REVOIR POUR GERER LE FAVICON DU REGISTER_FORM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    // const formRegister = document.getElementById("#registration_form");
-    // const registerForm = document.querySelector("#registration_form");
-    // // console.log(registerForm);
-    // error = document.getElementsByClassName("invalid-feedback");
-    // // console.log(error);
-    // // inputEmail = document.getElementById("registration_form_email");
-    // if (error) {
-    //     const elMailId = document.getElementById("#errorMail");
-    //     errorMailMessage = elMailId.querySelector(".form-error-message");
-    //     if (errorMailMessage) {
-    //         errorMailMessage.innerText = "Ce compte existe déjà";
-    //     }
-    //     const elPasswordId = document.getElementById("#errorPassword");
-    //     // console.log(elPasswordId);
+    const formRegister = document.getElementById("#registration_form");
+    const registerForm = document.querySelector("#registration_form");
+    // console.log(registerForm);
+    error = document.getElementsByClassName("invalid-feedback");
+    // console.log(error);
+    // inputEmail = document.getElementById("registration_form_email");
+    if (error) {
+        const elMailId = document.getElementById("#errorMail");
+        if (elMailId) {
+            errorMailMessage = elMailId.querySelector(".form-error-message");
+            if (errorMailMessage) {
+                errorMailMessage.innerText = "Ce compte existe déjà";
+            }
 
-    //     errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
-    //     if (errorPasswordMessage) {
-    //         const iconEl = document.getElementById("eyeSvg");
-    //         // console.log(iconEl);
+        }
 
-    //         if (iconEl.classList.contains('field-icon')) {
-    //             // iconEl.classList.remove('field-icon');
-    //             iconEl.classList.toggle('field-icon-reg');
-    //         }
-    //     }
-    // }
+        const elPasswordId = document.getElementById("#errorPassword");
+        // console.log(elPasswordId);
+
+        if (elPasswordId) {
+            errorPasswordMessage = elPasswordId.querySelector(".form-error-message");
+            if (errorPasswordMessage) {
+                const iconEl = document.getElementById("eyeSvg");
+                // console.log(iconEl);
+
+                if (iconEl.classList.contains('field-icon')) {
+                    // iconEl.classList.remove('field-icon');
+                    iconEl.classList.toggle('field-icon-reg');
+                }
+            }
+
+        }
+
+    }
 
 
 });

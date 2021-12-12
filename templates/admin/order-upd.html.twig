@@ -12,8 +12,8 @@
 				<div>Gestion de la commande</div>
 			</div>
 		</div>
-		<div class="row justify-content-center mt-2 orderUpdRef pt-2 mx-1">
-			<div class="col-12 col-lg-5 col-xl-4 text-md-center">
+		<div class="row justify-content-center mt-2 pt-2 mx-1">
+			<div class="col-12 col-md-8 col-lg-5 col-xl-4 text-md-center orderUpdRef p-2">
 				<div>
 					<b>Référence</b>
 				</div>
@@ -22,9 +22,25 @@
 					</button>
 				</div>
 			</div>
-			<div class="col-12 col-lg-5 col-xl-4 text-md-center">
+			<div class="col-12 col-md-8 col-lg-5 col-xl-4 text-md-center orderUpdRef mt-1 mt-lg-0 mx-lg-1 p-2">
 				<div>
 					<b>Utilisateur</b>
+					{% set count = 0 %}
+					{% set strCommand = "commande" %}
+					{% for allStripeOrder in allStripeOrders %}
+						{% if allStripeOrder.username == stripeOrder.username %}
+							{% set count = count + 1 %}
+						{% endif %}
+					{% endfor %}
+					<span>-
+						<b>{{count}}
+							{% if count > 1 %}
+								{% set strCommand = "commandes" %}
+							{% endif %}
+							{{strCommand}}
+						</b>
+						au total
+					</span>
 				</div>
 				<div class="d-block d-lg-inline">{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
 						<i class="far fa-copy"></i>
@@ -36,7 +52,10 @@
 			<div class="row justify-content-center">
 				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4">
 					<div class="card h-100 shadow-sm imgProduct">
-						<img src="/img/uploads/{{ stripeOrder.img }}" class="card-img-top" alt="image {{ stripeOrder.img }}">
+						<div class="row justify-content-center py-3">
+							<img src="/img/uploads/{{ stripeOrder.img }}" class="img-up-admin" alt="image {{ stripeOrder.img }}">
+							<div class="col-12"></div>
+						</div>
 						<div class="label-top shadow-sm text-white px-3">{{ stripeOrder.product }}</div>
 						<div class="card-body">
 							<div class="clearfix mb-3">

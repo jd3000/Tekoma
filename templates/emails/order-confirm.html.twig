@@ -747,10 +747,10 @@ END OF IMPORTANT
 		<div
 			class="es-wrapper-color">
 			<!--[if gte mso 9]>
-																																																																																																																																																																																																																					<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-																																																																																																																																																																																																																						<v:fill type="tile" color="#eeeeee"></v:fill>
-																																																																																																																																																																																																																					</v:background>
-																																																																																																																																																																																																																				<![endif]-->
+																																																																																																																																																																																																																																																						<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+																																																																																																																																																																																																																																																							<v:fill type="tile" color="#eeeeee"></v:fill>
+																																																																																																																																																																																																																																																						</v:background>
+																																																																																																																																																																																																																																																					<![endif]-->
 			<table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
 				<tbody>
 					<tr>
@@ -882,121 +882,54 @@ END OF IMPORTANT
 																					</tr>
 																					<tr>
 																						<td class="esd-block-text es-p5t es-p10b" align="left">
-																							<p style="font-size: 16px; color: #777777;">L' adresse de livrasion est la suivante :
+																							<p style="font-size: 16px; color: #777777;">L'adresse de livrasion est la suivante :<br>
 																								<b>
 																									<code>
 																										{{ stripeOrder.getAdressLine1 }}
-																										{{ stripeOrder.getAdressLine2 }}
+																									</code><br>
+																									{% if stripeOrder.getAdressLine2 != null %}
+																										<code>
+																											{{ stripeOrder.getAdressLine2 }}
+																										</code><br>
+																									{% endif %}
+																									<code>
 																										{{ stripeOrder.getPostalCode }}
+																									</code><br>
+																									<code>
 																										{{ stripeOrder.getCity }}
 																									</code>
 																								</b>
 																							</p>
 																						</td>
 																					</tr>
-																					<tr>
-																						<td class="esd-block-text es-p5t" align="left">
-																							<p style="font-size: 16px; color: #777777;">
-																								<b>Produit :
-																								</b>
-																								{{ productName }}</p>
-																						</td>
-																					</tr>
-																					<tr>
-																						<td class="esd-block-text es-p5t" align="left">
-																							<p style="font-size: 16px; color: #777777;">
-																								<b>Merci de l'attention que vous portez à nos produits.
-																								</b>
-																							</p>
-																						</td>
-																					</tr>
-																					<tr>
-																						<td class="esd-block-text es-p40t" align="left">
-																							<h3 style="color: #333333;">L'équipe Tekoma</h3>
-																						</td>
-																					</tr>
-																					<tr>
-																						<td class="esd-block-text" align="left">
-																							<p style="font-size: 16px; color: #777777;">contact@tekoma.fr</p>
-																						</td>
-																					</tr>
 																				</tbody>
-																			</table>
+																			</p>
 																		</td>
 																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<table class="es-content" cellspacing="0" cellpadding="0" align="center">
-								<tbody>
-									<tr>
-										<td class="esd-stripe" align="center">
-											<table class="es-content-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
-												<tbody>
-													<tr>
-														<td class="esd-structure es-p15t es-p35r es-p35l" align="left">
-															<table width="100%" cellspacing="0" cellpadding="0">
-																<tbody>
 																	<tr>
-																		<td class="esd-container-frame" width="530" valign="top" align="center">
-																			<table width="100%" cellspacing="0" cellpadding="0">
-																				<tbody>
-																					<tr>
-																						<td class="esd-block-image" align="center" style="font-size:0">
-																							<a target="_blank"><img src="{{ email.image('@images/triangleNoir.svg') }}" alt style="display: block;" width="46"></a>
-																						</td>
-																					</tr>
-																				</tbody>
-																			</table>
+																		<td class="esd-block-text es-p5t" align="left">
+																			<p style="font-size: 16px; color: #777777;">
+																				<b>Date d'achat :
+																				</b>
+																				{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</p>
 																		</td>
 																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<table cellpadding="0" cellspacing="0" class="es-content" align="center">
-								<tbody>
-									<tr>
-										<td class="esd-stripe" esd-custom-block-id="7766" align="center">
-											<table class="es-content-body" style="border-bottom:10px solid #363636;background-color: #000000;" width="600" cellspacing="0" cellpadding="0" bgcolor="#000000" align="center">
-												<tbody>
-													<tr>
-														<td class="esd-structure" align="left">
-															<table width="100%" cellspacing="0" cellpadding="0">
-																<tbody>
 																	<tr>
-																		<td class="esd-container-frame" width="600" valign="top" align="center">
-																			<table width="100%" cellspacing="0" cellpadding="0">
-																				<tbody>
-																					<tr>
-																						<td class="esd-block-menu">
-																							<table class="es-menu" width="40%" cellspacing="0" cellpadding="0" align="center">
-																								<tbody>
-																									<tr class="links-images-top">
-																										<td class="es-p10t es-p10b es-p5r es-p5l " style="padding-bottom: 30px; padding-top: 35px; " width="25.00%" bgcolor="transparent" align="center">
-																											<a target="_blank" style="color: #ffffff; font-size: 20px;" href>
-																												<img src="{{ email.image('@images/instagram.svg') }}" height="50px" alt="Logo Tekoma"></td>
-																										</td>
-																									</tr>
-																								</tbody>
-																							</table>
-																						</td>
-																					</tr>
-																				</tbody>
-																			</table>
+																		<td class="esd-block-text es-p5t" align="left">
+																			<p style="font-size: 16px; color: #777777;">
+																				<b>Merci de l'attention que vous portez à nos produits.
+																				</b>
+																			</p>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="esd-block-text es-p40t" align="left">
+																			<h3 style="color: #333333;">L'équipe Tekoma</h3>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td class="esd-block-text" align="left">
+																			<p style="font-size: 16px; color: #777777;">contact@tekoma.fr</p>
 																		</td>
 																	</tr>
 																</tbody>
@@ -1009,93 +942,167 @@ END OF IMPORTANT
 									</tr>
 								</tbody>
 							</table>
-
-
-							{# <table cellpadding="0" cellspacing="0" class="es-footer" align="center">
-																																																																																																																																																																																																																																																																									<tbody>
-																																																																																																																																																																																																																																																																										<tr>
-																																																																																																																																																																																																																																																																											<td class="esd-stripe" esd-custom-block-id="7684" align="center">
-																																																																																																																																																																																																																																																																												<table class="es-footer-body" width="600" cellspacing="0" cellpadding="0" align="center">
-																																																																																																																																																																																																																																																																													<tbody>
-																																																																																																																																																																																																																																																																														<tr>
-																																																																																																																																																																																																																																																																															<td class="esd-structure es-p35t es-p40b es-p35r es-p35l" align="left">
-																																																																																																																																																																																																																																																																																<table width="100%" cellspacing="0" cellpadding="0">
-																																																																																																																																																																																																																																																																																	<tbody>
-																																																																																																																																																																																																																																																																																		<tr>
-																																																																																																																																																																																																																																																																																			<td class="esd-container-frame" width="530" valign="top" align="center">
-																																																																																																																																																																																																																																																																																				<table width="100%" cellspacing="0" cellpadding="0">
-																																																																																																																																																																																																																																																																																					<tbody>
-																																																																																																																																																																																																																																																																																						<tr>
-																																																																																																																																																																																																																																																																																							<td class="es-p10t es-p10b es-p5r es-p5l " style="padding-bottom: 30px; padding-top: 35px; " width="25.00%" bgcolor="#363636" align="center">
-																																																																																																																																																																																																																																																																																								<a target="_blank"><img src="{{ email.image('@images/JUL.png') }}" alt="jul logo" style="display: block;" title="jul logo" width="120"></a>
-																																																																																																																																																																																																																																																																																							</td>
-																																																																																																																																																																																																																																																																																						</tr>
-																																																																																																																																																																																																																																																																																						<tr>
-																																																																																																																																																																																																																																																																																							<td class="esd-block-text es-p35b" align="center">
-																																																																																																																																																																																																																																																																																								<p>&nbsp;
-																																																																																																																																																																																																																																																																																								</p>
-																																																																																																																																																																																																																																																																																								<p>
-																																																																																																																																																																																																																																																																																									<strong>Tekoma, Lyon</strong>
-																																																																																																																																																																																																																																																																																								</p>
-																																																																																																																																																																																																																																																																																							</td>
-																																																																																																																																																																																																																																																																																						</tr>
-																																																																																																																																																																																																																																																																																						<tr>
-																																																																																																																																																																																																																																																																																							<td esdev-links-color="#777777" align="left" class="esd-block-text es-m-txt-c es-p5b">
-																																																																																																																																																																																																																																																																																								<p style="color: #777777;">&nbsp;</p>
-																																																																																																																																																																																																																																																																																							</td>
-																																																																																																																																																																																																																																																																																						</tr>
-																																																																																																																																																																																																																																																																																					</tbody>
-																																																																																																																																																																																																																																																																																				</table>
-																																																																																																																																																																																																																																																																																			</td>
-																																																																																																																																																																																																																																																																																		</tr>
-																																																																																																																																																																																																																																																																																	</tbody>
-																																																																																																																																																																																																																																																																																</table>
-																																																																																																																																																																																																																																																																															</td>
-																																																																																																																																																																																																																																																																														</tr>
-																																																																																																																																																																																																																																																																													</tbody>
-																																																																																																																																																																																																																																																																												</table>
-																																																																																																																																																																																																																																																																											</td>
-																																																																																																																																																																																																																																																																										</tr>
-																																																																																																																																																																																																																																																																									</tbody>
-																																																																																																																																																																																																																																																																								</table>
-																																																																																																																																																																																																																																																																								<table class="esd-footer-popover es-content" cellspacing="0" cellpadding="0" align="center">
-																																																																																																																																																																																																																																																																									<tbody>
-																																																																																																																																																																																																																																																																										<tr>
-																																																																																																																																																																																																																																																																											<td class="esd-stripe" align="center">
-																																																																																																																																																																																																																																																																												<table class="es-content-body" style="background-color: transparent;" width="600" cellspacing="0" cellpadding="0" align="center">
-																																																																																																																																																																																																																																																																													<tbody>
-																																																																																																																																																																																																																																																																														<tr>
-																																																																																																																																																																																																																																																																															<td class="esd-structure es-p30t es-p30b es-p20r es-p20l" align="left">
-																																																																																																																																																																																																																																																																																<table width="100%" cellspacing="0" cellpadding="0">
-																																																																																																																																																																																																																																																																																	<tbody>
-																																																																																																																																																																																																																																																																																		<tr>
-																																																																																																																																																																																																																																																																																			<td class="esd-container-frame" width="560" valign="top" align="center">
-																																																																																																																																																																																																																																																																																				<table width="100%" cellspacing="0" cellpadding="0">
-																																																																																																																																																																																																																																																																																					<tbody>
-																																																																																																																																																																																																																																																																																						<tr>
-																																																																																																																																																																																																																																																																																							<td class="esd-block-image es-infoblock made_with" align="center" style="font-size:0">
-																																																																																																																																																																																																																																																																																								<a></a>
-																																																																																																																																																																																																																																																																																							</td>
-																																																																																																																																																																																																																																																																																						</tr>
-																																																																																																																																																																																																																																																																																					</tbody>
-																																																																																																																																																																																																																																																																																				</table>
-																																																																																																																																																																																																																																																																																			</td>
-																																																																																																																																																																																																																																																																																		</tr>
-																																																																																																																																																																																																																																																																																	</tbody>
-																																																																																																																																																																																																																																																																																</table>
-																																																																																																																																																																																																																																																																															</td>
-																																																																																																																																																																																																																																																																														</tr>
-																																																																																																																																																																																																																																																																													</tbody>
-																																																																																																																																																																																																																																																																												</table>
-																																																																																																																																																																																																																																																																											</td>
-																																																																																																																																																																																																																																																																										</tr>
-																																																																																																																																																																																																																																																																									</tbody>
-																																																																																																																																																																																																																																																																								</table> #}
 						</td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
+			<table class="es-content" cellspacing="0" cellpadding="0" align="center">
+				<tbody>
+					<tr>
+						<td class="esd-stripe" align="center">
+							<table class="es-content-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
+								<tbody>
+									<tr>
+										<td class="esd-structure es-p15t es-p35r es-p35l" align="left">
+											<table width="100%" cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr>
+														<td class="esd-container-frame" width="530" valign="top" align="center">
+															<table width="100%" cellspacing="0" cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td class="esd-block-image" align="center" style="font-size:0">
+																			<a target="_blank"><img src="{{ email.image('@images/triangleNoir.svg') }}" alt style="display: block;" width="46"></a>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<table cellpadding="0" cellspacing="0" class="es-content" align="center">
+				<tbody>
+					<tr>
+						<td class="esd-stripe" esd-custom-block-id="7766" align="center">
+							<table class="es-content-body" style="border-bottom:10px solid #363636;background-color: #000000;" width="600" cellspacing="0" cellpadding="0" bgcolor="#000000" align="center">
+								<tbody>
+									<tr>
+										<td class="esd-structure" align="left">
+											<table width="100%" cellspacing="0" cellpadding="0">
+												<tbody>
+													<tr>
+														<td class="esd-container-frame" width="600" valign="top" align="center">
+															<table width="100%" cellspacing="0" cellpadding="0">
+																<tbody>
+																	<tr>
+																		<td class="esd-block-menu">
+																			<table class="es-menu" width="40%" cellspacing="0" cellpadding="0" align="center">
+																				<tbody>
+																					<tr class="links-images-top">
+																						<td class="es-p10t es-p10b es-p5r es-p5l " style="padding-bottom: 30px; padding-top: 35px; " width="25.00%" bgcolor="transparent" align="center">
+																							<a target="_blank" style="color: #ffffff; font-size: 20px;" href>
+																								<img src="{{ email.image('@images/instagram.svg') }}" height="50px" alt="Logo Tekoma"></td>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			{# <table cellpadding="0" cellspacing="0" class="es-footer" align="center">
+																																																																																																																																																																																																																																																																																																																		<tbody>
+																																																																																																																																																																																																																																																																																																																			<tr>
+																																																																																																																																																																																																																																																																																																																				<td class="esd-stripe" esd-custom-block-id="7684" align="center">
+																																																																																																																																																																																																																																																																																																																					<table class="es-footer-body" width="600" cellspacing="0" cellpadding="0" align="center">
+																																																																																																																																																																																																																																																																																																																						<tbody>
+																																																																																																																																																																																																																																																																																																																							<tr>
+																																																																																																																																																																																																																																																																																																																								<td class="esd-structure es-p35t es-p40b es-p35r es-p35l" align="left">
+																																																																																																																																																																																																																																																																																																																									<table width="100%" cellspacing="0" cellpadding="0">
+																																																																																																																																																																																																																																																																																																																										<tbody>
+																																																																																																																																																																																																																																																																																																																											<tr>
+																																																																																																																																																																																																																																																																																																																												<td class="esd-container-frame" width="530" valign="top" align="center">
+																																																																																																																																																																																																																																																																																																																													<table width="100%" cellspacing="0" cellpadding="0">
+																																																																																																																																																																																																																																																																																																																														<tbody>
+																																																																																																																																																																																																																																																																																																																															<tr>
+																																																																																																																																																																																																																																																																																																																																<td class="es-p10t es-p10b es-p5r es-p5l " style="padding-bottom: 30px; padding-top: 35px; " width="25.00%" bgcolor="#363636" align="center">
+																																																																																																																																																																																																																																																																																																																																	<a target="_blank"><img src="{{ email.image('@images/JUL.png') }}" alt="jul logo" style="display: block;" title="jul logo" width="120"></a>
+																																																																																																																																																																																																																																																																																																																																</td>
+																																																																																																																																																																																																																																																																																																																															</tr>
+																																																																																																																																																																																																																																																																																																																															<tr>
+																																																																																																																																																																																																																																																																																																																																<td class="esd-block-text es-p35b" align="center">
+																																																																																																																																																																																																																																																																																																																																	<p>&nbsp;
+																																																																																																																																																																																																																																																																																																																																	</p>
+																																																																																																																																																																																																																																																																																																																																	<p>
+																																																																																																																																																																																																																																																																																																																																		<strong>Tekoma, Lyon</strong>
+																																																																																																																																																																																																																																																																																																																																	</p>
+																																																																																																																																																																																																																																																																																																																																</td>
+																																																																																																																																																																																																																																																																																																																															</tr>
+																																																																																																																																																																																																																																																																																																																															<tr>
+																																																																																																																																																																																																																																																																																																																																<td esdev-links-color="#777777" align="left" class="esd-block-text es-m-txt-c es-p5b">
+																																																																																																																																																																																																																																																																																																																																	<p style="color: #777777;">&nbsp;</p>
+																																																																																																																																																																																																																																																																																																																																</td>
+																																																																																																																																																																																																																																																																																																																															</tr>
+																																																																																																																																																																																																																																																																																																																														</tbody>
+																																																																																																																																																																																																																																																																																																																													</table>
+																																																																																																																																																																																																																																																																																																																												</td>
+																																																																																																																																																																																																																																																																																																																											</tr>
+																																																																																																																																																																																																																																																																																																																										</tbody>
+																																																																																																																																																																																																																																																																																																																									</table>
+																																																																																																																																																																																																																																																																																																																								</td>
+																																																																																																																																																																																																																																																																																																																							</tr>
+																																																																																																																																																																																																																																																																																																																						</tbody>
+																																																																																																																																																																																																																																																																																																																					</table>
+																																																																																																																																																																																																																																																																																																																				</td>
+																																																																																																																																																																																																																																																																																																																			</tr>
+																																																																																																																																																																																																																																																																																																																		</tbody>
+																																																																																																																																																																																																																																																																																																																	</table>
+																																																																																																																																																																																																																																																																																																																	<table class="esd-footer-popover es-content" cellspacing="0" cellpadding="0" align="center">
+																																																																																																																																																																																																																																																																																																																		<tbody>
+																																																																																																																																																																																																																																																																																																																			<tr>
+																																																																																																																																																																																																																																																																																																																				<td class="esd-stripe" align="center">
+																																																																																																																																																																																																																																																																																																																					<table class="es-content-body" style="background-color: transparent;" width="600" cellspacing="0" cellpadding="0" align="center">
+																																																																																																																																																																																																																																																																																																																						<tbody>
+																																																																																																																																																																																																																																																																																																																							<tr>
+																																																																																																																																																																																																																																																																																																																								<td class="esd-structure es-p30t es-p30b es-p20r es-p20l" align="left">
+																																																																																																																																																																																																																																																																																																																									<table width="100%" cellspacing="0" cellpadding="0">
+																																																																																																																																																																																																																																																																																																																										<tbody>
+																																																																																																																																																																																																																																																																																																																											<tr>
+																																																																																																																																																																																																																																																																																																																												<td class="esd-container-frame" width="560" valign="top" align="center">
+																																																																																																																																																																																																																																																																																																																													<table width="100%" cellspacing="0" cellpadding="0">
+																																																																																																																																																																																																																																																																																																																														<tbody>
+																																																																																																																																																																																																																																																																																																																															<tr>
+																																																																																																																																																																																																																																																																																																																																<td class="esd-block-image es-infoblock made_with" align="center" style="font-size:0">
+																																																																																																																																																																																																																																																																																																																																	<a></a>
+																																																																																																																																																																																																																																																																																																																																</td>
+																																																																																																																																																																																																																																																																																																																															</tr>
+																																																																																																																																																																																																																																																																																																																														</tbody>
+																																																																																																																																																																																																																																																																																																																													</table>
+																																																																																																																																																																																																																																																																																																																												</td>
+																																																																																																																																																																																																																																																																																																																											</tr>
+																																																																																																																																																																																																																																																																																																																										</tbody>
+																																																																																																																																																																																																																																																																																																																									</table>
+																																																																																																																																																																																																																																																																																																																								</td>
+																																																																																																																																																																																																																																																																																																																							</tr>
+																																																																																																																																																																																																																																																																																																																						</tbody>
+																																																																																																																																																																																																																																																																																																																					</table>
+																																																																																																																																																																																																																																																																																																																				</td>
+																																																																																																																																																																																																																																																																																																																			</tr>
+																																																																																																																																																																																																																																																																																																																		</tbody>
+																																																																																																																																																																																																																																																																																																																	</table> #}
+		</td>
 	</body>
-</html>
-{% endapply %}
+</html></tr></tbody></table></div></body></html>{% endapply %}

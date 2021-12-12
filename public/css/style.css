@@ -92,6 +92,15 @@ input:focus {
   z-index: 2;
 }
 
+.field-icon-result {
+  font-size: 20px;
+  float: right;
+  margin-right: 15px;
+  margin-top: -26px;
+  position: relative;
+  z-index: 2;
+}
+
 .field-icon-reg {
   float: right;
   margin-right: 30px;
@@ -282,6 +291,16 @@ color:black;
 .orderUpdRef {   
   border: 1px solid #505050;
   background-color: #6c757d6c;
+}
+
+
+.img-up-admin {
+  max-width: 20vh;
+  height: auto;
+}
+
+.custom-link {
+  font-size: 16px;;
 }
 
  

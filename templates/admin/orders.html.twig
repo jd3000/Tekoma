@@ -13,10 +13,25 @@
 			</div>
 		</div>
 		<div class="row justify-content-center">
-			<div class="col-11 col-sm-9 col-md-7 col-lg-5 mt-5">
+			<div class="col-12 col-lg-10 col-xl-8 mt-5">
 				<input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
 				<span id="icon-no-result" class="d-none fas fa-times field-icon-no-result text-danger"></span>
+				<span id="icon-result" class="d-none fas fa-times field-icon-result text-success"></span>
 			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-10 col-xl-8 mt-1">
+				{% if stripeOrders|length > 1 %}
+					{% set stringOrder = "commandes" %}
+				{% else %}
+					{% set stringOrder = "commande" %}
+				{% endif %}
+
+				<div id="message-result" class="text-end">{{stripeOrders|length ~ ' ' ~ stringOrder ~ ' au total' }}
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center">
 			<div class="col-12 text-center mt-3">
 				{% if stripeOrders %}
 					<table class="table text-white" id="sortTable" class="display" style="width:100%">
@@ -24,7 +39,7 @@
 							<tr>
 								<th scope="col" id="userName" data-toggle="tooltip" data-placement="top" title="Trier par Utilisateur">Utilisateur</th>
 								<th scope="col" id="product" data-toggle="tooltip" data-placement="top" title="Trier par Création">Création</th>
-								<th scope="col" id="reference" data-toggle="tooltip" data-placement="top" title="Trier par Création">Référence</th>
+								<th scope="col" class="displayHidden" id="reference" data-toggle="tooltip" data-placement="top" title="Trier par Création">Référence</th>
 								<th scope="col" id="date" data-toggle="tooltip" data-placement="top" title="Trier par Date">Date</th>
 								<th scope="col" id="price" data-toggle="tooltip" data-placement="top" title="Trier par Prix">Prix</th>
 								<th scope="col" id="isSent" data-toggle="tooltip" data-placement="top" title="Trier par Statut">Envoyée</th>
@@ -33,10 +48,10 @@
 						</thead>
 						<tbody id="myTable">
 							{% for stripeOrder in stripeOrders %}
-								<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.product}}">
+								<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.reference}}">
 									<th scope="row">{{ stripeOrder.username }}</th>
 									<td>{{stripeOrder.product}}</td>
-									<td class="ref text-muted">{{stripeOrder.reference}}</td>
+									<td class="ref text-muted displayHidden">{{stripeOrder.reference}}</td>
 									<td>{{stripeOrder.getCreatedAt|date('d/m/Y')}}</td>
 									<td>{{stripeOrder.price}}&nbsp;€</td>
 									<td class="displayHidden">{{stripeOrder.getIsSent}}</td>

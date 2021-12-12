@@ -21,7 +21,7 @@
 						<h5 class="card-title">{{ product.name }}</h5>
 						<p class="card-text">
 							{% if product.description|e|length > 50 %}
-								{{ product.description|e|striptags|slice(0, 50)|nl2br ~ '...' }}
+								{{ product.description|e|nl2br|striptags|slice(0, 50) ~ '...' }}
 							{% else %}
 								{{ product.description|e|nl2br }}
 							{% endif %}

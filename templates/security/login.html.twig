@@ -12,13 +12,18 @@
 		<div class="row">
 			<div class="col text-center mt-5 title">CONNEXION</div>
 		</div>
-		<div class="row justify-content-center align-items-center mt-4">
+		<div class="row">
+			<div class="col text-center mt-2">
+				<a href="{{ path('forgotten_password')}}">Mot de passe oublié ?</a>
+			</div>
+		</div>
+		<div class="row justify-content-center align-items-center">
 			<div class="col-8 col-md-8 text-center mt-4">
 				<form method="post">
 					{% if error %}
 						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
-					<div class="row justify-content-center mt-4">
+					<div class="row justify-content-center">
 						<div class="col-10 col-md-8 col-lg-6 text-start">
 							<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control col-12" autocomplete="email" required autofocus>
 						</div>
@@ -32,9 +37,7 @@
 					</div>
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 					<div class="row justify-content-center mt-4">
-						<div
-							class="col-10 col-md-8 col-lg-6 m-3 text-center">
-							{# <input type="hidden" name="_target_path" value="{{ path('home') }}"/> #}
+						<div class="col-10 col-md-8 col-lg-6 m-3 text-center">
 							<button class="btn btn-lg btn-custom-border" type="submit">
 								Me connecter
 							</button>
@@ -66,7 +69,7 @@
 
 			<div class="row">
 				<div class="col text-center mt-4">
-					<a href="{{ path('register')}}">Nouveau membre ? Inscrivez-vous !</a>
+					<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
 				</div>
 			</div>
 
@@ -74,7 +77,7 @@
 
 		<div class="row d-flex justify-content-center logoLogin">
 			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="./img/JUL.png" alt="sign logo">
+				<img class="card-img" src="/img/JUL.png" alt="sign logo">
 			</div>
 		</div>
 	</div>
