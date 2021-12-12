@@ -247,7 +247,8 @@ $(document).ready(function () {
 
 
     $('#sortTable').DataTable({
-        "order": [[5, "asc"]]
+        "order": [[5, "asc"]],
+        paging: false
     });
     if ($('#sortTable_length')[0]) {
         $('#sortTable_length')[0].hidden = true;
