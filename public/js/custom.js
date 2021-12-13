@@ -3,74 +3,6 @@ setTimeout(function () {
     $(".btn-close").trigger('click');
 }, 10000);
 
-// $("#cp").autocomplete({
-//     source: function (request, response) {
-//         $.ajax({
-//             url: "https://api-adresse.data.gouv.fr/search/?q=" + $("input[name='cp']").val() + '&type=municipality&autocomplete=1',
-//             data: { q: request.term },
-//             dataType: "json",
-//             success: function (data) {
-//                 response($.map(data.features, function (item) {
-//                     console.log(item);
-//                     console.log(data.features);
-
-//                     return {
-//                         label: item.properties.postcode + " – " + item.properties.city,
-//                         city: item.properties.city,
-//                         value: item.properties.postcode
-//                     };
-//                 }));
-//             }
-//         });
-//     },
-//     // On remplit aussi la ville
-//     select: function (event, ui) {
-//         $('#ville').val(ui.item.city);
-//     }
-// });
-// $("#ville").autocomplete({
-//     source: function (request, response) {
-//         $.ajax({
-//             url: "https://api-adresse.data.gouv.fr/search/?city=" + $("input[name='ville']").val(),
-//             data: { q: request.term },
-//             dataType: "json",
-//             success: function (data) {
-//                 let cities = [];
-//                 response($.map(data.features, function (item) {
-//                     // Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
-//                     if ($.inArray(item.properties.postcode, cities) == -1) {
-//                         cities.push(item.properties.postcode);
-//                         return {
-//                             label: item.properties.postcode + " - " + item.properties.city,
-//                             postcode: item.properties.postcode,
-//                             value: item.properties.city
-//                         };
-//                     }
-//                 }));
-//             }
-//         });
-//     },
-//     // On remplit aussi le CP
-//     select: function (event, ui) {
-//         $('#cp').val(ui.item.postcode);
-//     }
-// });
-// $("#adresse").autocomplete({
-//     source: function (request, response) {
-//         $.ajax({
-//             url: "https://api-adresse.data.gouv.fr/search/?postcode=" + $("input[name='cp']").val(),
-//             data: { q: request.term },
-//             dataType: "json",
-//             success: function (data) {
-//                 response($.map(data.features, function (item) {
-//                     return { label: item.properties.name, value: item.properties.name };
-//                 }));
-//             }
-//         });
-//     }
-// });
-
-
 // Permet de gérer le toggle du burger (small)
 function burgerToggle() {
     let x = document.getElementById("myTopnav");
@@ -84,19 +16,6 @@ function burgerToggle() {
         y.src = "/img/cross.png";
     }
 }
-
-
-
-
-// if (thIconAsc) {
-//     thIconAsc.innerHTML += "&nbsp;<i class=\"fas fa-caret-down\"></i>";
-//     console.log(thIconAsc);
-// }
-
-// if (thIconDesc) {
-//     thIconDesc.innerHTML += "&nbsp;<i class=\"fas fa-caret-up\"></i>";
-//     console.log(thIconDesc);
-// }
 
 // admin / update.html.twig new.html.twig creation
 $(document).ready(function () {
@@ -248,22 +167,10 @@ $(document).ready(function () {
 
     $('#sortTable').DataTable({
         "order": [[5, "asc"]],
-        paging: false
+        searching: false,
+        paging: false,
+        info: false
     });
-    if ($('#sortTable_length')[0]) {
-        $('#sortTable_length')[0].hidden = true;
-    }
-    if ($('#sortTable_filter')[0]) {
-        $('#sortTable_filter')[0].hidden = true;
-    }
-    if ($('#sortTable_info')[0]) {
-        $('#sortTable_info')[0].hidden = true;
-    }
-    if ($('#sortTable_paginate')[0]) {
-        $('#sortTable_paginate')[0].hidden = true;
-    }
-
-
 
     // permet de rechercher des valeurs dans la gestion des commandes partie admin, d'afficher l'icone d'effacer l'input et d'afficher le message si aucun résultât 
     $("#myInput").on("keyup blur", function () {
@@ -340,6 +247,8 @@ $(document).ready(function () {
                     input.blur();
                     noResult.innerHTML = "";
                     iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
+                    iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
+
                 }
             });
         }
