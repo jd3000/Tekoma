@@ -201,7 +201,7 @@ $(document).ready(function () {
         }
 
         if (compare == 0) {
-            console.log(compareNumber + " commandes");
+            // console.log(compareNumber + " commandes");
             messageResult.innerText = compareNumber + " commandes au total"
             messageResult.className = "text-end";
             noResult.innerHTML = "";
@@ -217,7 +217,7 @@ $(document).ready(function () {
             });
 
         } else if (compare > 0 && compare < compareNumber) {
-            console.log(compareNumber - compare + " " + stringMessRes);
+            // console.log(compareNumber - compare + " " + stringMessRes);
             messageResult.innerText = compareNumber - compare + " " + stringMessRes;
             messageResult.className = "text-end text-success";
             iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-result text-success";
@@ -233,7 +233,7 @@ $(document).ready(function () {
             });
 
         } else if (compare == compareNumber) {
-            console.log("Auccun résultat");
+            // console.log("Auccun résultat");
             messageResult.innerText = "Auccun résultat";
             messageResult.className = "text-end text-danger";
             noResult.innerHTML = "<div class=\"no-result p-4\">Aucune commande ne correspond à la recherche</div>";
@@ -327,6 +327,22 @@ $(document).ready(function () {
                     // iconEl.classList.remove('field-icon');
                     iconEl.classList.toggle('field-icon-reg');
                 }
+            }
+
+        }
+
+    }
+
+    let divs = document.getElementsByClassName("grid-item");
+    // console.log(divs);
+    if (divs) {
+        for (const key in divs) {
+            if (Object.hasOwnProperty.call(divs, key)) {
+                divs[key].style.webkitTransform = 'rotate(' + key * 65 + 'deg)';
+                divs[key].style.mozTransform = 'rotate(' + key * 65 + 'deg)';
+                divs[key].style.msTransform = 'rotate(' + key * 65 + 'deg)';
+                divs[key].style.oTransform = 'rotate(' + key * 65 + 'deg)';
+                divs[key].style.transform = 'rotate(' + key * 65 + 'deg)';
             }
 
         }
