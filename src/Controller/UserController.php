@@ -26,6 +26,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
 class UserController extends AbstractController
 {
     /**
@@ -33,18 +34,9 @@ class UserController extends AbstractController
      * 
      * @Route("/user", name="user")
      */
-    public function user(OrderStripeRepository $orderStripeRepo)
+    public function user()
     {
-        $user = $this->getUser();
-        $userName = $user->getUsername();
-        $stripeOrders = $orderStripeRepo->findByUserName($userName);
-        // dump($stripeOrders);
-        $userId = $user->getId();
-        // dump($userId);
-
-        return $this->render('user/index.html.twig', [
-            'stripeOrders' => $stripeOrders
-        ]);
+        return $this->render('user/index.html.twig');
     }
 
     /**
@@ -107,6 +99,10 @@ class UserController extends AbstractController
      */
     public function userSelection($slug, Product $product): Response
     {
+        $user = $this->getUser();
+        $id = $user->getId();
+        dump($user);
+        dump($id);
 
 
         // si on utilise le ProductRepository à la place du paramconverter
@@ -114,6 +110,7 @@ class UserController extends AbstractController
 
         // (“dump and die”) helper function
         // dump($product);
+
         return $this->render('user/payment.html.twig', [
             'product' => $product
         ]);
@@ -124,14 +121,21 @@ class UserController extends AbstractController
      * 
      * @Route("/user/checkout/{slug}", name="user_checkout")
      */
-    public function checkout($slug, Product $product, $stripeSK, Security $security): Response
+    public function checkout($slug, Product $product, $stripeSK, Security $security, Request $request): Response
     {
+        $user = $this->getUser();
+        $id = $user->getId();
+
 
         $productName = $product->getName();
         $productImg = $product->getImg();
         $productPrice = $product->getPrice();
         $user = $security->getUser();
         $user = $user->getUsername();
+
+        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+        $imgStripe = $baseurl . "/img/uploads/" . $productImg;
+
 
         Stripe::setApiKey($stripeSK);
 
@@ -140,23 +144,25 @@ class UserController extends AbstractController
             'shipping_address_collection' => [
                 'allowed_countries' => ['FR'],
             ],
-            'line_items'           => [
+            'line_items' => [
                 [
                     'price_data' => [
                         'currency'     => 'eur',
                         'product_data' => [
-                            'name' => $productName
+                            'name' => $productName,
+                            'images' => [$imgStripe]
                         ],
                         'unit_amount'  => $productPrice * 100,
                     ],
                     'quantity'   => 1,
                 ]
             ],
-            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid(), 'productImg' => $productImg],
+            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid(), 'productImg' => $productImg, 'stripeImg' => $imgStripe, 'id' => $id],
             'mode'                 => 'payment',
             'success_url'          => $this->generateUrl('success_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url'           => $this->generateUrl('cancel_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
+        // dump($session->id);
         // dd($session);
         return $this->redirect($session->url, 303);
     }
@@ -168,6 +174,7 @@ class UserController extends AbstractController
      */
     public function successUrl($slug, Product $product): Response
     {
+        // $user = $this->getUser();
         $entityManager = $this->getDoctrine()->getManager();
         $productName = $product->getName();
         $productQuantity = $product->getQuantity();

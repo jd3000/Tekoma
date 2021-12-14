@@ -163,8 +163,6 @@ $(document).ready(function () {
         window.document.location = $(this).data("href");
     });
 
-
-
     $('#sortTable').DataTable({
         "order": [[5, "asc"]],
         searching: false,
@@ -194,21 +192,29 @@ $(document).ready(function () {
         let iconNoResult = document.getElementById("icon-no-result");
         let messageResult = document.getElementById("message-result");
         let messRes = compareNumber - compare;
+        let input = $("#myInput");
+
         if (messRes > 1) {
             stringMessRes = 'résultats';
         } else {
             stringMessRes = 'résultat';
         }
-
-        if (compare == 0) {
+        if (compare == 0 && input.val() == "") {
             // console.log(compareNumber + " commandes");
             messageResult.innerText = compareNumber + " commandes au total"
             messageResult.className = "text-end";
             noResult.innerHTML = "";
+            iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
+            iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
+
+        } else if (compare == 0 && input.val() != "") {
+            // console.log(compareNumber + " commandes");
+            messageResult.innerText = compareNumber + " commandes au total"
+            messageResult.className = "text-end text-success";
+            noResult.innerHTML = "";
             iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-result text-success";
             iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
             $("body").on('click', '#icon-result', function () {
-                let input = $("#myInput");
                 if (input.val() != "") {
                     input.val('');
                     input.blur();
@@ -224,7 +230,7 @@ $(document).ready(function () {
             iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-no-result text-danger";
             noResult.innerHTML = "";
             $("body").on('click', '#icon-result', function () {
-                let input = $("#myInput");
+                // let input = $("#myInput");
                 if (input.val() != "") {
                     input.val('');
                     input.blur();
@@ -241,7 +247,7 @@ $(document).ready(function () {
             iconNoResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 field-icon-no-result text-danger";
             iconResult.className.baseVal = "svg-inline--fa fa-times fa-w-11 d-none field-icon-result text-success";
             $("body").on('click', '#icon-no-result', function () {
-                let input = $("#myInput");
+                // let input = $("#myInput");
                 if (input.val() != "") {
                     input.val('');
                     input.blur();

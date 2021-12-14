@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\OrderStripe;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ class WebhookController extends AbstractController
     /**
      * @Route("/webhook", name="webhook")
      */
-    public function stripeWebhookAction(Request $request, EntityManagerInterface $entityManager)
+    public function stripeWebhookAction(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
         $payload = @file_get_contents('php://input');
         $event = null;
@@ -38,6 +39,10 @@ class WebhookController extends AbstractController
                 $paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
                 $entityManager = $this->getDoctrine()->getManager();
                 $order = new OrderStripe();
+                $user = User::class;
+                $user = $userRepository->findOneById($paymentIntent->metadata->id);
+                $userId = $user->getId();
+                $orderUserId = $order->setUser($user);
                 $orderUserName = $order->setUsername($paymentIntent->metadata->userMail);
                 $orderProductName = $order->setProduct($paymentIntent->metadata->productName);
                 $orderProductImg = $order->setImg($paymentIntent->metadata->productImg);
@@ -56,13 +61,14 @@ class WebhookController extends AbstractController
 
                 // // $orderuserId = $order->setUser($user);
                 $entityManager->persist($order);
+
                 $entityManager->flush();
                 // Then define and call a method to handle the successful payment intent.
 
                 return new Response(http_response_code(200));
 
                 break;
-            case 'payment_method.attached':
+            case 'payment_intent.payment_failed':
                 $paymentMethod = $event->data->object; // contains a \Stripe\PaymentMethod
                 // Then define and call a method to handle the successful attachment of a PaymentMethod.
                 // handlePaymentMethodAttached($paymentMethod);

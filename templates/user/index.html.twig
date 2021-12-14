@@ -14,6 +14,9 @@
 					<div>COMPTE</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col text-center mt-3"></div>
+			</div>
 			<div class="row justify-content-center">
 				<div class="col-12 text-center mt-3">
 					{{ app.user.email }}
@@ -22,7 +25,7 @@
 					<div>COMMANDES</div>
 				</div>
 				<div class="col-12 text-center mt-3">
-					{% if stripeOrders %}
+					{% if app.user.orderStripes|length > 0 %}
 						<table class="table text-white">
 							<thead>
 								<tr>
@@ -34,13 +37,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								{% for stripeOrder in stripeOrders %}
-									{% if stripeOrder.getIsSent == false %}
-										<tr class='table-row' data-href='{{ path('user_order' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse de livraison commande N°{{ loop.index }}">
+								{% for orderStripe in app.user.orderStripes %}
+									{% if orderStripe.getIsSent == false %}
+										<tr class='table-row' data-href='{{ path('user_order' , {'reference':orderStripe.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Modifier l'adresse de livraison commande N°{{ loop.index }}">
 											<th scope="row">{{ loop.index }}</th>
-											<td>{{stripeOrder.product}}</td>
-											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
-											<td>{{stripeOrder.price}}&nbsp;€</td>
+											<td>{{orderStripe.product}}</td>
+											<td>{{orderStripe.getCreatedAt|date('d-m-Y')}}</td>
+											<td>{{orderStripe.price}}&nbsp;€</td>
 											<td>
 												<i class="text-warning fas fa-times"></i>
 											</td>
@@ -48,9 +51,9 @@
 									{% else %}
 										<tr>
 											<td scope="row">{{ loop.index }}</td>
-											<td>{{stripeOrder.product}}</td>
-											<td>{{stripeOrder.getCreatedAt|date('d-m-Y')}}</td>
-											<td>{{stripeOrder.price}}&nbsp;€</td>
+											<td>{{orderStripe.product}}</td>
+											<td>{{orderStripe.getCreatedAt|date('d-m-Y')}}</td>
+											<td>{{orderStripe.price}}&nbsp;€</td>
 											<td>
 												<i class="text-success fas fa-check"></i>
 											</td>

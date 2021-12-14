@@ -43,6 +43,16 @@ class User implements UserInterface
      */
     private $reset_token;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrderStripe::class, mappedBy="user")
+     */
+    private $orderStripes;
+
+    public function __construct()
+    {
+        $this->orderStripes = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -133,6 +143,36 @@ class User implements UserInterface
     public function setResetToken(?string $reset_token): self
     {
         $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderStripe[]
+     */
+    public function getOrderStripes(): Collection
+    {
+        return $this->orderStripes;
+    }
+
+    public function addOrderStripe(OrderStripe $orderStripe): self
+    {
+        if (!$this->orderStripes->contains($orderStripe)) {
+            $this->orderStripes[] = $orderStripe;
+            $orderStripe->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderStripe(OrderStripe $orderStripe): self
+    {
+        if ($this->orderStripes->removeElement($orderStripe)) {
+            // set the owning side to null (unless already changed)
+            if ($orderStripe->getUser() === $this) {
+                $orderStripe->setUser(null);
+            }
+        }
 
         return $this;
     }

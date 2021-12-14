@@ -87,6 +87,13 @@ class OrderStripe
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orderStripes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -256,6 +263,18 @@ class OrderStripe
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
