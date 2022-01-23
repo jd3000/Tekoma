@@ -13,33 +13,38 @@
 				<div>ACHETER</div>
 			</div>
 		</div>
-		<div class="row justify-content-center">
-			<div class="col-10 col-md-6 col-lg-4 mt-3">
-				<div class="card-img imgProduct mx-auto p-4">
-					<img src="/img/uploads/{{ product.img }}" class="card-img-top" alt="{{ product.img }}">
-					<div class="card-body">
-						<h5 class="card-title">{{ product.name }}</h5>
-						<p class="card-text">
-							{% if product.description|e|length > 50 %}
-								{{ product.description|e|nl2br|striptags|slice(0, 50) ~ '...' }}
-							{% else %}
-								{{ product.description|e|nl2br }}
+		<section>
+
+			<div class="row justify-content-center">
+				<div class="col-10 col-md-6 col-lg-4 mt-3">
+
+					<div class="card-img imgProduct mx-auto p-4">
+						<img src="/img/uploads/{{ product.img }}" class="card-img-top" alt="{{ product.img }}">
+						<div class="card-body">
+							<h5 class="card-title">{{ product.name }}</h5>
+							<p class="card-text">
+								{% if product.description|e|length > 50 %}
+									{{ product.description|e|nl2br|striptags|slice(0, 50) ~ '...' }}
+								{% else %}
+									{{ product.description|e|nl2br }}
+								{% endif %}
+							</p>
+							{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+								<div class="text-center">
+									<form action="{{ path('user_checkout' , {'slug':product.slug} )}}" method="POST">
+										<button type="submit" id="checkout-button" class="btn btn-custom-border mt-3">Paiement
+											{{product.price}}
+											€</button>
+									</form>
+								</div>
 							{% endif %}
-						</p>
-						{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-							<div class="text-center">
-								<form action="{{ path('user_checkout' , {'slug':product.slug} )}}" method="POST">
-									<button type="submit" id="checkout-button" class="btn btn-custom-border mt-3">Paiement
-										{{product.price}}
-										€</button>
-								</form>
-							</div>
-						{% endif %}
+						</div>
 					</div>
+
 				</div>
 			</div>
-		</div>
 
+		</section>
 
 		<div class="row justify-content-center">
 			<div class="col-12 text-center mt-3">
@@ -59,4 +64,6 @@
 {% endblock %}
 {% block javascripts %}
 	{{ parent() }}
+	<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+	<script src="https://js.stripe.com/v3/"></script>
 {% endblock %}

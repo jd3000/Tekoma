@@ -56,15 +56,15 @@ class UserController extends AbstractController
 
         $user = $this->getUser();
         $userName = $user->getUsername();
-        dump($userName);
+        // dump($userName);
 
 
         $stripeOrder = $orderStripeRepo->findOneByReference($reference);
         $productName =  $stripeOrder->getProduct();
 
-        dump($stripeOrder);
+        // dump($stripeOrder);
         $userOrder = $stripeOrder->getUsername();
-        dump($userOrder);
+        // dump($userOrder);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -101,8 +101,8 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $id = $user->getId();
-        dump($user);
-        dump($id);
+        // dump($user);
+        // dump($id);
 
 
         // si on utilise le ProductRepository à la place du paramconverter
@@ -131,7 +131,7 @@ class UserController extends AbstractController
         $productImg = $product->getImg();
         $productPrice = $product->getPrice();
         $user = $security->getUser();
-        $user = $user->getUsername();
+        $userName = $user->getUsername();
 
         $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
         $imgStripe = $baseurl . "/img/uploads/" . $productImg;
@@ -144,6 +144,7 @@ class UserController extends AbstractController
             'shipping_address_collection' => [
                 'allowed_countries' => ['FR'],
             ],
+            'customer_email' => $userName,
             'line_items' => [
                 [
                     'price_data' => [
@@ -157,8 +158,9 @@ class UserController extends AbstractController
                     'quantity'   => 1,
                 ]
             ],
-            'metadata' => ['userMail' => $user, 'productName' => $productName, 'unique' => uniqid(), 'productImg' => $productImg, 'stripeImg' => $imgStripe, 'id' => $id],
+            'metadata' => ['userMail' => $userName, 'productName' => $productName, 'unique' => uniqid(), 'productImg' => $productImg, 'stripeImg' => $imgStripe, 'id' => $id],
             'mode'                 => 'payment',
+            'submit_type'          => 'pay',
             'success_url'          => $this->generateUrl('success_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
             'cancel_url'           => $this->generateUrl('cancel_url', array('slug' => $slug), UrlGeneratorInterface::ABSOLUTE_URL),
         ]);

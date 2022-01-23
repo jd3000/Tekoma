@@ -61,6 +61,7 @@ class ContactController extends AbstractController
 
             // dump($hcaptcha);
             // dd($hcaptcha);
+            // dd($ishcaptchaValid);
             $prospect = $form->getData();
             // # 3
             $email = (new TemplatedEmail())
@@ -92,6 +93,7 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'form' => $form->createView(),
+            'hcaptcha' => $hcaptcha,
             'response' => $hcaptcha->isHCaptchaValid(),
             'verif' => $verif
         ]);

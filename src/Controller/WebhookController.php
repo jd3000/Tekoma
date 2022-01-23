@@ -40,7 +40,8 @@ class WebhookController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $order = new OrderStripe();
                 $user = User::class;
-                $user = $userRepository->findOneById($paymentIntent->metadata->id);
+                // $user = $userRepository->find((int) $paymentIntent->metadata->id);
+                $user = $userRepository->findOneById(intval($paymentIntent->metadata->id));
                 $userId = $user->getId();
                 $orderUserId = $order->setUser($user);
                 $orderUserName = $order->setUsername($paymentIntent->metadata->userMail);
@@ -53,6 +54,7 @@ class WebhookController extends AbstractController
                 $orderUpdateAddressLine2 = $order->setAdressLine2($paymentIntent->shipping->address->line2);
                 $orderUpdatePostalCode = $order->setPostalCode($paymentIntent->shipping->address->postal_code);
                 $orderStatus = $order->setStatusStripe($paymentIntent->status);
+                $orderIntent = $order->setIntent($paymentIntent->payment_intent);
                 $now = new \DateTimeImmutable($request->get('time'));
                 $orderCrationDate = $order->setCreatedAt($now);
                 $orderUpadateDate = $order->setUpdatedAt($now);

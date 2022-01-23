@@ -93,6 +93,11 @@ class OrderStripe
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $intent;
+
 
     public function getId(): ?int
     {
@@ -275,6 +280,18 @@ class OrderStripe
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIntent(): ?string
+    {
+        return $this->intent;
+    }
+
+    public function setIntent(?string $intent): self
+    {
+        $this->intent = $intent;
 
         return $this;
     }

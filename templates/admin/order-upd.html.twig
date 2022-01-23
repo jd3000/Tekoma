@@ -12,17 +12,19 @@
 				<div>Gestion de la commande</div>
 			</div>
 		</div>
-		<div class="row justify-content-center mt-2 pt-2 mx-1">
-			<div class="col-12 col-md-8 col-lg-5 col-xl-4 text-md-center orderUpdRef p-2">
+		<div class="row justify-content-center mt-2 px-4">
+			<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
 				<div>
 					<b>Référence</b>
 				</div>
-				<div class="d-block d-lg-inline ref">{{stripeOrder.reference}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.reference }}" title="Copier Référence">
+				<div class="ref">{{stripeOrder.reference}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.reference }}" title="Copier Référence">
 						<i class="far fa-copy"></i>
 					</button>
 				</div>
 			</div>
-			<div class="col-12 col-md-8 col-lg-5 col-xl-4 text-md-center orderUpdRef mt-1 mt-lg-0 mx-lg-1 p-2">
+		</div>
+		<div class="row justify-content-center px-4 mt-1">
+			<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
 				<div>
 					<b>Utilisateur</b>
 					{% set count = 0 %}
@@ -42,23 +44,20 @@
 						au total
 					</span>
 				</div>
-				<div class="d-block d-lg-inline">{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
+				<div>{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
 						<i class="far fa-copy"></i>
 					</button>
 				</div>
 			</div>
 		</div>
-		<div class="bg-trasparent my-3" style="position: relative;">
+		<div class="bg-trasparent my-2" style="position: relative;">
 			<div class="row justify-content-center">
 				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4">
-					<div class="card h-100 shadow-sm imgProduct">
-						<div class="row justify-content-center py-3">
-							<img src="/img/uploads/{{ stripeOrder.img }}" class="img-up-admin" alt="image {{ stripeOrder.img }}">
-							<div class="col-12"></div>
-						</div>
-						<div class="label-top shadow-sm text-white px-3">{{ stripeOrder.product }}</div>
-						<div class="card-body">
-							<div class="clearfix mb-3">
+					<div class="card h-100 shadow-sm imgProduct p-2">
+						<img src="/img/uploads/{{ stripeOrder.img }}" alt="image {{ stripeOrder.img }}">
+						<div class="label-top shadow-sm text-white">{{ stripeOrder.product }}</div>
+						<div class="card-body-top">
+							<div class="clearfix">
 								<span class="float-start badge rounded-pill bg-{{ (stripeOrder.getStatusStripe == 'complete') ? 'success' : 'danger' }}">{{ stripeOrder.price }}&nbsp;€</span>
 								<span class="float-end text-white">Envoyé
 									{% if stripeOrder.getIsSent == false %}
@@ -74,7 +73,7 @@
 									{% endif %}
 								</span>
 							</div>
-							<div class="clearfix mb-3">
+							<div class="clearfix">
 								<span class="float-start text-white">Commandé le
 									{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</span>
 								<span class="float-end">
@@ -83,7 +82,9 @@
 									{% endif %}
 								</span>
 							</div>
-							<h5 class="card-title">Adresse de livraison</h5>
+							<div class="card-title">
+								<h5>Adresse de livraison</h5>
+							</div>
 							<div class="clearfix text-white">
 								<span class="float-start">{{stripeOrder.name}}</span>
 
@@ -110,17 +111,28 @@
 								{% else %}
 									{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
 								{% endif %}
-
-
 								<span class="float-end">
 									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ adressString }}" title="Copier Adresse">
 										<i class="far fa-copy"></i>
 									</button>
 								</span>
 							</div>
-							<div class="text-center mt-4">
-								<div class="btn-group">
-									<a class="btn btn-custom-border btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail</a>
+							<div class="clearfix text-white bg bg-success text-center mt-1">
+								<span>{{stripeOrder.intent}}</span>
+
+								<span>
+									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.intent}}" title="Copier Référence">
+										<i class="far fa-copy"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+						<div class="card-footer">
+							<div class="clearfix text-white">
+								<div class="text-center mt-4">
+									<div class="btn-group">
+										<a class="btn btn-custom-border btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail</a>
+									</div>
 								</div>
 							</div>
 						</div>
