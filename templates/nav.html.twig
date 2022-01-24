@@ -1,4 +1,4 @@
-<nav class="fixed-top">
+<nav id ="nav" class="fixed-top">
 	<div class="container-fluid">
 
 		<div class="row d-flex align-items-center justify-content-between navBlack">
@@ -7,7 +7,7 @@
 					<img id="burger" class="img-burger d-md-none" src="/img/burger.png" alt="logo">
 				</a>
 			</div>
-			<div class="col-7 col-md-4 col-lg-3 mt-1">
+			<div class="col-7 col-md-4 col-lg-3 mt-1 logo">
 				<a href="{{ path('home')}}">
 					<img class="card-img" src="/img/TEKOMA.png" alt="logo"></a>
 			</div>
@@ -65,27 +65,27 @@
 		</div>
 		{# medium  #}
 		<div class="row d-none d-md-flex justify-content-between navbar navBlack">
-			<div class="col-2 my-3">
+			<div class="col-2">
 				<div class="text-center">
 					<a class="title {{ app.request.get('_route') == 'home' ? 'active' }}" href="{{ path('home')}}">ACCUEIL</a>
 				</div>
 			</div>
-			<div class="col-2 col-md-3 col-lg-2 my-3">
+			<div class="col-2 col-md-3 col-lg-2">
 				<div class="text-center">
 					<a class="title {{ app.request.get('_route') == 'specifications' ? 'active' }}" href="{{ path('specifications')}}">SPECIFICATIONS</a>
 				</div>
 			</div>
-			<div class="col-2 my-3">
+			<div class="col-2">
 				<div class="text-center">
 					<a class="title {{ app.request.get('_route') matches '/creations/' ? 'active' }}" href="{{ path('creations')}}">CREATIONS</a>
 				</div>
 			</div>
-			<div class="col-2 my-3">
+			<div class="col-2">
 				<div class="text-center">
 					<a class="title {{ app.request.get('_route') == 'contact' ? 'active' }}" href="{{ path('contact')}}">CONTACT</a>
 				</div>
 			</div>
-			<div class="col-2 my-3">
+			<div class="col-2">
 				{% if is_granted('ROLE_ADMIN') %}
 					<div class="text-center">
 						<a class="text-warning title {{ app.request.get('_route') == 'admin' ? 'active' }}" href="{{ path('admin')}}">ADMIN</a>
