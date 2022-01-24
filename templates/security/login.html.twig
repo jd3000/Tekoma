@@ -8,78 +8,66 @@
 
 {% block body %}
 	<div class="container accueil">
-
-		<div class="row">
-			<div class="col text-center mt-5 title">CONNEXION</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-2">
-				<a href="{{ path('forgotten_password')}}">Mot de passe oublié ?</a>
+		<main>
+			<div class="row">
+				<div class="col text-center mt-5 title">CONNEXION</div>
 			</div>
-		</div>
-		<div class="row justify-content-center align-items-center">
-			<div class="col-8 col-md-8 text-center mt-4">
-				<form method="post">
-					{% if error %}
-						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-					{% endif %}
-					<div class="row justify-content-center">
-						<div class="col-10 col-md-8 col-lg-6 text-start">
-							<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control col-12" autocomplete="email" required autofocus>
-						</div>
-					</div>
-					<div class="row justify-content-center align-items-center mt-4">
-						<div class="col-10 col-md-8 col-lg-6 text-start">
-							<input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control col-12" autocomplete="current-password" required>
-							<span toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password icon-eye-size"></span>
-						</div>
-
-					</div>
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					<div class="row justify-content-center mt-4">
-						<div class="col-10 col-md-8 col-lg-6 m-3 text-center">
-							<button class="btn btn-lg btn-custom-border" type="submit">
-								Me connecter
-							</button>
-						</div>
-					</div>
-				</form>
+			<div class="row">
+				<div class="col text-center mt-2">
+					<a href="{{ path('forgotten_password')}}">Mot de passe oublié ?</a>
+				</div>
 			</div>
-		</div>
-
-		{% set prevUrl = app.request.headers.get('referer') %}
-		{# {% dump(prevUrl) %} #}
-		{% set urlParams = prevUrl|split('/') %}
-		{% set lastParam = urlParams[urlParams|length - 1] %}
-		{# {% dump(lastParam) %} #}
-
-		{% for product in products %}
-			{% if product.slug == lastParam %}
-
+			<div class="row justify-content-center align-items-center">
+				<div class="col-8 col-md-8 text-center mt-4">
+					<form method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+						<div class="row justify-content-center">
+							<div class="col-10 col-md-8 col-lg-6 text-start">
+								<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control col-12" autocomplete="email" required autofocus>
+							</div>
+						</div>
+						<div class="row justify-content-center align-items-center mt-4">
+							<div class="col-10 col-md-8 col-lg-6 text-start">
+								<input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control col-12" autocomplete="current-password" required>
+								<span toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password icon-eye-size"></span>
+							</div>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<div class="row justify-content-center mt-4">
+							<div class="col-10 col-md-8 col-lg-6 m-3 text-center">
+								<button class="btn btn-lg btn-custom-border" type="submit">
+									Me connecter
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			{% set prevUrl = app.request.headers.get('referer') %}
+			{# {% dump(prevUrl) %} #}
+			{% set urlParams = prevUrl|split('/') %}
+			{% set lastParam = urlParams[urlParams|length - 1] %}
+			{# {% dump(lastParam) %} #}
+			{% for product in products %}
+				{% if product.slug == lastParam %}
+					<div class="row">
+						<div class="col text-center mt-4">
+							<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+			{% if lastParam == 'register' %}
 				<div class="row">
 					<div class="col text-center mt-4">
 						<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
 					</div>
 				</div>
-
 			{% endif %}
-		{% endfor %}
-
-		{% if lastParam == 'register' %}
-
-			<div class="row">
-				<div class="col text-center mt-4">
-					<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
-				</div>
-			</div>
-
-		{% endif %}
-
-		<div class="row d-flex justify-content-center logoLogin">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 
 {% endblock %}

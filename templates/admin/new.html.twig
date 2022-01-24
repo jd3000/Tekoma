@@ -7,103 +7,94 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
-			<div class="col text-center mt-3 title">
-				<div>Ajout d'une création</div>
+		<main>
+			<div class="row">
+				<div class="col text-center mt-3 title">
+					<div>Ajout d'une création</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="row align-items-center justify-content-center mt-5 mx-3">
-			<div id="uploadPreview" class="col-12 col-md-4 text-center">
-				<div id="image-holder"></div>
+			<div class="row align-items-center justify-content-center mt-5 mx-3">
+				<div id="uploadPreview" class="col-12 col-md-4 text-center">
+					<div id="image-holder"></div>
+				</div>
 			</div>
-		</div>
+			{# FORM #}
+			<div class="row justify-content-center">
+				<div class="col-md-8 mt-md-5">
+					<div id="add_creationForm">
+						{{ form_start(form) }}
+						{{ form_errors(form) }}
+						<div class="row align-items-center justify-content-center mx-2">
+							<div class="col-12 col-md-6 mt-3">
+								<div>{{ form_widget(form.name) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.name) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div>{{ form_widget(form.price) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.price) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.name) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.price) }}</div>
+							</div>
+							<div class="col-12 mt-3">
+								{{ form_widget(form.description) }}
+								{{ form_errors(form.description) }}
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div>{{ form_widget(form.quantity) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.quantity) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3 custom-form">
+								<div>{{ form_widget(form.img) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.img) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.quantity) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.img) }}</div>
+							</div>
 
-
-		{# TEST FORM #}
-		<div class="row justify-content-center">
-			<div class="col-md-8 mt-md-5">
-				<div id="add_creationForm">
-					{{ form_start(form) }}
-					{{ form_errors(form) }}
-					<div class="row align-items-center justify-content-center mx-2">
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.name) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.name) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.price) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.price) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.name) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.price) }}</div>
-						</div>
-						<div class="col-12 mt-3">
-							{{ form_widget(form.description) }}
-							{{ form_errors(form.description) }}
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.quantity) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.quantity) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3 custom-form">
-							<div>{{ form_widget(form.img) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.img) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.quantity) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.img) }}</div>
-						</div>
-
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.highlighted) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.highlighted) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div>{{ form_widget(form.slug) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.slug) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.highlighted) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.slug) }}</div>
-						</div>
-
-						<div class="row d-flex justify-content-center">
-							<div class="col-12 col-md-8 col-lg-4 mt-3">
-								<div class="text-md-center">{{ form_widget(form.isActive) }}</div>
-								<div class="text-center">{{ form_errors(form.isActive) }}</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div>{{ form_widget(form.highlighted) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.highlighted) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div>{{ form_widget(form.slug) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.slug) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.highlighted) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.slug) }}</div>
+							</div>
+							<div class="row d-flex justify-content-center">
+								<div class="col-12 col-md-8 col-lg-4 mt-3">
+									<div class="text-md-center">{{ form_widget(form.isActive) }}</div>
+									<div class="text-center">{{ form_errors(form.isActive) }}</div>
+								</div>
+							</div>
+							<div class="col-12 mt-1 form-group">
+								<button class="btn btn-custom-border float-end" type="submit">Créer</button>
 							</div>
 						</div>
-
-						<div class="col-12 mt-1 form-group">
-							<button class="btn btn-custom-border float-end" type="submit">Créer</button>
-						</div>
+						{{ form_rest(form) }}
+						{{ form_end(form) }}
 					</div>
-					{{ form_rest(form) }}
-					{{ form_end(form) }}
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col text-center mt-3">
-					<a href="{{ path('admin')}}">
-						<button class="btn btn-custom">Revenir aux créations</button>
-					</a>
+				<div class="row">
+					<div class="col text-center mt-3">
+						<a href="{{ path('admin')}}">
+							<button class="btn btn-custom">Revenir aux créations</button>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="row d-flex justify-content-center logoSpec">
-				<div class="col-3 col-md-2 col-lg-2 mt-3">
-					<img class="card-img" src="/img/JUL.png" alt="sign logo">
-				</div>
-			</div>
-
+			</main>
+			{% include "footer.html.twig" %}
 		</div>
 	</div>
 {% endblock %}

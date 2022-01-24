@@ -7,87 +7,85 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
-			<div class="col-12 text-center mt-3 title">
-				<div>Gestion des commandes</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-10 col-xl-8 mt-5">
-				<input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
-				<span id="icon-no-result" class="d-none fas fa-times field-icon-no-result text-danger"></span>
-				<span id="icon-result" class="d-none fas fa-times field-icon-result text-success"></span>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-10 col-xl-8 mt-1">
-				{% if stripeOrders|length > 1 %}
-					{% set stringOrder = "commandes" %}
-				{% else %}
-					{% set stringOrder = "commande" %}
-				{% endif %}
-
-				<div id="message-result" class="text-end">{{stripeOrders|length ~ ' ' ~ stringOrder ~ ' au total' }}
+		<main>
+			<div class="row">
+				<div class="col-12 text-center mt-3 title">
+					<div>Gestion des commandes</div>
 				</div>
 			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3">
-				{% if stripeOrders %}
-					<table class="table text-white" id="sortTable" class="display" style="width:100%">
-						<thead id="theadOrders">
-							<tr>
-								<th scope="col" id="userName" data-toggle="tooltip" data-placement="top" title="Trier par Utilisateur">Utilisateur</th>
-								<th scope="col" id="product" data-toggle="tooltip" data-placement="top" title="Trier par Création">Création</th>
-								<th scope="col" class="displayHidden" id="reference" data-toggle="tooltip" data-placement="top" title="Trier par Création">Référence</th>
-								<th scope="col" id="date" data-toggle="tooltip" data-placement="top" title="Trier par Date">Date</th>
-								<th scope="col" id="price" data-toggle="tooltip" data-placement="top" title="Trier par Prix">Prix</th>
-								<th scope="col" id="isSent" data-toggle="tooltip" data-placement="top" title="Trier par Statut">Envoyée</th>
-								<th scope="col" id="isSent" class="displayHidden">Envoyée</th>
-							</tr>
-						</thead>
-						<tbody id="myTable">
-							{% for stripeOrder in stripeOrders %}
-								<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.reference}}">
-									<th scope="row">{{ stripeOrder.username }}</th>
-									<td>{{stripeOrder.product}}</td>
-									<td class="ref text-muted displayHidden">{{stripeOrder.reference}}</td>
-									<td>{{stripeOrder.getCreatedAt|date('d/m/Y')}}</td>
-									<td>{{stripeOrder.price}}&nbsp;€</td>
-									<td class="displayHidden">{{stripeOrder.getIsSent}}</td>
-									<td id="isSentValue">
-										{% if stripeOrder.getIsSent == 1 %}
-											<span>
-												<i class="fas fa-check text-success"></i>
-											</span>
-										{% else %}
-											<span>
-												<i class="fas fa-times text-warning"></i>
-											</span>
-										{% endif %}
-									</td>
+			<div class="row justify-content-center">
+				<div class="col-12 col-lg-10 col-xl-8 mt-5">
+					<input class="form-control" id="myInput" type="text" placeholder="Rechercher...">
+					<span id="icon-no-result" class="d-none fas fa-times field-icon-no-result text-danger"></span>
+					<span id="icon-result" class="d-none fas fa-times field-icon-result text-success"></span>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-12 col-lg-10 col-xl-8 mt-1">
+					{% if stripeOrders|length > 1 %}
+						{% set stringOrder = "commandes" %}
+					{% else %}
+						{% set stringOrder = "commande" %}
+					{% endif %}
+
+					<div id="message-result" class="text-end">{{stripeOrders|length ~ ' ' ~ stringOrder ~ ' au total' }}
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3">
+					{% if stripeOrders %}
+						<table class="table text-white" id="sortTable" class="display" style="width:100%">
+							<thead id="theadOrders">
+								<tr>
+									<th scope="col" id="userName" data-toggle="tooltip" data-placement="top" title="Trier par Utilisateur">Utilisateur</th>
+									<th scope="col" id="product" data-toggle="tooltip" data-placement="top" title="Trier par Création">Création</th>
+									<th scope="col" class="displayHidden" id="reference" data-toggle="tooltip" data-placement="top" title="Trier par Création">Référence</th>
+									<th scope="col" id="date" data-toggle="tooltip" data-placement="top" title="Trier par Date">Date</th>
+									<th scope="col" id="price" data-toggle="tooltip" data-placement="top" title="Trier par Prix">Prix</th>
+									<th scope="col" id="isSent" data-toggle="tooltip" data-placement="top" title="Trier par Statut">Envoyée</th>
+									<th scope="col" id="isSent" class="displayHidden">Envoyée</th>
 								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-					<div id="noResult"></div>
-				{% else %}
-					<div class="border border-white p-4">Aucune comande pour l'instant</div>
-				{% endif %}
+							</thead>
+							<tbody id="myTable">
+								{% for stripeOrder in stripeOrders %}
+									<tr class='table-row' data-href='{{ path('admin_order_upd' , {'reference':stripeOrder.reference} ) }}' data-toggle="tooltip" data-placement="bottom" title="Gérer la commande : {{stripeOrder.reference}}">
+										<th scope="row">{{ stripeOrder.username }}</th>
+										<td>{{stripeOrder.product}}</td>
+										<td class="ref text-muted displayHidden">{{stripeOrder.reference}}</td>
+										<td>{{stripeOrder.getCreatedAt|date('d/m/Y')}}</td>
+										<td>{{stripeOrder.price}}&nbsp;€</td>
+										<td class="displayHidden">{{stripeOrder.getIsSent}}</td>
+										<td id="isSentValue">
+											{% if stripeOrder.getIsSent == 1 %}
+												<span>
+													<i class="fas fa-check text-success"></i>
+												</span>
+											{% else %}
+												<span>
+													<i class="fas fa-times text-warning"></i>
+												</span>
+											{% endif %}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<div id="noResult"></div>
+					{% else %}
+						<div class="border border-white p-4">Aucune comande pour l'instant</div>
+					{% endif %}
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3">
-				<a href="{{ path('admin')}}">
-					<button class="btn btn-custom">Revenir aux créations</button>
-				</a>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<a href="{{ path('admin')}}">
+						<button class="btn btn-custom">Revenir aux créations</button>
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 {% block javascripts %}

@@ -8,116 +8,114 @@
 
 {% block body %}
 	<div class="container accueil" id="scroll">
-		<div class="row">
-			<div class="col-12 text-center mt-3 title d-md-none">
-				<div class="text-warning">ADMIN</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
-				<div>
-					<a href="{{ path('admin_create')}}">
-						<button class="btn btn-custom-border">
-							<i class="fas fa-plus"></i>
-							<b>Ajouter une création</b>
-						</button>
-					</a>
+		<main>
+			<div class="row">
+				<div class="col-12 text-center mt-3 title d-md-none">
+					<div class="text-warning">ADMIN</div>
 				</div>
 			</div>
-			<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
-				<div>
-					<a href="{{ path('admin_orders')}}">
-						<button class="btn btn-custom-border">
-							<i class="fas fa-shopping-cart"></i>
-							<b>Gérer les commandes</b>
-						</button>
-					</a>
+			<div class="row justify-content-center">
+				<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
+					<div>
+						<a href="{{ path('admin_create')}}">
+							<button class="btn btn-custom-border">
+								<i class="fas fa-plus"></i>
+								<b>Ajouter une création</b>
+							</button>
+						</a>
+					</div>
+				</div>
+				<div class="col-6 col-md-4 col-lg-3 text-center mt-3 mt-md-4 met-lg-5">
+					<div>
+						<a href="{{ path('admin_orders')}}">
+							<button class="btn btn-custom-border">
+								<i class="fas fa-shopping-cart"></i>
+								<b>Gérer les commandes</b>
+							</button>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 text-center mt-4">
-				<div>
-					{{ products|length > 1 ? 'Produits :' : 'Produit :' }}
-					{{ products|length }}
-				</div>
-				<div>
-					{{ activeProducts|length > 1 ? 'Produits actifs :' : 'Produit actif :' }}
-					{{ activeProducts|length }}
+			<div class="row">
+				<div class="col-12 text-center mt-4">
+					<div>
+						{{ products|length > 1 ? 'Produits :' : 'Produit :' }}
+						{{ products|length }}
+					</div>
+					<div>
+						{{ activeProducts|length > 1 ? 'Produits actifs :' : 'Produit actif :' }}
+						{{ activeProducts|length }}
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row align-items-streched justify-content-center mt-2 px-3">
-			{% for product in products %}
-				<div id="product-{{ product.name|e }}" class="col-12 col-md-3 text-center m-3 rounded {% if product.isActive|e %} border border-success border-4 {% else %} border border-danger border-4{% endif %} cardAnim">
-					<a href="{{ path('admin_show' , {'slug':product.slug|e} ) }}">
-						<div class="card mb-3">
-							<h3 class="card-header">{{ product.name|e }}</h3>
-							<div class="card-body">
-								{% if product.isActive|e %}
-									<h5 class="card-title text-success">Actif</h5>
-								{% else %}
-									<h5 class="card-title text-danger">Inactif</h5>
-								{% endif %}
-								<h6 class="card-subtitle text-muted pt-3">{{ product.price|e }}€</h6>
-							</div>
-							<img class="card-img img-admin-card" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}">
-							<div class="card-body">
-								<p class="card-text">
-									{% if product.description|e|length > 50 %}
-										{{ product.description|e|striptags|slice(0, 50) ~ '...' }}
+			<div class="row align-items-streched justify-content-center mt-2 px-3">
+				{% for product in products %}
+					<div id="product-{{ product.name|e }}" class="col-12 col-md-3 text-center m-3 rounded {% if product.isActive|e %} border border-success border-4 {% else %} border border-danger border-4{% endif %} cardAnim">
+						<a href="{{ path('admin_show' , {'slug':product.slug|e} ) }}">
+							<div class="card mb-3">
+								<h3 class="card-header">{{ product.name|e }}</h3>
+								<div class="card-body">
+									{% if product.isActive|e %}
+										<h5 class="card-title text-success">Actif</h5>
 									{% else %}
-										{{ product.description|e }}
+										<h5 class="card-title text-danger">Inactif</h5>
 									{% endif %}
-								</p>
-							</div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item rounded {{ product.quantity|e > 0  ? 'text-white bg-transparent border border-white border-3' : 'bg-transparent border border-danger border-3' }} ">
-									Quantité disponible
-									<b>{{ product.quantity|e }}</b>
-								</li>
-								{% if product.highlighted|e %}
-									<li class="list-group-item bg-success mt-1 rounded text-light">Produit mis en avant sur la page d'accueil :
-										<span class="lead">
-											<b>{{ product.highlighted|e }}</b>
-										</span>
+									<h6 class="card-subtitle text-muted pt-3">{{ product.price|e }}€</h6>
+								</div>
+								<img class="card-img img-admin-card" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}">
+								<div class="card-body">
+									<p class="card-text">
+										{% if product.description|e|length > 50 %}
+											{{ product.description|e|striptags|slice(0, 50) ~ '...' }}
+										{% else %}
+											{{ product.description|e }}
+										{% endif %}
+									</p>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item rounded {{ product.quantity|e > 0  ? 'text-white bg-transparent border border-white border-3' : 'bg-transparent border border-danger border-3' }} ">
+										Quantité disponible
+										<b>{{ product.quantity|e }}</b>
 									</li>
-									{% else %}
-								{% endif %}
-							</ul>
-							<div class="card-body">
-								<a href="{{ path('admin_delete' , {'slug':product.slug} )}}" class="card-link text-danger">Supprimer</a>
-								{% if product.isActive|e %}
-									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link">Désactiver</a>
+									{% if product.highlighted|e %}
+										<li class="list-group-item bg-success mt-1 rounded text-light">Produit mis en avant sur la page d'accueil :
+											<span class="lead">
+												<b>{{ product.highlighted|e }}</b>
+											</span>
+										</li>
+										{% else %}
+									{% endif %}
+								</ul>
+								<div class="card-body">
+									<a href="{{ path('admin_delete' , {'slug':product.slug} )}}" class="card-link text-danger">Supprimer</a>
+									{% if product.isActive|e %}
+										<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link">Désactiver</a>
+									</div>
+									<div class="card-footer text-muted">
+										Une création active est visible par les utilisateurs
+									</div>
+								{% else %}
+									<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link text-light border-bottom border-light">Activer</a>
 								</div>
 								<div class="card-footer text-muted">
-									Une création active est visible par les utilisateurs
+									Une création inactive n'est pas visible par les utilisateurs
 								</div>
-							{% else %}
-								<a href="{{ path('admin_activate_confirm' , {'slug':product.slug} )}}" class="card-link text-light border-bottom border-light">Activer</a>
-							</div>
-							<div class="card-footer text-muted">
-								Une création inactive n'est pas visible par les utilisateurs
-							</div>
-						{% endif %}
-					</div>
-					<div class="card">
-						<div class="card-body">
-							{% if product.highlighted|e %}
-								<a href="{{ path('admin_unhighlight_confirm' , {'slug':product.slug} )}}" class="card-link">Enlever de la page d'accueil</a>
-							{% else %}
-								<a href="{{ path('admin_highlight_confirm' , {'slug':product.slug} )}}" class="card-link">Mettre en avant sur la page d'accueil</a>
 							{% endif %}
 						</div>
-					</div>
-					{# <div class="imgProduct p-4"><img class="card-img" src="/img/{{ product.img|e }}" alt="image {{ product.name|e }}"></div> #}
-				</a>
-			</div>
-		{% endfor %}
-	</div>
-	<div class="row d-flex justify-content-center logoSpec">
-		<div class="col-3 col-md-2 col-lg-2 mt-3">
-			<img class="card-img" src="/img/JUL.png" alt="sign logo"></div>
-	</div>
+						<div class="card">
+							<div class="card-body">
+								{% if product.highlighted|e %}
+									<a href="{{ path('admin_unhighlight_confirm' , {'slug':product.slug} )}}" class="card-link">Enlever de la page d'accueil</a>
+								{% else %}
+									<a href="{{ path('admin_highlight_confirm' , {'slug':product.slug} )}}" class="card-link">Mettre en avant sur la page d'accueil</a>
+								{% endif %}
+							</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</main>
+	{% include "footer.html.twig" %}
 </div>{% endblock %}{% block javascripts %}
 {{ parent() }}{% endblock %}

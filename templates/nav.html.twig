@@ -1,6 +1,5 @@
-<nav id ="nav" class="fixed-top">
+<nav class="fixed-top">
 	<div class="container-fluid">
-
 		<div class="row d-flex align-items-center justify-content-between navBlack">
 			<div class="col-2">
 				<a href="javascript:void(0);" onclick="burgerToggle()">
@@ -11,8 +10,6 @@
 				<a href="{{ path('home')}}">
 					<img class="card-img" src="/img/TEKOMA.png" alt="logo"></a>
 			</div>
-
-
 			{% if app.user %}
 				<div class="col-2 mt-1 text-center">
 					<a href="{{ path('logout')}}">
@@ -26,8 +23,6 @@
 					</a>
 				</div>
 			{% endif %}
-
-
 		</div>
 		{# small  #}
 		<div id="myTopnav" class="row coverBlack d-none d-md-none mx-1">
@@ -37,15 +32,12 @@
 			<div class="col-12 mt-2">
 				<a href="{{ path('specifications')}}" class="{{ app.request.get('_route') == 'specifications' ? 'active' }}">Spécifications</a>
 			</div>
-
 			<div class="col-12 mt-2">
 				<a href="{{ path('creations')}}" class="{{ app.request.get('_route') matches '/creations/' ? 'active' }}">Créations</a>
 			</div>
-
 			<div class="col-12 mt-2">
 				<a href="{{path('contact')}}" class="{{ app.request.get('_route') == 'contact' ? 'active' }}">Contact</a>
 			</div>
-
 			{% if is_granted('ROLE_ADMIN') %}
 				<div class="col-12 my-2">
 					<a href="{{path('admin')}}" class="{{ app.request.get('_route') == 'admin' ? 'active' }} text-warning">ADMIN</a>
@@ -61,7 +53,6 @@
 					</a>
 				</div>
 			{% endif %}
-
 		</div>
 		{# medium  #}
 		<div class="row d-none d-md-flex justify-content-between navbar navBlack">

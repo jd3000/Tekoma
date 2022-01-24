@@ -191,6 +191,9 @@ color: RED;
 .logo {
   max-width: 230px;
 }
+.logoFooter {
+  max-width: 100px;
+}
 
 .logoSpec {
   position: relative;

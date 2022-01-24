@@ -8,25 +8,23 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
-			<div class="col text-center mt-3 title d-md-none">
-				<div>CREATIONS</div>
-			</div>
-		</div>
-		<div class="row align-items-center justify-content-center mt-1">
-			{% for product in products %}
-				<div class="col-12 col-md-4 text-center mt-3 cardAnim">
-					<a href="{{ path('creations_show' , {'slug':product.slug|e} ) }}">
-						<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
-					</a>
+		<main>
+			<div class="row">
+				<div class="col text-center mt-3 title d-md-none">
+					<div>CREATIONS</div>
 				</div>
-			{% endfor %}
-		</div>
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
 			</div>
-		</div>
+			<div class="row align-items-center justify-content-center mt-1">
+				{% for product in products %}
+					<div class="col-12 col-md-4 text-center mt-3 cardAnim">
+						<a href="{{ path('creations_show' , {'slug':product.slug|e} ) }}">
+							<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 

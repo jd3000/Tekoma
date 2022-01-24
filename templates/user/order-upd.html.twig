@@ -9,57 +9,58 @@
 {% block body %}
 {% if app.user and app.user.username == stripeOrder.username %}
 	<div class="container accueil">
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3 title">
-				Modification adresse de livraison
-			</div>
-			<div class="row align-items-center justify-content-center">
-				<div class="col-12 text-center mt-3">
-					Commande
-					{{stripeOrder.product}}
+		<main>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3 title">
+					Modification adresse de livraison
+				</div>
+				<div class="row align-items-center justify-content-center">
+					<div class="col-12 text-center mt-3">
+						Commande
+						{{stripeOrder.product}}
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-4 text-center mt-3">
+						<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ stripeOrder.img }}" alt="image {{ stripeOrder.product }}"></div>
+					</div>
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-12 col-md-4 text-center mt-3">
-					<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ stripeOrder.img }}" alt="image {{ stripeOrder.product }}"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-md-8 mt-md-5">
-				<div id="upd_orderForm">
-					{{ form_start(form) }}
-					{{ form_errors(form) }}
-					<div class="row align-items-center justify-content-center mx-2">
-						<div class="col-12 mt-3">
-							<div>Nom*</div>
-							{{ form_widget(form.name) }}
-							{{ form_errors(form.name) }}
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Ville*</div>
-							<div>{{ form_widget(form.city) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.city) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Adresse*</div>
-							<div>{{ form_widget(form.adress_line1) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.adress_line1) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.city) }}</div>
-						</div>
-						<div class="col-12 col-md-6">
-							<div class="d-none d-md-block">{{ form_errors(form.adress_line1) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Code postal</div>
-							<div>{{ form_widget(form.postal_code) }}</div>
-							<div class="d-block d-md-none">{{ form_errors(form.postal_code) }}</div>
-						</div>
-						<div class="col-12 col-md-6 mt-3">
-							<div class="d-block">Ligne d'adresse n°2</div>
-							<div>{{ form_widget(form.adress_line2, {'attr': {'placeholder': 'Ligne d\'adresse n°2'}}) }}</div>
+				<div class="col-md-8 mt-md-5">
+					<div id="upd_orderForm">
+						{{ form_start(form) }}
+						{{ form_errors(form) }}
+						<div class="row align-items-center justify-content-center mx-2">
+							<div class="col-12 mt-3">
+								<div>Nom*</div>
+								{{ form_widget(form.name) }}
+								{{ form_errors(form.name) }}
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div class="d-block">Ville*</div>
+								<div>{{ form_widget(form.city) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.city) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div class="d-block">Adresse*</div>
+								<div>{{ form_widget(form.adress_line1) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.adress_line1) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.city) }}</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<div class="d-none d-md-block">{{ form_errors(form.adress_line1) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div class="d-block">Code postal</div>
+								<div>{{ form_widget(form.postal_code) }}</div>
+								<div class="d-block d-md-none">{{ form_errors(form.postal_code) }}</div>
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								<div class="d-block">Ligne d'adresse n°2</div>
+								<div>{{ form_widget(form.adress_line2, {'attr': {'placeholder': 'Ligne d\'adresse n°2'}}) }}</div>
 								<div class="d-block d-md-none">{{ form_errors(form.adress_line2) }}</div>
 							</div>
 							<div class="col-12 col-md-6">
@@ -69,10 +70,6 @@
 								<div class="d-none d-md-block">{{ form_errors(form.adress_line2) }}</div>
 							</div>
 						</div>
-						{# {{ form_widget(form.created_at, {'attr': { 'style': 'display:none' }}) }}
-												{{ form_widget(form.updated_at, {'attr': { 'style': 'display:none' }}) }} #}
-
-
 						<div class="col-12 mt-1 form-group">
 							<button class="btn btn-custom-border float-end" type="submit">Modifier</button>
 						</div>
@@ -89,12 +86,8 @@
 				</a>
 			</div>
 		</div>
-
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 

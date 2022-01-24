@@ -7,62 +7,53 @@
 {% endblock %}
 
 {% block body %}
-
 	<div class="container accueil">
-		<div class="row">
-			<div class="col text-center mt-5 title">INSCRIPTION</div>
-		</div>
-		<div class="row justify-content-center align-items-center mt-4">
-			<div class="col-8 col-md-8 text-center mt-4">
-
-				{{ form_start(registrationForm,{'attr': {'id': 'registration_form'}}) }}
-				{{ form_errors(registrationForm) }}
-
-				<div class="row justify-content-center">
-					<div class="col-10 col-md-8 col-lg-6 text-start">
-						<div>{{ form_widget(registrationForm.email) }}</div>
-						<div id="#errorMail">{{ form_errors(registrationForm.email) }}</div>
-					</div>
-				</div>
-				<div class="row justify-content-center mt-4">
-					<div class="col-10 col-md-8 col-lg-6 text-start">
-						<div>{{ form_widget(registrationForm.plainPassword, {label: 'Password'}) }}</div>
-						<span id="eyeSvg" toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password-register icon-eye-size"></span>
-						<div id="#errorPassword">{{ form_errors(registrationForm.plainPassword, {label: 'Password'}) }}
+		<main>
+			<div class="row">
+				<div class="col text-center mt-5 title">INSCRIPTION</div>
+			</div>
+			<div class="row justify-content-center align-items-center mt-4">
+				<div class="col-8 col-md-8 text-center mt-4">
+					{{ form_start(registrationForm,{'attr': {'id': 'registration_form'}}) }}
+					{{ form_errors(registrationForm) }}
+					<div class="row justify-content-center">
+						<div class="col-10 col-md-8 col-lg-6 text-start">
+							<div>{{ form_widget(registrationForm.email) }}</div>
+							<div id="#errorMail">{{ form_errors(registrationForm.email) }}</div>
 						</div>
 					</div>
-					{# <div class="col-2"></div> #}
-				</div>
-				<div class="row d-flex justify-content-center">
-					<div class="col-12 col-md-8 col-lg-6 mt-3">
-						<div>{{ form_widget(registrationForm.agreeTerms) }}</div>
-						<div>{{ form_errors(registrationForm.agreeTerms) }}</div>
+					<div class="row justify-content-center mt-4">
+						<div class="col-10 col-md-8 col-lg-6 text-start">
+							<div>{{ form_widget(registrationForm.plainPassword, {label: 'Password'}) }}</div>
+							<span id="eyeSvg" toggle="#password-field" class="fas fa-eye-slash field-icon toggle-password-register icon-eye-size"></span>
+							<div id="#errorPassword">{{ form_errors(registrationForm.plainPassword, {label: 'Password'}) }}
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="row justify-content-center mt-4">
-					<div
-						class="col-10 col-md-8 col-lg-6 m-3 text-center">
-						{# <button type="submit" class="btn btn-lg btn-custom-border">M'inscrire</button> #}
-						{% include '_partials/_hcaptcha_register_submit_button.html.twig' %}
-
-						{{ form_end(registrationForm) }}
+					<div class="row d-flex justify-content-center">
+						<div class="col-12 col-md-8 col-lg-6 mt-3">
+							<div>{{ form_widget(registrationForm.agreeTerms) }}</div>
+							<div>{{ form_errors(registrationForm.agreeTerms) }}</div>
+						</div>
 					</div>
-				</div>
-				<div class="row justify-content-center mt-4">
-					<div class="col-12 text-center">
-						<a href="{{ path('login')}}" class="custom-link">Déjà membre ? Connectez-vous !</a>
+					<div class="row justify-content-center mt-4">
+						<div class="col-10 col-md-8 col-lg-6 m-3 text-center">
+							{% include '_partials/_hcaptcha_register_submit_button.html.twig' %}
+							{{ form_end(registrationForm) }}
+						</div>
+					</div>
+					<div class="row justify-content-center mt-4">
+						<div class="col-12 text-center">
+							<a href="{{ path('login')}}" class="custom-link">Déjà membre ? Connectez-vous !</a>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row d-flex justify-content-center logoLogin">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
+
 {% block javascripts %}
 	{{ parent() }}
 	<script src="https://js.hcaptcha.com/1/api.js" async defer></script>

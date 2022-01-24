@@ -8,135 +8,121 @@
 
 
 {% block body %}
-
-
 	<div class="container accueil">
-		<div class="row mt-4">
-			<div class="col text-center mt-lg-3">
-				<div><img src="/img/imagAccueil.png" alt="image accueil 1"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div>TEKOMA est une sculpture sonorisée nomade à la restitution sonore précise et puissante.</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3 title">
-				<div>SPECIFICATIONS</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div><img src="/img/imagAccueil2.png" alt="image accueil 2"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div>Structure en .......... créée par fabrication additive.<br>
-					Composants électroniques et audios choisis pour leur qualité et leur fiabilité.<br>
-					Assemblage manuel et finition personnalisée sur demande (couleur, aspect).<br>
-					Puissance 50W, 2 voies.<br>
-					Réponse en fréquence : 55Hz à 20KHz.<br>
-					Bluetooth 5.0, haute sensibilité de réception. Codecs APTX, APTX HD, APTX-LL, SBC & AAC.<br>
-					Controle d’apairage avec indicateur de connexion.<br>
-					Batteries rechargeables et remplaçables. Autonomie de 10h à puissance moyenne.<br>
-					Alimentation externe 19V/2A fournie permettant  une recharge totale en 2h pendant le fonctionnement.<br>
-					Indicateur de connexion secteur et de pleine charge.</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col text-center mt-3 title">
-				<div>CREATIONS</div>
-			</div>
-		</div>
-
-		<div class="row align-items-center justify-content-center p-3">
-			{% for product in products %}
-				<div class="col-12 col-md-4 text-center mt-3 cardAnim">
-					<a href="{{ path('creations_show' , {'slug':product.slug|e} ) }}">
-						<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
-					</a>
+		<main>
+			<div class="row">
+				<div class="col text-center mt-lg-3">
+					<div><img src="/img/imagAccueil.png" alt="image accueil 1"></div>
 				</div>
-			{% endfor %}
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3 title">
-				<div>CONTACT</div>
 			</div>
-		</div>
-
-
-		<div class="row justify-content-center">
-			<div class="col-md-8 mt-md-5">
-				{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
-				{{ form_errors(form) }}
-				<div class="row align-items-center justify-content-center mx-2">
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.firstname) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div>TEKOMA est une sculpture sonorisée nomade à la restitution sonore précise et puissante.</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3 title">
+					<div>SPECIFICATIONS</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div><img src="/img/imagAccueil2.png" alt="image accueil 2"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div>Structure en .......... créée par fabrication additive.<br>
+						Composants électroniques et audios choisis pour leur qualité et leur fiabilité.<br>
+						Assemblage manuel et finition personnalisée sur demande (couleur, aspect).<br>
+						Puissance 50W, 2 voies.<br>
+						Réponse en fréquence : 55Hz à 20KHz.<br>
+						Bluetooth 5.0, haute sensibilité de réception. Codecs APTX, APTX HD, APTX-LL, SBC & AAC.<br>
+						Controle d’apairage avec indicateur de connexion.<br>
+						Batteries rechargeables et remplaçables. Autonomie de 10h à puissance moyenne.<br>
+						Alimentation externe 19V/2A fournie permettant  une recharge totale en 2h pendant le fonctionnement.<br>
+						Indicateur de connexion secteur et de pleine charge.</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3 title">
+					<div>CREATIONS</div>
+				</div>
+			</div>
+			<div class="row align-items-center justify-content-center p-3">
+				{% for product in products %}
+					<div class="col-12 col-md-4 text-center mt-3 cardAnim">
+						<a href="{{ path('creations_show' , {'slug':product.slug|e} ) }}">
+							<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img|e }}" alt="image {{ product.name|e }}"></div>
+						</a>
 					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.lastname) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
-					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.prospectEmail) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
-					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.subject) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
-					</div>
-					<div class="row d-flex justify-content-center">
-						<div class="col-12 col-md-8 col-lg-4 mt-3">
-							<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
-							<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
-
+				{% endfor %}
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3 title">
+					<div>CONTACT</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-8 mt-md-5">
+					{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
+					{{ form_errors(form) }}
+					<div class="row align-items-center justify-content-center mx-2">
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.firstname) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
 						</div>
-					</div>
-					<div class="col-12 mt-3">
-						{{ form_widget(form.message) }}
-						{{ form_errors(form.message) }}
-					</div>
-					<div class="col-12 mt-1 form-group">
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.lastname) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
+						</div>
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.prospectEmail) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
+						</div>
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.subject) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
+						</div>
 						<div class="row d-flex justify-content-center">
-							<div class="col-12 col-md-8 col-lg-4 text-center">
-								{{ form_widget(form.check) }}
+							<div class="col-12 col-md-8 col-lg-4 mt-3">
+								<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
+								<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
 							</div>
 						</div>
-						{% if response['success'] == false and verif == true %}
-							{# {{ dump(response) }} #}
-							{% include '_partials/_hcaptcha_submit_button.html.twig' %}
-						{% endif %}
-						{# <button class="btn btn-custom float-end" type="submit">Envoyer</button> #}
+						<div class="col-12 mt-3">
+							{{ form_widget(form.message) }}
+							{{ form_errors(form.message) }}
+						</div>
+						<div class="col-12 mt-1 form-group">
+							<div class="row d-flex justify-content-center">
+								<div class="col-12 col-md-8 col-lg-4 text-center">
+									{{ form_widget(form.check) }}
+								</div>
+							</div>
+							{% if response['success'] == false and verif == true %}
+								{# {{ dump(response) }} #}
+								{% include '_partials/_hcaptcha_submit_button.html.twig' %}
+							{% endif %}
+						</div>
 					</div>
+					{{ form_end(form) }}
 				</div>
-				{# {{ form_end(form, {'render_rest': false}) }} #}
-				{{ form_end(form) }}
-
-
 			</div>
-		</div>
-
-		<div class="row d-flex justify-content-center">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
-			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 

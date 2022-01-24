@@ -7,110 +7,98 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
-
-			<div class="col text-center mt-3 title d-md-none">
-				<div>COMMANDE</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3 title d-md-none">
-				<div>{{ product.name }}</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3 title d-none d-md-block">
-				<div>PRÉCOMMANDE -
-					{{ product.name }}</div>
-			</div>
-		</div>
-
-		<div class="row align-items-center justify-content-center">
-
-			<div class="col-12 col-md-4 text-center mt-3">
-				<div class="imgProduct p-4"><img class="card-img" style="width: 10vh;" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div>{{ product.price }}
-					€
+		<main>
+			<div class="row">
+				<div class="col text-center mt-3 title d-md-none">
+					<div>COMMANDE</div>
 				</div>
 			</div>
-		</div>
-
-		{# TEST FORM #}
-		<div class="row justify-content-center">
-			<div class="col-md-8 mt-md-5">
-				{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
-				{{ form_errors(form) }}
-				<div class="row align-items-center justify-content-center mx-2">
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.firstname) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
+			<div class="row">
+				<div class="col text-center mt-3 title d-md-none">
+					<div>{{ product.name }}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3 title d-none d-md-block">
+					<div>PRÉCOMMANDE -
+						{{ product.name }}</div>
+				</div>
+			</div>
+			<div class="row align-items-center justify-content-center">
+				<div class="col-12 col-md-4 text-center mt-3">
+					<div class="imgProduct p-4"><img class="card-img" style="width: 10vh;" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div>{{ product.price }}
+						€
 					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.lastname) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
-					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.prospectEmail) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
-					</div>
-					<div class="col-12 col-md-6 mt-3">
-						<div>{{ form_widget(form.subject) }}</div>
-						<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
-					</div>
-					<div class="row d-flex justify-content-center">
-						<div class="col-12 col-md-8 col-lg-4 mt-3">
-							<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
-							<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
-
+				</div>
+			</div>
+			{# FORM #}
+			<div class="row justify-content-center">
+				<div class="col-md-8 mt-md-5">
+					{{ form_start(form, {'attr': {'id': 'form_prospect'}}) }}
+					{{ form_errors(form) }}
+					<div class="row align-items-center justify-content-center mx-2">
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.firstname) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.firstname) }}</div>
 						</div>
-					</div>
-					<div
-						class="col-12 mt-3">
-						{# {{product.name}} #}
-						{{ form_widget(form.message) }}
-						{{ form_errors(form.message) }}
-					</div>
-					<div class="col-12 mt-1 form-group">
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.lastname) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.lastname) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.firstname) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.lastname) }}</div>
+						</div>
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.prospectEmail) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.prospectEmail) }}</div>
+						</div>
+						<div class="col-12 col-md-6 mt-3">
+							<div>{{ form_widget(form.subject) }}</div>
+							<div class="d-block d-md-none">{{ form_errors(form.subject) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.prospectEmail) }}</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="d-none d-md-block">{{ form_errors(form.subject) }}</div>
+						</div>
 						<div class="row d-flex justify-content-center">
-							<div class="col-12 col-md-8 col-lg-4 text-center">
-								{{ form_widget(form.check) }}
+							<div class="col-12 col-md-8 col-lg-4 mt-3">
+								<div class="text-md-center">{{ form_widget(form.agreeTerms) }}</div>
+								<div class="text-center">{{ form_errors(form.agreeTerms) }}</div>
 							</div>
 						</div>
-						{% if response['success'] == false and verif == true %}
-							{% include '_partials/_hcaptcha_order_submit_button.html.twig' %}
-							{# <button class="btn btn-custom float-end" type="submit">Commander</button> #}
-						{% endif %}
+						<div
+							class="col-12 mt-3">
+							{# {{product.name}} #}
+							{{ form_widget(form.message) }}
+							{{ form_errors(form.message) }}
+						</div>
+						<div class="col-12 mt-1 form-group">
+							<div class="row d-flex justify-content-center">
+								<div class="col-12 col-md-8 col-lg-4 text-center">
+									{{ form_widget(form.check) }}
+								</div>
+							</div>
+							{% if response['success'] == false and verif == true %}
+								{% include '_partials/_hcaptcha_order_submit_button.html.twig' %}
+								{# <button class="btn btn-custom float-end" type="submit">Commander</button> #}
+							{% endif %}
+						</div>
 					</div>
+					{# {{ form_end(form, {'render_rest': false}) }} #}
+					{{ form_end(form) }}
 				</div>
-				{# {{ form_end(form, {'render_rest': false}) }} #}
-				{{ form_end(form) }}
-			</div>
-			<div class="row d-flex justify-content-center logoSpec">
-				<div class="col-3 col-md-2 col-lg-2 mt-3">
-					<img class="card-img" src="/img/JUL.png" alt="sign logo">
-				</div>
-			</div>
-
+			</main>
+			{% include "footer.html.twig" %}
 		</div>
 	</div>
 {% endblock %}

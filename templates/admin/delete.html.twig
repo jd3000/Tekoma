@@ -8,63 +8,53 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row justify-content-center p-3">
-			<div class="col-md-6 text-center m-3 title bg-danger mx-3 rounded">
-				<div>Suppression
-					{{ product.name }}</div>
-			</div>
-		</div>
-		<div class="row align-items-center justify-content-center">
-
-			<div class="col-12 col-md-4 text-center mt-3">
-				<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
-			</div>
-
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3 title">
-				<div>Description
-					{{ product.name }}</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div>{{ product.description|nl2br }}
+		<main>
+			<div class="row justify-content-center p-3">
+				<div class="col-md-6 text-center m-3 title bg-danger mx-3 rounded">
+					<div>Suppression
+						{{ product.name }}</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
-				<div>{{ product.price }}
-					€
+			<div class="row align-items-center justify-content-center">
+				<div class="col-12 col-md-4 text-center mt-3">
+					<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
-				<a href="{{ path('admin')}}">
-					<button class="btn btn-custom">Revenir aux créations</button>
-				</a>
+			<div class="row">
+				<div class="col text-center mt-3 title">
+					<div>Description
+						{{ product.name }}</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col text-center mt-3">
-				<a href="{{ path('admin_delete_confirm' , {'slug':product.slug} )}}">
-					<button class="btn btn-custom-border bg-danger">Supprimer</button>
-				</a>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div>{{ product.description|nl2br }}
+					</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+			<div class="row">
+				<div class="col text-center mt-3">
+					<div>{{ product.price }}
+						€
+					</div>
+				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<a href="{{ path('admin')}}">
+						<button class="btn btn-custom">Revenir aux créations</button>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center mt-3">
+					<a href="{{ path('admin_delete_confirm' , {'slug':product.slug} )}}">
+						<button class="btn btn-custom-border bg-danger">Supprimer</button>
+					</a>
+				</div>
+			</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 

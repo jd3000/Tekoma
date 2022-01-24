@@ -8,70 +8,58 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3 title">
-				<div>{{ product.name }}</div>
-			</div>
-		</div>
-		<div class="row align-items-center justify-content-center">
-
-			<div class="col-12 col-md-4 text-center mt-3">
-				<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
-			</div>
-
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3 title">
-				<div>Description
-					{{ product.name }}</div>
-			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-md-10 text-center mt-3">
-				<div>{{ product.description|nl2br }}
+		<main>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3 title">
+					<div>{{ product.name }}</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3">
-				<div>{{ product.price }}
-					€
+			<div class="row align-items-center justify-content-center">
+				<div class="col-12 col-md-4 text-center mt-3">
+					<div class="imgProduct p-4"><img class="card-img" src="/img/uploads/{{ product.img }}" alt="image {{ product.name }}"></div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3">
-				<a href="{{ path('creations')}}">
-					<button class="btn btn-custom">Revenir aux créations</button>
-				</a>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3 title">
+					<div>Description
+						{{ product.name }}</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-12 text-center mt-3">
-				{% if product.quantity < 1 %}
-					<a href="{{ path('contact_order' , {'slug':product.slug} )}}">
-						<button class="btn btn-custom-border">Précommander</button>
+			<div class="row justify-content-center">
+				<div class="col-md-10 text-center mt-3">
+					<div>{{ product.description|nl2br }}
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3">
+					<div>{{ product.price }}
+						€
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3">
+					<a href="{{ path('creations')}}">
+						<button class="btn btn-custom">Revenir aux créations</button>
 					</a>
-				{% elseif product.quantity > 0 %}
-					<a href="{{ path('user_creations_payment', {'slug':product.slug} )}}">
-						<button class="btn btn-custom-border">Acheter</button>
-					</a>
-					{# {% elseif is_granted('IS_AUTHENTICATED_REMEMBERED') %} #}
-
-				{% endif %}
+				</div>
 			</div>
-		</div>
-
-		<div class="row d-flex justify-content-center logoSpec">
-			<div class="col-3 col-md-2 col-lg-2 mt-3">
-				<img class="card-img" src="/img/JUL.png" alt="sign logo">
+			<div class="row justify-content-center">
+				<div class="col-12 text-center mt-3">
+					{% if product.quantity < 1 %}
+						<a href="{{ path('contact_order' , {'slug':product.slug} )}}">
+							<button class="btn btn-custom-border">Précommander</button>
+						</a>
+					{% elseif product.quantity > 0 %}
+						<a href="{{ path('user_creations_payment', {'slug':product.slug} )}}">
+							<button class="btn btn-custom-border">Acheter</button>
+						</a>
+					{% endif %}
+				</div>
 			</div>
-		</div>
+		</main>
+		{% include "footer.html.twig" %}
 	</div>
 {% endblock %}
 

@@ -7,150 +7,148 @@
 
 {% block body %}
 	<div class="container accueil">
-		<div class="row">
-			<div class="col-12 text-center mt-3 title">
-				<div>Gestion de la commande</div>
-			</div>
-		</div>
-		<div class="row justify-content-center mt-2 px-4">
-			<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
-				<div>
-					<b>Référence</b>
-				</div>
-				<div class="ref">{{stripeOrder.reference}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.reference }}" title="Copier Référence">
-						<i class="far fa-copy"></i>
-					</button>
+		<main>
+			<div class="row">
+				<div class="col-12 text-center mt-3 title">
+					<div>Gestion de la commande</div>
 				</div>
 			</div>
-		</div>
-		<div class="row justify-content-center px-4 mt-1">
-			<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
-				<div>
-					<b>Utilisateur</b>
-					{% set count = 0 %}
-					{% set strCommand = "commande" %}
-					{% for allStripeOrder in allStripeOrders %}
-						{% if allStripeOrder.username == stripeOrder.username %}
-							{% set count = count + 1 %}
-						{% endif %}
-					{% endfor %}
-					<span>-
-						<b>{{count}}
-							{% if count > 1 %}
-								{% set strCommand = "commandes" %}
+			<div class="row justify-content-center mt-2 px-4">
+				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
+					<div>
+						<b>Référence</b>
+					</div>
+					<div class="ref">{{stripeOrder.reference}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.reference }}" title="Copier Référence">
+							<i class="far fa-copy"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-center px-4 mt-1">
+				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4 orderUpdRef">
+					<div>
+						<b>Utilisateur</b>
+						{% set count = 0 %}
+						{% set strCommand = "commande" %}
+						{% for allStripeOrder in allStripeOrders %}
+							{% if allStripeOrder.username == stripeOrder.username %}
+								{% set count = count + 1 %}
 							{% endif %}
-							{{strCommand}}
-						</b>
-						au total
-					</span>
-				</div>
-				<div>{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
-						<i class="far fa-copy"></i>
-					</button>
+						{% endfor %}
+						<span>-
+							<b>{{count}}
+								{% if count > 1 %}
+									{% set strCommand = "commandes" %}
+								{% endif %}
+								{{strCommand}}
+							</b>
+							au total
+						</span>
+					</div>
+					<div>{{stripeOrder.username}}<button type="button" class="btn btn-custom btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ stripeOrder.username }}" title="Copier Utilisateur">
+							<i class="far fa-copy"></i>
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="bg-trasparent my-2" style="position: relative;">
-			<div class="row justify-content-center">
-				<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4">
-					<div class="card h-100 shadow-sm imgProduct p-2">
-						<img src="/img/uploads/{{ stripeOrder.img }}" alt="image {{ stripeOrder.img }}">
-						<div class="label-top shadow-sm text-white">{{ stripeOrder.product }}</div>
-						<div class="card-body-top">
-							<div class="clearfix">
-								<span class="float-start badge rounded-pill bg-{{ (stripeOrder.getStatusStripe == 'complete') ? 'success' : 'danger' }}">{{ stripeOrder.price }}&nbsp;€</span>
-								<span class="float-end text-white">Envoyé
-									{% if stripeOrder.getIsSent == false %}
-										<span>
-											<i class="fas fa-times text-warning"></i>
-										</span>
-									{% else %}
-										<span>
-											<i class="fas fa-check text-success"></i><br>
-											le
-											{{stripeOrder.getUpdatedAt|date('d/m/Y')}}
-										</span>
-									{% endif %}
-								</span>
-							</div>
-							<div class="clearfix">
-								<span class="float-start text-white">Commandé le
-									{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</span>
-								<span class="float-end">
-									{% if stripeOrder.getIsSent == false %}
-										<a href="{{ path('admin_order_send' , {'reference':stripeOrder.reference} )}}" class="small text-warning">Modifier le statut</a>
-									{% endif %}
-								</span>
-							</div>
-							<div class="card-title">
-								<h5>Adresse de livraison</h5>
-							</div>
-							<div class="clearfix text-white">
-								<span class="float-start">{{stripeOrder.name}}</span>
+			<div class="bg-trasparent my-2" style="position: relative;">
+				<div class="row justify-content-center">
+					<div class="col col-xs-12 col-sm-8 col-md-6 col-lg-4">
+						<div class="card h-100 shadow-sm imgProduct p-2">
+							<img src="/img/uploads/{{ stripeOrder.img }}" alt="image {{ stripeOrder.img }}">
+							<div class="label-top shadow-sm text-white">{{ stripeOrder.product }}</div>
+							<div class="card-body-top">
+								<div class="clearfix">
+									<span class="float-start badge rounded-pill bg-{{ (stripeOrder.getStatusStripe == 'complete') ? 'success' : 'danger' }}">{{ stripeOrder.price }}&nbsp;€</span>
+									<span class="float-end text-white">Envoyé
+										{% if stripeOrder.getIsSent == false %}
+											<span>
+												<i class="fas fa-times text-warning"></i>
+											</span>
+										{% else %}
+											<span>
+												<i class="fas fa-check text-success"></i><br>
+												le
+												{{stripeOrder.getUpdatedAt|date('d/m/Y')}}
+											</span>
+										{% endif %}
+									</span>
+								</div>
+								<div class="clearfix">
+									<span class="float-start text-white">Commandé le
+										{{ stripeOrder.getCreatedAt|date('d/m/Y') }}</span>
+									<span class="float-end">
+										{% if stripeOrder.getIsSent == false %}
+											<a href="{{ path('admin_order_send' , {'reference':stripeOrder.reference} )}}" class="small text-warning">Modifier le statut</a>
+										{% endif %}
+									</span>
+								</div>
+								<div class="card-title">
+									<h5>Adresse de livraison</h5>
+								</div>
+								<div class="clearfix text-white">
+									<span class="float-start">{{stripeOrder.name}}</span>
 
-								<span class="float-end">
-									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.name}}" title="Copier Nom">
-										<i class="far fa-copy"></i>
-									</button>
-								</span>
-							</div>
-							<div class="clearfix text-white">
-								<span class="float-start">
-									{{stripeOrder.getAdressLine1}}
-									<br>
-									{% if stripeOrder.getAdressLine2 != null %}
-										{{stripeOrder.getAdressLine2}}
+									<span class="float-end">
+										<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.name}}" title="Copier Nom">
+											<i class="far fa-copy"></i>
+										</button>
+									</span>
+								</div>
+								<div class="clearfix text-white">
+									<span class="float-start">
+										{{stripeOrder.getAdressLine1}}
 										<br>
+										{% if stripeOrder.getAdressLine2 != null %}
+											{{stripeOrder.getAdressLine2}}
+											<br>
+										{% endif %}
+										{{stripeOrder.getPostalCode}}
+										<br>
+										{{stripeOrder.getCity}}</span>
+
+									{% if stripeOrder.getAdressLine2 != null %}
+										{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getAdressLine2 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
+									{% else %}
+										{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
 									{% endif %}
-									{{stripeOrder.getPostalCode}}
-									<br>
-									{{stripeOrder.getCity}}</span>
+									<span class="float-end">
+										<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ adressString }}" title="Copier Adresse">
+											<i class="far fa-copy"></i>
+										</button>
+									</span>
+								</div>
+								<div class="clearfix text-white bg bg-success text-center mt-1">
+									<span>{{stripeOrder.intent}}</span>
 
-								{% if stripeOrder.getAdressLine2 != null %}
-									{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getAdressLine2 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
-								{% else %}
-									{% set adressString %}{{stripeOrder.getAdressLine1 ~ " " ~ stripeOrder.getPostalCode ~ " " ~ stripeOrder.getCity}}{% endset %}
-								{% endif %}
-								<span class="float-end">
-									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{ adressString }}" title="Copier Adresse">
-										<i class="far fa-copy"></i>
-									</button>
-								</span>
+									<span>
+										<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.intent}}" title="Copier Référence">
+											<i class="far fa-copy"></i>
+										</button>
+									</span>
+								</div>
 							</div>
-							<div class="clearfix text-white bg bg-success text-center mt-1">
-								<span>{{stripeOrder.intent}}</span>
-
-								<span>
-									<button type="button" class="btn btn-default btn-copy js-tooltip js-copy" data-toggle="tooltip" data-placement="bottom" data-copy="{{stripeOrder.intent}}" title="Copier Référence">
-										<i class="far fa-copy"></i>
-									</button>
-								</span>
-							</div>
-						</div>
-						<div class="card-footer">
-							<div class="clearfix text-white">
-								<div class="text-center mt-4">
-									<div class="btn-group">
-										<a class="btn btn-custom-border btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail</a>
+							<div class="card-footer">
+								<div class="clearfix text-white">
+									<div class="text-center mt-4">
+										<div class="btn-group">
+											<a class="btn btn-custom-border btn-mail" href="mailto:{{ stripeOrder.username }}">Rédiger un mail</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col text-center mt-3">
-					<a href="{{ path('admin_orders')}}">
-						<button class="btn btn-custom">Revenir aux commandes</button>
-					</a>
+				<div class="row">
+					<div class="col text-center mt-3">
+						<a href="{{ path('admin_orders')}}">
+							<button class="btn btn-custom">Revenir aux commandes</button>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="row d-flex justify-content-center logoSpec">
-				<div class="col-3 col-md-2 col-lg-2 mt-3">
-					<img class="card-img" src="/img/JUL.png" alt="sign logo">
-				</div>
-			</div>
+			</main>
+			{% include "footer.html.twig" %}
 		</div>
 	{% endblock %}
 	{% block javascripts %}
