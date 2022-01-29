@@ -24,8 +24,14 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $productRepo, Request $request, MailerInterface $mailer, HCaptcha $hcaptcha): Response
     {
+        $user = $this->getUser();
         $prospect = new Prospect;
         // $prospect->setProduct($product);
+        if ($user) {
+            $email = $user->getUsername();
+            $prospect->setProspectEmail($email);
+        }
+
         $form = $this->createForm(ProspectType::class, $prospect);
         $form->handleRequest($request);
 

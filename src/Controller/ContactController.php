@@ -36,8 +36,15 @@ class ContactController extends AbstractController
      */
     public function index(Request $request, MailerInterface $mailer, HCaptcha $hcaptcha): Response
     {
+        $user = $this->getUser();
 
         $prospect = new Prospect;
+
+        if ($user) {
+            $email = $user->getUsername();
+            $prospect->setProspectEmail($email);
+        }
+
         $form = $this->createForm(ProspectType::class, $prospect);
 
         $form->handleRequest($request);
@@ -114,8 +121,16 @@ class ContactController extends AbstractController
         // dump($product);
         // dump($productImg);
 
+        $user = $this->getUser();
+
         $prospect = new Prospect;
         $prospect->setProduct($product);
+
+        if ($user) {
+            $email = $user->getUsername();
+            $prospect->setProspectEmail($email);
+        }
+
         $form = $this->createForm(ProspectProductType::class, $prospect);
 
         $form->handleRequest($request);

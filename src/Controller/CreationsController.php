@@ -34,7 +34,7 @@ class CreationsController extends AbstractController
      * 
      * @Route("/creations/{slug}", name="creations_show")
      */
-    public function show($slug, Product $product): Response
+    public function show(Product $product): Response
     {
 
         // si on utilise le ProductRepository à la place du paramconverter

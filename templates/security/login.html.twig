@@ -45,29 +45,28 @@
 					</form>
 				</div>
 			</div>
+			{# définition de l'url précdente #}
 			{% set prevUrl = app.request.headers.get('referer') %}
 			{# {% dump(prevUrl) %} #}
+			{# définition du dernier paramètre de l'url précédente #}
 			{% set urlParams = prevUrl|split('/') %}
 			{% set lastParam = urlParams[urlParams|length - 1] %}
-			{# {% dump(lastParam) %} #}
-			{% for product in products %}
-				{% if product.slug == lastParam %}
-					<div class="row">
-						<div class="col text-center mt-4">
+			{# définition d'un variable tableau dans laquelle on on place la route register et les slugs des produits actifs  #}
+			{% set checkedValues = ["register"] %}
+				{% for product in products %}
+			{% set checkedValues = checkedValues|merge([product.slug]) %}
+			{% endfor %}
+			{# comparaison du dernier paramètre de l'url à toutes les valeurs de la variable tableau checkedValue #}
+			{# affichage du lien vers la route register le cas échéant #}
+				{% for checkedValue in checkedValues %}
+					{% if checkedValue == lastParam %}
+						<div class="row"> <div class="col text-center mt-4">
 							<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
 						</div>
 					</div>
 				{% endif %}
 			{% endfor %}
-			{% if lastParam == 'register' %}
-				<div class="row">
-					<div class="col text-center mt-4">
-						<a href="{{ path('register')}}" class="custom-link">Nouveau membre ? Inscrivez-vous !</a>
-					</div>
-				</div>
-			{% endif %}
 		</main>
-		{% include "footer.html.twig" %}
 	</div>
 
 {% endblock %}

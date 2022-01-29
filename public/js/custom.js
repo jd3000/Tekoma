@@ -144,7 +144,6 @@ $(document).ready(function () {
         } else {
             input.attr("type", "password");
         }
-
     });
 
     $("body").on('click', '.toggle-password-register', function () {

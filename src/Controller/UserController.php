@@ -99,11 +99,10 @@ class UserController extends AbstractController
      */
     public function userSelection($slug, Product $product): Response
     {
-        $user = $this->getUser();
-        $id = $user->getId();
-        // dump($user);
-        // dump($id);
-
+        $quantity = $product->getQuantity($slug);
+        if ($quantity < 1) {
+            return $this->redirectToRoute('contact_order', ['slug' => $slug]);
+        }
 
         // si on utilise le ProductRepository à la place du paramconverter
         // $product = $productRepo->findOneBySlug($slug);
@@ -130,11 +129,11 @@ class UserController extends AbstractController
         $productName = $product->getName();
         $productImg = $product->getImg();
         $productPrice = $product->getPrice();
-        $user = $security->getUser();
+        // $user = $security->getUser();
         $userName = $user->getUsername();
 
-        $baseurl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
-        $imgStripe = $baseurl . "/img/uploads/" . $productImg;
+        $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
+        $imgStripe = $baseUrl . "/img/uploads/" . $productImg;
 
 
         Stripe::setApiKey($stripeSK);

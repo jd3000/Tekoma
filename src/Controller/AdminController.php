@@ -336,7 +336,7 @@ class AdminController extends AbstractController
      * 
      * @Route("/update/{slug}", name="admin_update")
      */
-    public function update($slug, Request $request, Product $product, FileUploader $fileUploader): Response
+    public function update(Request $request, Product $product, FileUploader $fileUploader): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 

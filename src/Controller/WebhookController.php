@@ -40,8 +40,8 @@ class WebhookController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $order = new OrderStripe();
                 $user = User::class;
-                // $user = $userRepository->find((int) $paymentIntent->metadata->id);
-                $user = $userRepository->findOneById(intval($paymentIntent->metadata->id));
+                $user = $userRepository->find((int) $paymentIntent->metadata->id);
+                // $user = $userRepository->findOneById(intval($paymentIntent->metadata->id));
                 $userId = $user->getId();
                 $orderUserId = $order->setUser($user);
                 $orderUserName = $order->setUsername($paymentIntent->metadata->userMail);

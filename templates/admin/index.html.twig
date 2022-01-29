@@ -83,7 +83,6 @@
 												<b>{{ product.highlighted|e }}</b>
 											</span>
 										</li>
-										{% else %}
 									{% endif %}
 								</ul>
 								<div class="card-body">
@@ -116,6 +115,5 @@
 			{% endfor %}
 		</div>
 	</main>
-	{% include "footer.html.twig" %}
 </div>{% endblock %}{% block javascripts %}
 {{ parent() }}{% endblock %}
