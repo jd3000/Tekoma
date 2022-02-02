@@ -55,7 +55,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('agreeTerms', CheckboxType::class, array(
-                'label' => 'J\'accepte l\'utilisation de ces informations pour être recontacté par Tekoma',
+                'label' => 'agree terms',
                 'attr' => array(
                     'class' => 'form-arround',
                     'required' => true,

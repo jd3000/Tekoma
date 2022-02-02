@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProspectProductType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -58,11 +59,11 @@ class ProspectProductType extends AbstractType
                 'attr' => array(
                     'class' => 'form-arround',
                     'required rows' => '5',
-                    'placeholder' => 'Votre message pour précommander la création ' . $productName,
+                    'placeholder' => 'Votre message pour la commande ' . $productName,
                 )
             ))
             ->add('agreeTerms', CheckboxType::class, array(
-                'label' => 'J\'accepte l\'utilisation de ces informations pour être recontacté par Tekoma',
+                'label' => 'agree terms',
                 'attr' => array(
                     'class' => 'form-arround',
                     'required' => true,
