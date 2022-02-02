@@ -116,11 +116,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * Permet d'afficher une seule creation sélectionnée par un utilisateur
+     * Permet la redirection vers le formulaire stripe
      * 
      * @Route("/user/checkout/{slug}", name="user_checkout")
      */
-    public function checkout($slug, Product $product, $stripeSK, Security $security, Request $request): Response
+    public function checkout($slug, Product $product, $stripeSK, Request $request): Response
     {
         $user = $this->getUser();
         $id = $user->getId();
@@ -129,7 +129,6 @@ class UserController extends AbstractController
         $productName = $product->getName();
         $productImg = $product->getImg();
         $productPrice = $product->getPrice();
-        // $user = $security->getUser();
         $userName = $user->getUsername();
 
         $baseUrl = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath();
@@ -169,7 +168,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Permet 
+     * Permet de soustraire un quantité du produit précedemment acheté
      * 
      * @Route("/user/success-url/{slug}", name="success_url")
      */
@@ -192,7 +191,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * Permet 
+     * Permet de rediréger l'utilisateur vers le produit précédent
      * 
      * @Route("/user/cancel-url/{slug}", name="cancel_url")
      */

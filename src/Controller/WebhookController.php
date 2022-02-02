@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\OrderStripe;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;

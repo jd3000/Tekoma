@@ -1,10 +1,10 @@
-[class^="col"] {
+/* [class^="col"] {
   border: 1px solid rgb(212, 95, 95)!important;
 }
 
 [class^="row"] {
   border: 1px solid yellow!important;
-}
+} */
 
 * { box-sizing: border-box; }
 
@@ -197,7 +197,7 @@ color: RED;
 
 .footer {
   position: relative;
-  bottom: calc(-55vh);
+  bottom: calc(-55vh - 8vh);
 }
 
 .active {

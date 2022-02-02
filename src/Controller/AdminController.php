@@ -334,7 +334,7 @@ class AdminController extends AbstractController
     /**
      * Permet d'afficher une seule creation
      * 
-     * @Route("/update/{slug}", name="admin_update")
+     * @Route("/admin/update/{slug}", name="admin_update")
      */
     public function update(Request $request, Product $product, FileUploader $fileUploader): Response
     {

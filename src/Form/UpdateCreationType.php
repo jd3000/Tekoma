@@ -5,22 +5,16 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
-use Symfony\Component\Validator\Constraints\LessThan;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class UpdateCreationType extends AbstractType
@@ -131,19 +125,7 @@ class UpdateCreationType extends AbstractType
                 'slug',
                 HiddenType::class,
                 $this->getConfiguration("Slug associé au produit", "Slug", "")
-            )
-            // ->add(
-            //     'isActive',
-            //     HiddenType::class,
-            //     array(
-            //         'label' => 'Produit visible par les visiteurs',
-            //         'attr' => array(
-            //             'class' => '',
-            //             'required' => false,
-            //         )
-            //     )
-            // )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
