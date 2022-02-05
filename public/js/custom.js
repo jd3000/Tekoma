@@ -303,21 +303,21 @@ $(document).ready(function () {
 
     // A REVOIR POUR GERER LE FAVICON DU REGISTER_FORM !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    const formRegister = document.getElementById("#registration_form");
-    const registerForm = document.querySelector("#registration_form");
+    // const formRegister = document.getElementById("#registration_form");
+    // const registerForm = document.querySelector("#registration_form");
     // console.log(registerForm);
     error = document.getElementsByClassName("invalid-feedback");
     // console.log(error);
     // inputEmail = document.getElementById("registration_form_email");
     if (error) {
-        const elMailId = document.getElementById("#errorMail");
-        if (elMailId) {
-            errorMailMessage = elMailId.querySelector(".form-error-message");
-            if (errorMailMessage) {
-                errorMailMessage.innerText = "Ce compte existe déjà";
-            }
+        // const elMailId = document.getElementById("#errorMail");
+        // if (elMailId) {
+        //     errorMailMessage = elMailId.querySelector(".form-error-message");
+        //     if (errorMailMessage) {
+        //         errorMailMessage.innerText = "Ce compte existe déjà";
+        //     }
 
-        }
+        // }
 
         const elPasswordId = document.getElementById("#errorPassword");
         // console.log(elPasswordId);

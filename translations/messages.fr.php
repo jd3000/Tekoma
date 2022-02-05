@@ -8,8 +8,5 @@ return [
     'Email' => "Email",
     'Nom' => "Nom",
     'Prénom' => "Prénom",
-    'product' => [
-        // id is user.login
-        'name' => 'name',
-    ],
-];
+    'Mot de passe' => "Mot de passe",
+ ];

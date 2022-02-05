@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -23,11 +24,15 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Email'
+                ],'constraints' => [
+                    new Email([
+                        'message'=>'Renseignez un email.'
+                    ])
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'J\'accepte l\'utilisation de ces informations pour utiliser les services proposés par Tekoma',
+                'label' => 'agree terms',
                 'attr' => [
                     'class' => 'form-arround',
                     'required' => true
